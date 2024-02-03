@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "test-app-133d0": {
+      "hosting": {
+        "test-app": [
+          "test-app-133d0"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "test-app-133d0"
+  }
+}
