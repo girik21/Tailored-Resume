@@ -1,1 +1,8 @@
+# Angular build output
+dist/
+
+
+# Local npm module directory
+/node_modules/
+/.angular/
 
