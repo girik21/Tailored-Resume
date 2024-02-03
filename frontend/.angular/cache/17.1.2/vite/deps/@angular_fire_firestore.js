@@ -1,11 +1,11 @@
 import {
   AuthInstances
-} from "./chunk-2GFWZ4FU.js";
+} from "./chunk-GVSHYIK2.js";
 import {
   FirebaseApp,
   FirebaseApps
-} from "./chunk-KNEAEC4M.js";
-import "./chunk-JIXWIHAX.js";
+} from "./chunk-QY5MU4LC.js";
+import "./chunk-EF5MFCMW.js";
 import {
   VERSION,
   ɵAngularFireSchedulers,
@@ -13,7 +13,7 @@ import {
   ɵgetAllInstancesOf,
   ɵgetDefaultInstanceOf,
   ɵzoneWrap
-} from "./chunk-RJE4NSXN.js";
+} from "./chunk-DO7R4T2L.js";
 import {
   Component,
   FirebaseError,
@@ -32,7 +32,7 @@ import {
   isIndexedDBAvailable,
   isSafari,
   registerVersion
-} from "./chunk-EVMZEAM3.js";
+} from "./chunk-ZZ47JO2S.js";
 import {
   InjectionToken,
   Injector,
