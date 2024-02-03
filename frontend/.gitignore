@@ -5,6 +5,6 @@ dist/
 # Local npm module directory
 /node_modules/
 /.angular/
-/src/environments/
+frontend/src/environments/*
 
 
