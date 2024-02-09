@@ -1,0 +1,35 @@
+.custom-toolbar {
+    background-color: #FFFCF2;
+}
+
+.menu-icon {
+    color: #04724D;
+    transform: scale(2);
+    font-weight: bolder;
+}
+
+.title {
+    margin-left: 30px;
+    color: #072A6C;
+    font-family: "Lobster", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.button-class {
+    color: #04724D;
+    font-size: 40px;
+    text-decoration: none;
+    margin-left: 40px;
+    font-family: "Lobster", sans-serif;
+}
+
+.button-class:hover{
+    text-decoration: underline;
+    transition: transform 1.3s; 
+}
