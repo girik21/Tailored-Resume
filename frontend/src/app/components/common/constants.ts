@@ -3,5 +3,7 @@ export const locale = {
     navbar: "hello from navbar",
     create: "Create",
     update: "Update",
-    samples: "Samples"
+    samples: "Samples",
+    slogan: "Tailor your resume based on the job description",
+    getStarted: "Get Started !"
 }
