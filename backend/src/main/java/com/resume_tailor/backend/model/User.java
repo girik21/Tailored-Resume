@@ -1,11 +1,12 @@
 package com.resume_tailor.backend.model;
 
 import com.resume_tailor.backend.security.Role;
+import jakarta.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Email;
 
 @Document(collection = "users")
@@ -14,17 +15,27 @@ public class User {
     private String id;
     @NotBlank(message = "Username cannot be null!")
     private String username;
-
     @Email(message = "Enter valid email!")
-    @Indexed(unique = true)
     private String email;
+    @NotBlank(message = "Phone number cannot be null!")
+    private String phone;
+    @NotBlank(message = "Password cannot be null!")
     private String password;
+    @NotNull(message = "Address 1 cannot be null!")
     private String address1;
     private String address2;
+    @NotNull(message = "City cannot be null!")
     private String city;
+    @NotNull(message = "State cannot be null!")
     private String state;
+    @NotNull(message = "Zip cannot be null!")
     private String zip;
+    @NotNull(message = "Linked in Link cannot be null!")
     private String linkedinLink;
+    @NotNull(message = "Portfolio link cannot be null!")
+    private String portfolioLink;
+    private String professionalSummary;
+    @NotNull(message = "Role cannot be null!")
     private Role role;
 
     // Getters and setters
@@ -58,6 +69,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAddress1() {
@@ -106,6 +125,22 @@ public class User {
 
     public void setLinkedinLink(String linkedinLink) {
         this.linkedinLink = linkedinLink;
+    }
+
+    public String getPortfolioLink() {
+        return portfolioLink;
+    }
+
+    public void setPortfolioLink(String portfolioLink) {
+        this.portfolioLink = portfolioLink;
+    }
+
+    public String getProfessionalSummary() {
+        return professionalSummary;
+    }
+
+    public void setProfessionalSummary(String professionalSummary) {
+        this.professionalSummary = professionalSummary;
     }
 
     public Role getRole() {
