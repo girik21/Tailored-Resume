@@ -1,7 +1,7 @@
 package com.resume_tailor.backend.controller;
 
 import com.resume_tailor.backend.model.UserEducation;
-import com.resume_tailor.backend.service.UserEducationService;
+import com.resume_tailor.backend.service.UserEducation.UserEducationService;
 import com.resume_tailor.backend.utils.ResponseWrapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

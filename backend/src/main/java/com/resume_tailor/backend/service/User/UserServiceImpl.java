@@ -1,4 +1,4 @@
-package com.resume_tailor.backend.service;
+package com.resume_tailor.backend.service.User;
 
 import com.resume_tailor.backend.model.User;
 import com.resume_tailor.backend.repository.UserRepository;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;

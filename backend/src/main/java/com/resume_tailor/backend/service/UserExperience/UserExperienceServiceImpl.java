@@ -1,4 +1,4 @@
-package com.resume_tailor.backend.service;
+package com.resume_tailor.backend.service.UserExperience;
 
 import com.resume_tailor.backend.model.UserExperience;
 import com.resume_tailor.backend.repository.UserExperienceRepository;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserExperienceServiceImpl implements UserExperienceService{
+public class UserExperienceServiceImpl implements UserExperienceService {
 
     @Autowired
     private UserExperienceRepository userExperienceRepository;

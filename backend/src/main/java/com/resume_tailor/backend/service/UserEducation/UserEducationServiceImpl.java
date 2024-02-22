@@ -1,4 +1,4 @@
-package com.resume_tailor.backend.service;
+package com.resume_tailor.backend.service.UserEducation;
 
 import com.resume_tailor.backend.model.UserEducation;
 import com.resume_tailor.backend.repository.UserEducationRepository;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserEducationServiceImpl implements UserEducationService{
+public class UserEducationServiceImpl implements UserEducationService {
 
     @Autowired
     private UserEducationRepository userEducationRepository;
