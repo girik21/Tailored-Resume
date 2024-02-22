@@ -1,13 +1,15 @@
 package com.resume_tailor.backend.model;
 
 import com.resume_tailor.backend.security.Role;
-import jakarta.validation.constraints.NotEmpty;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Email;
+
+import java.util.Date;
 
 @Document(collection = "users")
 public class User {
@@ -37,6 +39,9 @@ public class User {
     private String professionalSummary;
     @NotNull(message = "Role cannot be null!")
     private Role role;
+
+    @CreatedDate
+    private Date createdDate;
 
     // Getters and setters
     public String getId() {
@@ -149,5 +154,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

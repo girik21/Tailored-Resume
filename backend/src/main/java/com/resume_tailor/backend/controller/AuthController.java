@@ -24,7 +24,7 @@ public class AuthController {
 
     @GetMapping("/home")
     public String home() {
-        return "This is test!!";
+        return "Your API works!!";
     }
 
     @PostMapping("/register")
