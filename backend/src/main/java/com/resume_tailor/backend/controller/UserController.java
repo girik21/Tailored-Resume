@@ -1,7 +1,7 @@
 package com.resume_tailor.backend.controller;
 
 import com.resume_tailor.backend.model.User;
-import com.resume_tailor.backend.service.UserService;
+import com.resume_tailor.backend.service.User.UserService;
 import com.resume_tailor.backend.utils.ResponseWrapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +53,7 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<?> updateUser(@PathVariable String userId, @RequestBody User updatedUser) {
+    public ResponseEntity<?> updateUser(@PathVariable String userId, @Valid @RequestBody User updatedUser) {
         try {
             User user = userService.updateUser(userId, updatedUser);
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User updated successfully.", user));
