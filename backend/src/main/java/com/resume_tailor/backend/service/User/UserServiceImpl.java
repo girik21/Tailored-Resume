@@ -1,4 +1,4 @@
-package com.resume_tailor.backend.service;
+package com.resume_tailor.backend.service.User;
 
 import com.resume_tailor.backend.model.User;
 import com.resume_tailor.backend.repository.UserRepository;
@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -20,7 +21,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userRepository.findAllByOrderByCreatedDateDesc();
     }
 
     @Override
@@ -33,6 +34,7 @@ public class UserServiceImpl implements UserService{
     public User createUser(User user) {
         // Encrypt the password before saving
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setCreatedDate(new Date());
         return userRepository.save(user);
     }
 
@@ -46,5 +48,4 @@ public class UserServiceImpl implements UserService{
     public void deleteUser(String userId) {
         userRepository.deleteById(userId);
     }
-
 }

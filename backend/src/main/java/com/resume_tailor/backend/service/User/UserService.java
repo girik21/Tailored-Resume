@@ -1,4 +1,4 @@
-package com.resume_tailor.backend.service;
+package com.resume_tailor.backend.service.User;
 
 import com.resume_tailor.backend.model.User;
 
