@@ -18,6 +18,9 @@ public class ProjectServiceImpl implements ProjectService{
     public List<Project> getAllProjects() { return projectRepository.findAll();}
 
     @Override
+    public List<Project> getAllByNameContaining(String name) { return projectRepository.findByNameContaining(name);}
+
+    @Override
     public Project createProject(Project project) {
         return projectRepository.save(project);
     }
@@ -34,6 +37,6 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
-    public void deleteProject(String userId) {projectRepository.deleteById(userId); }
+    public void deleteProject(String projectId) {projectRepository.deleteById(projectId); }
 
 }
