@@ -1,7 +1,6 @@
-package com.resume_tailor.backend.service;
+package com.resume_tailor.backend.service.UserExperienceProjects;
 
 import com.resume_tailor.backend.model.Project;
-import com.resume_tailor.backend.model.User;
 import com.resume_tailor.backend.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

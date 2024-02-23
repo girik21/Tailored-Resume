@@ -2,12 +2,14 @@ package com.resume_tailor.backend.model;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
+import java.util.List;
 
 @Document(collection = "user_experiences")
 public class UserExperience {
@@ -39,6 +41,9 @@ public class UserExperience {
 
     @CreatedDate
     private Date createdDate;
+
+    @DBRef
+    private List<Project> projects;
 
     // Getters and setters
     public String getId() {
@@ -127,5 +132,13 @@ public class UserExperience {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }
