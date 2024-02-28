@@ -2,9 +2,11 @@
 dist/
 
 
+
 # Local npm module directory
 /node_modules/
-/.angular/
-frontend/src/environments/*
+.angular/
+
+/src/environments/
 
 
