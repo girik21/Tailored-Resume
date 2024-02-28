@@ -1,94 +1,94 @@
 {
-  "hash": "75ef855f",
-  "configHash": "f1fc28c3",
+  "hash": "38f13afd",
+  "configHash": "c6e2c091",
   "lockfileHash": "ef6d9d40",
-  "browserHash": "a8f93833",
+  "browserHash": "8b7ba481",
   "optimized": {
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "49b3164f",
+      "fileHash": "58ab0d3f",
       "needsInterop": false
     },
     "@angular/fire/auth": {
       "src": "../../../../../node_modules/@angular/fire/fesm2022/angular-fire-auth.mjs",
       "file": "@angular_fire_auth.js",
-      "fileHash": "5cfc15ab",
+      "fileHash": "3cab4a32",
       "needsInterop": false
     },
     "@angular/fire/compat": {
       "src": "../../../../../node_modules/@angular/fire/fesm2022/angular-fire-compat.mjs",
       "file": "@angular_fire_compat.js",
-      "fileHash": "bd3f060c",
+      "fileHash": "0e589a83",
       "needsInterop": false
     },
     "@angular/fire/compat/auth": {
       "src": "../../../../../node_modules/@angular/fire/fesm2022/angular-fire-compat-auth.mjs",
       "file": "@angular_fire_compat_auth.js",
-      "fileHash": "57bf4ca9",
-      "needsInterop": false
-    },
-    "@angular/fire/firestore": {
-      "src": "../../../../../node_modules/@angular/fire/fesm2022/angular-fire-firestore.mjs",
-      "file": "@angular_fire_firestore.js",
-      "fileHash": "1a389694",
+      "fileHash": "c72d2e63",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "797fbe68",
+      "fileHash": "817139ed",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "678df739",
+      "fileHash": "fb7b61ad",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "b4eb0f16",
+      "fileHash": "071f3c63",
+      "needsInterop": false
+    },
+    "rxjs/operators": {
+      "src": "../../../../../node_modules/rxjs/dist/esm5/operators/index.js",
+      "file": "rxjs_operators.js",
+      "fileHash": "2a9b1c0b",
       "needsInterop": false
     }
   },
   "chunks": {
-    "index.esm-CFBXHJ6N": {
-      "file": "index__esm-CFBXHJ6N.js"
+    "index.esm-EZMNJ7AS": {
+      "file": "index__esm-EZMNJ7AS.js"
     },
-    "chunk-3YBXYBNI": {
-      "file": "chunk-3YBXYBNI.js"
+    "chunk-YJ7ZHJA5": {
+      "file": "chunk-YJ7ZHJA5.js"
     },
-    "chunk-MULKDYGU": {
-      "file": "chunk-MULKDYGU.js"
+    "chunk-RNNE2BSX": {
+      "file": "chunk-RNNE2BSX.js"
     },
-    "chunk-FKFJIXCN": {
-      "file": "chunk-FKFJIXCN.js"
+    "chunk-FEOLTOQT": {
+      "file": "chunk-FEOLTOQT.js"
     },
-    "chunk-GVSHYIK2": {
-      "file": "chunk-GVSHYIK2.js"
+    "chunk-WHSD7QOQ": {
+      "file": "chunk-WHSD7QOQ.js"
     },
-    "chunk-QY5MU4LC": {
-      "file": "chunk-QY5MU4LC.js"
+    "chunk-OEB5EIMF": {
+      "file": "chunk-OEB5EIMF.js"
     },
-    "chunk-EF5MFCMW": {
-      "file": "chunk-EF5MFCMW.js"
+    "chunk-5WT2GUSN": {
+      "file": "chunk-5WT2GUSN.js"
     },
-    "chunk-DO7R4T2L": {
-      "file": "chunk-DO7R4T2L.js"
+    "chunk-PZHHFTTQ": {
+      "file": "chunk-PZHHFTTQ.js"
     },
-    "chunk-ZZ47JO2S": {
-      "file": "chunk-ZZ47JO2S.js"
+    "chunk-QMFYPEMZ": {
+      "file": "chunk-QMFYPEMZ.js"
     },
-    "chunk-3OHN7SJJ": {
-      "file": "chunk-3OHN7SJJ.js"
+    "chunk-P7DDSAWE": {
+      "file": "chunk-P7DDSAWE.js"
     },
-    "chunk-DB4XLD2O": {
-      "file": "chunk-DB4XLD2O.js"
+    "chunk-E2WX6NB2": {
+      "file": "chunk-E2WX6NB2.js"
     },
-    "chunk-IHRRZT46": {
-      "file": "chunk-IHRRZT46.js"
+    "chunk-WHIDAAWN": {
+      "file": "chunk-WHIDAAWN.js"
     },
     "chunk-AR2SKMNP": {
       "file": "chunk-AR2SKMNP.js"
