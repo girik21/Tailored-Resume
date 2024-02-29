@@ -1,42 +1,79 @@
 body {
-    background-color: #FFFCF2;
-    margin: 0;
-    padding: 0;
+  background-color: #FFFCF2;
+  margin: 0;
+  padding: 0;
 }
 
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+}
+
+
+.loginContainer {
+  margin-top: 50px;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.loginButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonClass {
+  font-family: "Lobster";
+  font-size: 30px;
+  color: #fffcf2;
+  background-color: #04724d;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 50px;
+  margin: 0 10px;
+  order: none;
+}
+
+
 .mainContainer {
-    margin: 0 auto;
-    margin-top: 100px;
-    width: 1186px;
-    height: 455px;
-    background-color: #04724D;
-    border-radius: 82px;
+  margin: 0 auto;
+  margin-top: 70px;
+  width: 1186px;
+  height: 455px;
+  background-color: #04724D;
+  border-radius: 82px;
 }
 
 .subContainer {
-    justify-content: center;
-    display: flex;
-    flex-direction: row;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
 }
 
 .sloganText {
-    margin-top: 30px;
-    font-family: "Lobster";
-    font-size: 80px;
-    text-align: left;
-    color: #FFFCF2;
-    width: 630px;
+  margin-top: 30px;
+  font-family: "Lobster";
+  font-size: 80px;
+  text-align: left;
+  color: #FFFCF2;
+  width: 630px;
 }
 
 .getStarted {
-    text-align: center;
-    background-color: #FFFCF2;
-    width: 400px;
-    height: 110px;
-    margin-top: 130px;
-    border-radius: 50px;
-    font-family: "Lobster";
-    font-size: 70px;
-    color: #04724D;
-    cursor: pointer;
+  text-align: center;
+  background-color: #FFFCF2;
+  width: 400px;
+  height: 110px;
+  margin-top: 130px;
+  border-radius: 50px;
+  font-family: "Lobster";
+  font-size: 70px;
+  color: #04724D;
+  cursor: pointer;
 }
