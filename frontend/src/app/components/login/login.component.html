@@ -1,35 +1,123 @@
 <div class="container-fluid">
-    <div class="row mt-5">
-        <div class="col"></div>
-        <div class="col-4">
-            <div class="card shadow">
-                <div class="card-body">
-                    <form>
-                        <div class="mb-3">
-                            <h4 class="text-dark text-muted">Login</h4>
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Email</label>
-                          <input type="email" class="form-control" name="email" [(ngModel)]="email">
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label">Password</label>
-                          <input type="password" class="form-control" name="password" [(ngModel)]="password">
-                        </div>
-                        <button type="button" class="btn btn-info" (click)="login()">Login</button>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <a href="/register" style="text-decoration: none;">Need Account ? <span class="text-danger">Register</span></a>
-                            </div>
-                            <div class="col-md-6">
-                                <a href="/forgot-password" class="text-dark" style="text-decoration: none;"> Forgot Password ? </a>
-                            </div>
-                        </div>
-                        
-                    </form>
-                </div>
+  <div class="row mt-5">
+    <div class="col"></div>
+    <div class="col-4">
+      <!-- Logout success message -->
+      <div *ngIf="logoutMessage" class="alert alert-success">
+        {{ logoutMessage }}
+
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="dismissMessage()"
+        ></button>
+      </div>
+
+      <!-- Error Messages-->
+      <div *ngIf="loginError" class="alert alert-danger">
+        {{ loginError }}
+
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="dismissMessage()"
+        ></button>
+      </div>
+      <div class="card shadow">
+        <div class="card-body">
+          <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+            <div class="mb-3">
+              <h4 class="text-dark text-muted">Login</h4>
             </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                [(ngModel)]="email"
+                required
+                #emailInput="ngModel"
+              />
+              <div
+                *ngIf="
+                  emailInput.invalid && (emailInput.dirty || emailInput.touched)
+                "
+                class="text-danger"
+              >
+                <div *ngIf="emailInput.errors?.['required']">
+                  Email is required.
+                </div>
+                <div
+                  *ngIf="
+                      emailInput.errors?.['email'] && !emailInput.errors?.['required']
+                    "
+                >
+                  Invalid email format.
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                [(ngModel)]="password"
+                required
+                minlength="6"
+                #passwordInput="ngModel"
+              />
+              <div
+                *ngIf="
+                  passwordInput.invalid &&
+                  (passwordInput.dirty || passwordInput.touched)
+                "
+                class="text-danger"
+              >
+                <div *ngIf="passwordInput.errors?.['required']">
+                  Password is required.
+                </div>
+                <div
+                  *ngIf="
+                      passwordInput.errors?.['minlength'] &&
+                      !passwordInput.errors?.['required']
+                    "
+                >
+                  Password must be at least 6 characters long.
+                </div>
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-info"
+              [disabled]="loginForm.invalid"
+            >
+              Login
+            </button>
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <a href="/register" style="text-decoration: none"
+                  >Need Account ? <span class="text-danger">Register</span></a
+                >
+              </div>
+              <div class="col-md-6">
+                <a
+                  href="/forgot-password"
+                  class="text-dark"
+                  style="text-decoration: none"
+                  >Forgot Password ?</a
+                >
+              </div>
+            </div>
+          </form>
         </div>
-        <div class="col"></div>
+      </div>
     </div>
+    <div class="col"></div>
+  </div>
 </div>

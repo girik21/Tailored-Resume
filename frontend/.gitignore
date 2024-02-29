@@ -1,10 +1,20 @@
-# Angular build output
+# Dependency directories
+node_modules/
+
+# Compiled output
 dist/
+tmp/
+out-tsc/
 
+# Sensitive or environment-specific files
+src/environments/*.ts
+src/environments/*.js
 
-# Local npm module directory
-/node_modules/
-/.angular/
-frontend/src/environments/*
-
-
+# IDE/Editor specific files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
