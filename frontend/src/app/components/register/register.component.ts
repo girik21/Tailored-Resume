@@ -39,20 +39,19 @@ export class RegisterComponent implements OnInit {
     }
   
 
-    this.auth.register(this.email, this.password).subscribe(
-      (response: ResponseWrapper<any>) => {
+    this.auth.register(this.email, this.password).subscribe({
+      next: (response: ResponseWrapper<any>) => {
         this.isSuccessful = response.success;
         this.isSignUpFailed = !response.success;
         this.errorMessage = response.message;
       },
-      (error) => {
+      error: (error) => {
         console.error(error);
         this.isSuccessful = false;
         this.isSignUpFailed = true;
-        this.errorMessage =
-          'An error occurred during registration. Please try again.';
+        this.errorMessage = 'An error occurred during registration. Please try again.';
       }
-    );
+    });
     this.email = '';
     this.password = '';
   }
