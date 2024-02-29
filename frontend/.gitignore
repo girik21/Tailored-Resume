@@ -1,6 +1,10 @@
 # Dependency directories
 node_modules/
 
+# Angular CLI cache
+.angular/
+.angular-cache/
+
 # Compiled output
 dist/
 tmp/
