@@ -28,7 +28,7 @@ export class AuthService {
     )
   }
  
-  register(email: string, password: string): Observable<ResponseWrapper<any>> {  
+  register(email: string, password: string): Observable<ResponseWrapper<any>> {      
     return from(this.fireAuth.createUserWithEmailAndPassword(email, password))
       .pipe(
         map(() => {

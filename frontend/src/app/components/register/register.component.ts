@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {NgForm} from '@angular/forms';
+
 import { AuthService } from '../../shared/auth.service';
-import { user } from '@angular/fire/auth';
-import { Subscription } from 'rxjs';
 import { ResponseWrapper } from '../../utils/response-wrapper';
 
 @Component({
@@ -9,37 +9,27 @@ import { ResponseWrapper } from '../../utils/response-wrapper';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
-  private subscription: Subscription | undefined;
-  email: string = '';
-  password: string = '';
+export class RegisterComponent implements OnInit {  
+  
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
 
-  form: any = {
+  form = {
     
-    email: null,
-    password: null,
-  };
+    email:'',
+    password:'',
+    confirmPassword:'',
+    
+  }
 
   constructor(private auth: AuthService) {}
 
   ngOnInit(): void {}
 
-  register() {
-    if (this.email == '') {
-      alert('Please enter email');
-      return;
-    }
-
-    if (this.password == '') {
-      alert('Please enter password');
-      return;
-    }
-  
-
-    this.auth.register(this.email, this.password).subscribe({
+  onSubmit(): void {    
+    
+    this.auth.register(this.form.email, this.form.password).subscribe({
       next: (response: ResponseWrapper<any>) => {
         this.isSuccessful = response.success;
         this.isSignUpFailed = !response.success;
@@ -52,26 +42,9 @@ export class RegisterComponent implements OnInit {
         this.errorMessage = 'An error occurred during registration. Please try again.';
       }
     });
-    this.email = '';
-    this.password = '';
   }
 
-  onSubmit(): void {
-    const { email, password } = this.form;
-    
-    this.auth.register(this.email, this.password).subscribe(
-      (response: ResponseWrapper<any>) => {
-        this.isSuccessful = response.success;
-        this.isSignUpFailed = !response.success;
-        this.errorMessage = response.message;
-      },
-      (error) => {
-        console.error(error);
-        this.isSuccessful = false;
-        this.isSignUpFailed = true;
-        this.errorMessage =
-          'An error occurred during registration. Please try again.';
-      }
-    );
+  onReset(form: NgForm): void {
+    form.onReset()
   }
 }

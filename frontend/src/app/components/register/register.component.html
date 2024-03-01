@@ -5,11 +5,12 @@
       <div class="card shadow">
         <div class="card-body">
           @if(!isSuccessful){
-            <form
+          <form
             name="form"
-            (ngSubmit)="f.form.valid && onSubmit()"
             #f="ngForm"
+            (ngSubmit)="f.form.valid && onSubmit()"
             novalidate
+            [appMatchPassword]="['password', 'confirmPassword']"
           >
             <div class="mb-3">
               <h4 class="text-dark text-muted">Register</h4>
@@ -20,8 +21,21 @@
                 type="email"
                 class="form-control"
                 name="email"
-                [(ngModel)]="email"
+                [(ngModel)]="form.email"
+                required
+                email
+                #email="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
               />
+              @if (f.submitted && email.errors) {
+              <div class="invalid-feedback">
+                @if (email.errors['required']) {
+                <div>Email is required</div>
+                } @if (email.errors['email']) {
+                <div>Email is invalid</div>
+                }
+              </div>
+              }
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label"
@@ -31,33 +45,77 @@
                 type="password"
                 class="form-control"
                 name="password"
-                [(ngModel)]="password"
+                [(ngModel)]="form.password"
+                required
+                minlength="6"
+                maxlength="20"
+                #password="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
               />
+              @if(f.submitted && password.errors){
+              <div class="invalid-feedback">
+                @if(password.errors['required']){
+                <div>Password is required</div>
+                } @if (password.errors['minlength']) {
+                <div>Password must be at least 6 chars</div>
+                } @if(password.errors['maxLength']){
+                <div>Username must not exceed 20 characters</div>
+                }
+              </div>
+              }
             </div>
-            <button type="submit" class="btn btn-primary" >
-              Register
-            </button>
+            <div class="mb-3">
+              <label>Confirm Password</label>
+              <input
+                type="password"
+                class="form-control"
+                name="confirmPassword"
+                [(ngModel)]="form.confirmPassword"
+                required
+                #confirmPassword="ngModel"
+                [ngClass]="{
+                  'is-invalid': f.submitted && confirmPassword.errors
+                }"
+              />
+              @if (f.submitted && confirmPassword.errors) {
+              <div class="invalid-feedback">
+                @if (confirmPassword.errors['required']) {
+                <div>Confirm Password is required</div>
+                } @if (confirmPassword.errors['matching']) {
+                <div>Confirm Password does not match</div>
+                }
+              </div>
+              }
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <button type="submit" class="btn btn-primary">Register</button>
+              </div>
+              <div class="col-6">
+                <button type="button" (click)="onReset(f)" class="btn btn-warning float-end">Reset</button>
+              </div>
+            </div>
 
             <!-- Validation Message -->
             @if(f.submitted && isSignUpFailed){
-            <div class="alert alert-warning">Signup failed: {{ errorMessage }}<br />
+            <div class="alert alert-warning">
+              Signup failed: {{ errorMessage }}<br />
             </div>
             }
-            
+
             <!-- End of validation message -->
-            
           </form>
-        }
-        @else {
+          } @else {
           <div class="alert alert-success">Registration Successfull!</div>
-        }
-        <div class="row">
-          <div class="col-md-6">
-            <a href="/login" style="text-decoration: none"
-              >Have an account ? <span class="text-danger">Login</span></a
-            >
+          }
+          <div class="row">
+            <div class="col-md-6">
+              <a href="/login" style="text-decoration: none"
+                >Have an account ? <span class="text-danger">Login</span></a
+              >
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
