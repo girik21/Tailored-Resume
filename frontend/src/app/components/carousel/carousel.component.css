@@ -1,0 +1,54 @@
+.c-item {
+  height: 480px;
+}
+
+.c-img {
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+
+.mainContainer {
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 1186px;
+  height: 455px;
+  background-color: #04724D;
+  border-radius: 82px;
+}
+
+.getStarted {
+  text-align: center;
+  background-color: #FFFCF2;
+  width: 400px;
+  height: 110px;
+  margin-top: 130px;
+  border-radius: 50px;
+  font-family: "Lobster";
+  color: #04724D;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.sloganText {
+  margin-top: 30px;
+  font-family: "Lobster", cursive;
+  font-size: 80px;
+  color: #FFFCF2;
+  text-align: left;
+  width: 630px;
+}
+
+.getStarted {
+  text-align: center;
+  background-color: #FFFCF2;
+  width: 400px;
+  height: 110px;
+  margin-top: 130px;
+  border-radius: 50px;
+  font-family: "Lobster", cursive;
+  font-size: 70px;
+  color: #04724D;
+  cursor: pointer;
+}

@@ -1,10 +1,11 @@
 import {
   AuthInstances
-} from "./chunk-HO4D7WPB.js";
+} from "./chunk-UHKI2YTQ.js";
 import {
   FirebaseApp,
   FirebaseApps
-} from "./chunk-BENXBLB3.js";
+} from "./chunk-XODOBTVL.js";
+import "./chunk-EF5MFCMW.js";
 import {
   VERSION,
   ɵAngularFireSchedulers,
@@ -12,8 +13,7 @@ import {
   ɵgetAllInstancesOf,
   ɵgetDefaultInstanceOf,
   ɵzoneWrap
-} from "./chunk-JHLXXRUF.js";
-import "./chunk-EF5MFCMW.js";
+} from "./chunk-F3TKJFDQ.js";
 import {
   Component,
   FirebaseError,
@@ -42,9 +42,7 @@ import {
   setClassMetadata,
   ɵɵdefineInjector,
   ɵɵdefineNgModule
-} from "./chunk-R7NBPG36.js";
-import "./chunk-MJV6UDH2.js";
-import "./chunk-OI5GLHID.js";
+} from "./chunk-U7UQMODZ.js";
 import {
   Observable,
   concatMap,
@@ -58,7 +56,7 @@ import {
   scan,
   startWith,
   timer
-} from "./chunk-7WFCSKEP.js";
+} from "./chunk-NMHDJ2G7.js";
 import {
   __async,
   __superGet

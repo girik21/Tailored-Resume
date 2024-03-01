@@ -17,6 +17,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { RegisterComponent } from './components/register/register.component';
     DashboardComponent,
     NavbarComponent,
     FooterComponent,
+    HomeComponent,
+    CarouselComponent,
 
   ],
   imports: [

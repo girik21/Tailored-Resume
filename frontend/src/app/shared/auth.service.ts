@@ -59,7 +59,7 @@ export class AuthService {
       await this.fireAuth.signOut();
       localStorage.removeItem('accessToken');
       localStorage.removeItem('accessTokenExpiresIn');
-      this.router.navigate(['/login'], { queryParams: { logout: true } });
+      this.router.navigate(['/dashboard'], { queryParams: { logout: true } });
     } catch (error: any) {
       throw error;
     }
