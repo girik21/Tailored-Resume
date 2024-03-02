@@ -9,6 +9,14 @@
 
 
 <ng-container *ngIf="showNavbar">
-    <app-navbar></app-navbar>
+  <app-navbar></app-navbar>
 </ng-container>
-<router-outlet/>
+
+<router-outlet></router-outlet>
+
+<ng-container *ngIf="showNavbar">
+  <app-footer></app-footer>
+</ng-container>
+
+
+

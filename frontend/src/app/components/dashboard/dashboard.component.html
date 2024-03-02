@@ -1,6 +1,9 @@
-<div class="mainContainer">
-    <div class="subContainer">
-        <p class="sloganText">{{locale.slogan}}</p>
-        <div class="getStarted">{{locale.getStarted}}</div>
-    </div>
+<div class="loginContainer">
+  <div class="loginButtons">
+    <button class="buttonClass" [routerLink]="['/login']">Login</button>
+    <span class="orText">OR</span>
+    <button class="buttonClass" [routerLink]="['/register']">Register</button>
+  </div>
 </div>
+
+<app-carousel></app-carousel>

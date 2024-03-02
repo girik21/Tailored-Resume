@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../shared/auth.service';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../shared/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginError: string = '';
   logoutMessage: string = '';
 
-  constructor(private authService: AuthService, private route: ActivatedRoute) { }
+  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     // Check if logout status query parameter is present
@@ -29,6 +29,10 @@ export class LoginComponent implements OnInit {
   login(loginForm: NgForm): void {
     if (loginForm.valid) {
       this.authService.login(this.email, this.password)
+        .then(() => {
+          // Navigate to the home page upon successful login
+          this.router.navigate(['/home']);
+        })
         .catch(error => {
           this.loginError = error.message; // Display Firebase Authentication error message
         });
