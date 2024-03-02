@@ -1,8 +1,9 @@
 <mat-toolbar color="primary" class="custom-toolbar">
-    <mat-icon class="menu-icon">menu</mat-icon>
-    <span class="title">Tailored</span>
-    <div class="spacer"></div>
-    <a class="button-class">{{locale.create}}</a>
-    <a class="button-class">{{locale.update}}</a>
-    <a class="button-class">{{locale.samples}}</a>
+  <mat-icon class="menu-icon">menu</mat-icon>
+  <span class="title">Tailored</span>
+  <div class="spacer"></div>
+  <a class="button-class">{{ locale.create }}</a>
+  <a class="button-class">{{ locale.update }}</a>
+  <a class="button-class">{{ locale.samples }}</a>
+  <a class="button-class" (click)="logout()">Logout</a>
 </mat-toolbar>
