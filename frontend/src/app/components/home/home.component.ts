@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../shared/auth.service';
-import { locale } from '../common/constants';
+
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css'
 })
-export class NavbarComponent {
-
-  locale = locale
+export class HomeComponent {
 
   constructor(private authService: AuthService) { }
 

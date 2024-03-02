@@ -6,20 +6,20 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 
 import { getAuth, provideAuth } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire/compat';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { AngularFireModule } from '@angular/fire/compat'
-import { environment } from '../environments/environment.development';
 import { FormsModule } from '@angular/forms';
-import { RegisterComponent } from './components/register/register.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { environment } from '../environments/environment.development';
+import { CarouselComponent } from './components/carousel/carousel.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { RegisterComponent } from './components/register/register.component';
 import { MatchPasswordDirective } from './directives/password-pattern.directive';
-
-
-
 
 @NgModule({
   declarations: [
@@ -29,7 +29,9 @@ import { MatchPasswordDirective } from './directives/password-pattern.directive'
     DashboardComponent,
     NavbarComponent,
     MatchPasswordDirective,
-    
+    FooterComponent,
+    HomeComponent,
+    CarouselComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,7 @@ import { MatchPasswordDirective } from './directives/password-pattern.directive'
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    
+
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     FormsModule
