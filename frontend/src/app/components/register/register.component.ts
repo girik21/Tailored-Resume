@@ -1,39 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../shared/auth.service';
+import {NgForm} from '@angular/forms';
 
+import { AuthService } from '../../shared/auth.service';
+import { ResponseWrapper } from '../../utils/response-wrapper';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit {  
+  
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
 
-  email : string = '';
-  password : string = '';
-
-  constructor(private auth : AuthService) { }
-
-  ngOnInit(): void {
-  }
-
-  register() {
-
-    if(this.email == '') {
-      alert('Please enter email');
-      return;
-    }
-
-    if(this.password == '') {
-      alert('Please enter password');
-      return;
-    }
-
-    this.auth.register(this.email,this.password);
+  form = {
     
-    this.email = '';
-    this.password = '';
-
+    email:'',
+    password:'',
+    confirmPassword:'',
+    
   }
 
+  constructor(private auth: AuthService) {}
+
+  ngOnInit(): void {}
+
+  onSubmit(): void {    
+    
+    this.auth.register(this.form.email, this.form.password).subscribe({
+      next: (response: ResponseWrapper<any>) => {
+        this.isSuccessful = response.success;
+        this.isSignUpFailed = !response.success;
+        this.errorMessage = response.message;
+      },
+      error: (error) => {
+        console.error(error);
+        this.isSuccessful = false;
+        this.isSignUpFailed = true;
+        this.errorMessage = 'An error occurred during registration. Please try again.';
+      }
+    });
+  }
+
+  onReset(form: NgForm): void {
+    form.onReset()
+  }
 }

@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+
+import {Observable, catchError, from, map, of, BehaviorSubject  } from 'rxjs';
+import {ResponseWrapper} from '../utils/response-wrapper'
+
 
 @Injectable({
   providedIn: 'root'
@@ -42,15 +45,16 @@ export class AuthService {
   }
 
   // register method
-  register(email: string, password: string){
-    this.fireAuth.createUserWithEmailAndPassword(email, password).then(()=> {
-      alert('registraion successful')
-      this.router.navigate(['/login'])
-    }, err => {
-      alert(err.message)
-      this.router.navigate(['register'])
-    }
-    )
+  register(email: string, password: string): Observable<ResponseWrapper<any>> {      
+    return from(this.fireAuth.createUserWithEmailAndPassword(email, password))
+      .pipe(
+        map(() => {
+          return { success: true, message: 'Registration successful', data: null };
+        }),
+        catchError(error => {
+          return of({ success: false, message: error.message, data: null });
+        })
+      );
   }
 
   // logout method

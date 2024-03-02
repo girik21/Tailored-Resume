@@ -14,6 +14,16 @@ out-tsc/
 src/environments/*.ts
 src/environments/*.js
 
+<<<<<<< HEAD
+
+# Local npm module directory
+/node_modules/
+.angular/
+
+/src/environments/
+
+
+=======
 # IDE/Editor specific files
 .idea/
 .vscode/
@@ -22,3 +32,4 @@ src/environments/*.js
 *.njsproj
 *.sln
 *.sw?
+>>>>>>> dev/frontend-login
