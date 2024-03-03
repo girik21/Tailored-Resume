@@ -1,18 +1,18 @@
-package com.resume_tailor.backend.service.UserExperience;
+package com.resume_tailor.backend.service.Experience;
 
 import com.resume_tailor.backend.model.Project;
-import com.resume_tailor.backend.model.UserExperience;
+import com.resume_tailor.backend.model.Experience;
 
 import java.util.List;
 
-public interface UserExperienceService {
-    List<UserExperience> getUserExperiences(String userId);
+public interface ExperienceService {
+    List<Experience> getUserExperiences(String userId);
 
-    UserExperience getUserExperienceById(String userExperienceId);
+    Experience getUserExperienceById(String userExperienceId);
 
-    UserExperience createUserExperience(String userId, UserExperience userExperience);
+    Experience createUserExperience(String userId, Experience experience);
 
-    UserExperience updateUserExperience(String userId, String experienceId, UserExperience userExperience);
+    Experience updateUserExperience(String userId, String experienceId, Experience experience);
 
     void deleteUserExperience(String experienceId);
 

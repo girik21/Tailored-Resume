@@ -1,4 +1,4 @@
-package com.resume_tailor.backend.service.UserExperienceProjects;
+package com.resume_tailor.backend.service.ExperienceProjects;
 
 import com.resume_tailor.backend.model.Project;
 import com.resume_tailor.backend.repository.ProjectRepository;

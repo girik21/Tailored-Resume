@@ -1,8 +1,8 @@
 package com.resume_tailor.backend.controller;
 
 import com.resume_tailor.backend.model.Project;
-import com.resume_tailor.backend.model.UserExperience;
-import com.resume_tailor.backend.service.UserExperience.UserExperienceService;
+import com.resume_tailor.backend.model.Experience;
+import com.resume_tailor.backend.service.Experience.ExperienceService;
 import com.resume_tailor.backend.utils.ResponseWrapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +14,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users/{userId}/experiences")
-public class UserExperienceController {
+public class ExperienceController {
     @Autowired
-    private UserExperienceService userExperienceService;
+    private ExperienceService experienceService;
 
     @GetMapping
-    public ResponseEntity<ResponseWrapper<List<UserExperience>>> getUserExperiences(@PathVariable String userId) {
+    public ResponseEntity<ResponseWrapper<List<Experience>>> getUserExperiences(@PathVariable String userId) {
         try {
-            List<UserExperience> experiences = userExperienceService.getUserExperiences(userId);
+            List<Experience> experiences = experienceService.getUserExperiences(userId);
             String successMessage = "Successfully retrieved user experiences.";
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, successMessage, experiences));
         } catch (Exception e) {
@@ -32,9 +32,9 @@ public class UserExperienceController {
     @GetMapping("/{experienceId}")
     public ResponseEntity<?> getUserExperienceById(@PathVariable String experienceId) {
         try {
-            UserExperience userExperience = userExperienceService.getUserExperienceById(experienceId);
-            if (userExperience != null) {
-                return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User Experience retrieved successfully.", userExperience));
+            Experience experience = experienceService.getUserExperienceById(experienceId);
+            if (experience != null) {
+                return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User Experience retrieved successfully.", experience));
             } else {
                 return ResponseEntity.notFound().build();
             }
@@ -44,9 +44,9 @@ public class UserExperienceController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseWrapper<UserExperience>> createUserExperience(@PathVariable String userId, @Valid @RequestBody UserExperience userExperience) {
+    public ResponseEntity<ResponseWrapper<Experience>> createUserExperience(@PathVariable String userId, @Valid @RequestBody Experience experience) {
         try {
-            UserExperience createdExperience = userExperienceService.createUserExperience(userId, userExperience);
+            Experience createdExperience = experienceService.createUserExperience(userId, experience);
             return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(true, "User experience created successfully.", createdExperience));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
@@ -54,9 +54,9 @@ public class UserExperienceController {
     }
 
     @PutMapping("/{experienceId}")
-    public ResponseEntity<ResponseWrapper<UserExperience>> updateUserExperience(@PathVariable String userId, @PathVariable String experienceId, @Valid @RequestBody UserExperience updatedExperience) {
+    public ResponseEntity<ResponseWrapper<Experience>> updateUserExperience(@PathVariable String userId, @PathVariable String experienceId, @Valid @RequestBody Experience updatedExperience) {
         try {
-            UserExperience experience = userExperienceService.updateUserExperience(userId, experienceId, updatedExperience);
+            Experience experience = experienceService.updateUserExperience(userId, experienceId, updatedExperience);
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User experience updated successfully.", experience));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
@@ -66,7 +66,7 @@ public class UserExperienceController {
     @DeleteMapping("/{experienceId}")
     public ResponseEntity<ResponseWrapper<Void>> deleteUserExperience(@PathVariable String experienceId) {
         try {
-            userExperienceService.deleteUserExperience(experienceId);
+            experienceService.deleteUserExperience(experienceId);
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User experience deleted successfully.", null));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
@@ -76,7 +76,7 @@ public class UserExperienceController {
     @GetMapping("/{experienceId}/projects")
     public ResponseEntity<?> getProjectsByExperienceId( @PathVariable String experienceId) {
         try {
-            List<Project> projects = userExperienceService.getProjectsByExperienceId( experienceId);
+            List<Project> projects = experienceService.getProjectsByExperienceId( experienceId);
             if (projects != null) {
                 return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Projects retrieved successfully.", projects));
             } else {
@@ -90,7 +90,7 @@ public class UserExperienceController {
     @PostMapping("/{experienceId}/projects")
     public ResponseEntity<?> addProjectToExperience( @PathVariable String experienceId, @Valid @RequestBody Project project) {
         try {
-            Project savedProject = userExperienceService.addProjectToExperience( experienceId, project);
+            Project savedProject = experienceService.addProjectToExperience( experienceId, project);
             if (savedProject != null) {
                 return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(true, "Project added to experience successfully.", savedProject));
             } else {
@@ -104,7 +104,7 @@ public class UserExperienceController {
     @PutMapping("/{experienceId}/projects/{projectId}")
     public ResponseEntity<?> updateProjectInExperience( @PathVariable String experienceId, @PathVariable String projectId, @Valid @RequestBody Project project) {
         try {
-            Project updatedProject = userExperienceService.updateProjectInExperience( experienceId, projectId, project);
+            Project updatedProject = experienceService.updateProjectInExperience( experienceId, projectId, project);
             if (updatedProject != null) {
                 return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Project updated successfully.", updatedProject));
             } else {
@@ -118,7 +118,7 @@ public class UserExperienceController {
     @DeleteMapping("/{experienceId}/projects/{projectId}")
     public ResponseEntity<?> deleteProjectFromExperience( @PathVariable String experienceId, @PathVariable String projectId) {
         try {
-            userExperienceService.deleteProjectFromExperience(experienceId, projectId);
+            experienceService.deleteProjectFromExperience(experienceId, projectId);
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Project deleted successfully.", null));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
