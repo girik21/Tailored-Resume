@@ -2,33 +2,29 @@ package com.resume_tailor.backend.model;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
+import java.util.List;
 
-@Document(collection = "user_education")
-public class UserEducation {
+@Document(collection = "experiences")
+public class Experience {
     @Id
     private String id;
 
     @NotNull(message = "User ID cannot be null.")
     private String userId;
 
-    @NotBlank(message = "Degree name cannot be null or empty.")
-    private String degreeName;
+    @NotBlank(message = "Position cannot be null or empty.")
+    private String position;
 
-    @NotBlank(message = "Major cannot be null or empty.")
-    private String major;
+    @NotBlank(message = "Employer cannot be null or empty.")
+    private String employer;
 
-    private String minor;
-
-    @NotBlank(message = "School cannot be null or empty.")
-    private String school;
-
-    @NotBlank(message = "Location cannot be null or empty.")
     private String location;
 
     @NotNull(message = "Start date cannot be null.")
@@ -36,14 +32,18 @@ public class UserEducation {
 
     private Date endDate;
 
-    private boolean graduated = false;
+    private boolean currentJob = false;
 
-    private Double grade;
-
+    @NotBlank(message = "Description cannot be null or empty.")
     private String description;
+
+    private String companyLink;
 
     @CreatedDate
     private Date createdDate;
+
+    @DBRef
+    private List<Project> projects;
 
     // Getters and setters
     public String getId() {
@@ -62,36 +62,20 @@ public class UserEducation {
         this.userId = userId;
     }
 
-    public String getDegreeName() {
-        return degreeName;
+    public String getPosition() {
+        return position;
     }
 
-    public void setDegreeName(String degreeName) {
-        this.degreeName = degreeName;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
-    public String getMajor() {
-        return major;
+    public String getEmployer() {
+        return employer;
     }
 
-    public void setMajor(String major) {
-        this.major = major;
-    }
-
-    public String getMinor() {
-        return minor;
-    }
-
-    public void setMinor(String minor) {
-        this.minor = minor;
-    }
-
-    public String getSchool() {
-        return school;
-    }
-
-    public void setSchool(String school) {
-        this.school = school;
+    public void setEmployer(String employer) {
+        this.employer = employer;
     }
 
     public String getLocation() {
@@ -118,20 +102,12 @@ public class UserEducation {
         this.endDate = endDate;
     }
 
-    public boolean isGraduated() {
-        return graduated;
+    public boolean isCurrentJob() {
+        return currentJob;
     }
 
-    public void setGraduated(boolean graduated) {
-        this.graduated = graduated;
-    }
-
-    public Double getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Double grade) {
-        this.grade = grade;
+    public void setCurrentJob(boolean currentJob) {
+        this.currentJob = currentJob;
     }
 
     public String getDescription() {
@@ -142,11 +118,27 @@ public class UserEducation {
         this.description = description;
     }
 
+    public String getCompanyLink() {
+        return companyLink;
+    }
+
+    public void setCompanyLink(String companyLink) {
+        this.companyLink = companyLink;
+    }
+
     public Date getCreatedDate() {
         return createdDate;
     }
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }
