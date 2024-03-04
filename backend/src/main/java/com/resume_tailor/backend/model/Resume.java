@@ -12,10 +12,10 @@ import jakarta.validation.constraints.NotNull;
 @Document(collection = "resumes")
 public class Resume {
     @Id
-    private Integer id;
+    private String id;
 
     @NotNull(message = "User ID cannot be null!")
-    private Integer userId;
+    private String userId;
 
     @NotBlank(message = "Link cannot be null!")
     private String link;
@@ -28,19 +28,19 @@ public class Resume {
 
     private String appliedJobLink;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
