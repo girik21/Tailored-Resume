@@ -1,0 +1,70 @@
+{
+  "name": "Kaustuv Giri",
+  "contact": {
+    "LinkedIn": "Kaustuv Giri",
+    "phone": "669-294-1406",
+    "location": "Sunnyvale, CA",
+    "portfolio": "Portfolio",
+    "email": "girikaustuv@gmail.com",
+    "github": "GitHub"
+  },
+  "skills": {
+    "programmingLanguages": ["Python", "Java", "JavaScript", "TypeScript"],
+    "databases": ["MySQL", "MongoDB"],
+    "frameworks": ["Node", "Express", "React", "React-Native", "Vue", "Redux"],
+    "otherTechnologies": ["NoSQL", "Git", "Figma"],
+    "cloudPlatforms": ["Azure"],
+    "developmentPractices": ["SDLC", "JIRA"],
+    "proficiency": ["Design", "Prototyping", "Frontend", "Backend", "Full-Stack", "English", "Nepali"]
+  },
+  "workHistory": [
+    {
+      "position": "React Developer",
+      "company": "MissPoppins",
+      "location": "Palo Alto, CA, USA",
+      "dates": "10/2023 - Current",
+      "responsibilities": [
+        "Developed cloud-native, object-oriented software using the Agile Software Development Life Cycle model tailored for React Native mobile applications.",
+        "Reduced code complexity by refactoring codebase using Redux, resulting in 30% increase in performance and improved scalability.",
+        "Collaborated with a team of developers to design and build a scalable HIPAA compliant messaging platform with NoSql databases and firebase.",
+        "Implemented infrastructure to automate data collection and processing, leveraging Mixpanel analytics, which significantly improved efficiency, performance, and user insights while optimizing cloud computing costs.",
+        "Assisted in security operations within the development environment and improved CI/CD practices by automating infrastructure in AWS."
+      ]
+    },
+    {
+      "position": "Software Developer",
+      "company": "Neumann Tokyo",
+      "location": "Tokyo, Japan",
+      "dates": "04/2017 - 04/2018",
+      "responsibilities": [
+        "Devised inventory management solution to provide customers with valuable insights that help manage costs, drivers, and keep supplies in check.",
+        "Designed and developed systems facilitating marketers to perform various optimization experiments within the application ecosphere.",
+        "Built data pipeline to ingest customers data in restocking and complete analysis and deliver robust inventory solution that allows store managers to get a summary of activity.",
+        "Served in security operations within the development environment. Documented work and shared ideas with engineering, IT, and security teams."
+      ]
+    }
+  ],
+  "education": {
+    "degree": "Masters of Science",
+    "institution": "SFBU",
+    "location": "Fremont, CA, USA",
+    "dates": "08/2022 - 04/2024",
+    "major": "Computer Engineering"
+  },
+  "projects": [
+    {
+      "name": "Resume Enhancer",
+      "description": "Innovated and crafted a cutting-edge software solution using OpenAI technology, aimed at automating the alignment of job requirements with corresponding job descriptions.",
+      "date": "04/2024"
+    },
+    {
+      "name": "Pattern Recognition",
+      "description": "Leveraged OpenCV for comprehensive image analysis, demonstrating proficiency in advanced algorithms for precise shape recognition and accurate object detection.",
+      "date": "09/2023"
+    }
+  ],
+  "mentorship": {
+    "role": "Teaching Assistant",
+    "responsibilities": "Delivered a range of teaching and assessment activities including tutorials."
+  }
+}
