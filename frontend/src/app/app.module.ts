@@ -21,6 +21,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PdfMakerComponent } from './components/pdf-maker/pdf-maker.component';
 import { RegisterComponent } from './components/register/register.component';
 import { MatchPasswordDirective } from './directives/password-pattern.directive';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MatchPasswordDirective } from './directives/password-pattern.directive'
     HomeComponent,
     PdfMakerComponent,
     CarouselComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,13 @@
+.buttonClass {
+  font-family: "Lobster";
+  font-size: 30px;
+  color: #fffcf2;
+  background-color: #04724d;
+  padding: 10px;
+  width: 200px;
+  border-radius: 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
