@@ -47,12 +47,8 @@ public class UserController {
     @GetMapping("/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable String userId) {
         try {
-            User user = userService.getUserById(userId);
+            User user = userService.getUserWithDetails(userId);
             if (user != null) {
-                user.setExperiences(experienceService.getUserExperiences(userId));
-                user.setEducation(educationService.getUserEducation(userId));
-                user.setProjects(projectService.getUserProjects(userId));
-                user.setSkills(skillService.getUserSkills(userId));
                 return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User retrieved successfully.", user));
             } else {
                 return ResponseEntity.notFound().build();
