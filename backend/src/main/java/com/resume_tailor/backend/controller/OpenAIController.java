@@ -42,7 +42,7 @@ public class OpenAIController {
      * Creates a chat request and sends it to the OpenAI API
      * Returns the first message from the API response
      *
-     * @param jobDesc containing the jobDescription and sample resume to send to the API
+     * @param requestBody containing the jobDescription and sample resume to send to the API
      *
      * @return first message from the API response
      */
