@@ -41,53 +41,35 @@ public class OpenAIServiceImpl implements OpenAIService{
     }
 
     public String createOpenAIPrompt(String jobDesc, String sampleResume){
-        return String.format("%s %s %s", "Given the job description:%n%s%n%n" +
-                        "Generate a new resume in json format based on the Harvard resume template from the existing resume:%n%s%n%n" +
-                        "Name: <<xxx>>%n" +
-                        "Address: <<xxx>>%n" +
-                        "Email: <<xxx>>%n" +
-                        "Phone: <<xxx-xxx-xxxx>>%n" +
-                        "Education: <<xxx>>%n" +
-                        "Previous Companies I worked At:%n" +
-                        "Name: <<xxx>>%n" +
-                        "From - To: <<xxx - xxx>>%n" +
-                        "Position: <<Generate relevant position 1 to the Job description>>%n" +
-                        "Responsibilities: <<Generate responsibilities relevant to position 1>>%n" +
-                        "Name: <<xxx>>%n" +
-                        "From - To: <<xxx - xxx>>%n" +
-                        "Position: <<Generate relevant position 2 to the Job description>>%n" +
-                        "Responsibilities: <<Generate responsibilities relevant to position 2>>%n" +
-                        "Name: <<xxx>>%n" +
-                        "From - To: <<xxx - xxx>>%n" +
-                        "Position: <<Generate relevant position 3 to the Job description>>%n" +
-                        "Responsibilities: <<Generate responsibilities relevant to position 3>>%n" +
-                        "Skills: <<Generate List of Skills relevant to the positions above>>%n" +
-                        "Here is the JSON Output Template for you to follow:%n" +
-                        "{%n" +
-                        "  \"name\": \"<<Name extracted from resume>>\",%n" +
-                        "  \"contact\": {%n" +
-                        "    \"LinkedIn\": \"<<LinkedIn extracted from resume>>\",%n" +
-                        "    \"phone\": \"<<Phone extracted from resume>>\",%n" +
-                        "    \"location\": \"<<Location extracted from resume>>\",%n" +
-                        "    \"portfolio\": \"<<Portfolio extracted from resume>>\",%n" +
-                        "    \"email\": \"<<Email extracted from resume>>\",%n" +
-                        "    \"github\": \"<<GitHub extracted from resume>>\"%n" +
-                        "  },%n" +
-                        "  \"skills\": {%n" +
-                        "    \"programmingLanguages\": [<<Programming Languages extracted from resume>>],%n" +
-                        "    \"databases\": [<<Databases extracted from resume>>],%n" +
-                        "    \"frameworks\": [<<Frameworks extracted from resume>>],%n" +
-                        "    \"otherTechnologies\": [<<Other Technologies extracted from resume>>],%n" +
-                        "    \"cloudPlatforms\": [<<Cloud Platforms extracted from resume>>],%n" +
-                        "    \"developmentPractices\": [<<Development Practices extracted from resume>>],%n" +
-                        "    \"proficiency\": [<<Proficiency extracted from resume>>]%n" +
-                        "  },%n" +
-                        "  \"workHistory\": [<<Work History extracted from resume>>],%n" +
-                        "  \"education\": [<<Education extracted from resume>>],%n" +
-                        "  \"projects\": [<<Projects extracted from resume>>],%n" +
-                        "  \"mentorship\": {%n" +
-                        "    \"role\": \"<<Role extracted from resume>>\",%n" +
-                        "    \"responsibilities\": \"<<Responsibilities extracted from resume>>\"%n" +
+        return  String.format("{%n" +
+                        "  \"jobDescription\": \"%s\",%n" +
+                        "  \"sampleResume\": \"%s\",%n" +
+                        "  \"resumeTemplate\": {%n" +
+                        "    \"name\": \"<<Name extracted from resume>>\",%n" +
+                        "    \"contact\": {%n" +
+                        "      \"LinkedIn\": \"<<LinkedIn extracted from resume>>\",%n" +
+                        "      \"phone\": \"<<Phone extracted from resume>>\",%n" +
+                        "      \"location\": \"<<Location extracted from resume>>\",%n" +
+                        "      \"portfolio\": \"<<Portfolio extracted from resume>>\",%n" +
+                        "      \"email\": \"<<Email extracted from resume>>\",%n" +
+                        "      \"github\": \"<<GitHub extracted from resume>>\"%n" +
+                        "    },%n" +
+                        "    \"skills\": {%n" +
+                        "      \"programmingLanguages\": [<<Programming Languages extracted from resume>>],%n" +
+                        "      \"databases\": [<<Databases extracted from resume>>],%n" +
+                        "      \"frameworks\": [<<Frameworks extracted from resume>>],%n" +
+                        "      \"otherTechnologies\": [<<Other Technologies extracted from resume>>],%n" +
+                        "      \"cloudPlatforms\": [<<Cloud Platforms extracted from resume>>],%n" +
+                        "      \"developmentPractices\": [<<Development Practices extracted from resume>>],%n" +
+                        "      \"proficiency\": [<<Proficiency extracted from resume>>]%n" +
+                        "    },%n" +
+                        "    \"workHistory\": [<<Work History extracted from resume>>],%n" +
+                        "    \"education\": [<<Education extracted from resume>>],%n" +
+                        "    \"projects\": [<<Projects extracted from resume>>],%n" +
+                        "    \"mentorship\": {%n" +
+                        "      \"role\": \"<<Role extracted from resume>>\",%n" +
+                        "      \"responsibilities\": \"<<Responsibilities extracted from resume>>\"%n" +
+                        "    }%n" +
                         "  }%n" +
                         "}",
                 jobDesc, sampleResume);
