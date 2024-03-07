@@ -1,6 +1,10 @@
 package com.resume_tailor.backend.controller;
 
 import com.resume_tailor.backend.model.User;
+import com.resume_tailor.backend.service.Education.EducationService;
+import com.resume_tailor.backend.service.Experience.ExperienceService;
+import com.resume_tailor.backend.service.ExperienceProjects.ProjectService;
+import com.resume_tailor.backend.service.Skill.SkillService;
 import com.resume_tailor.backend.service.User.UserService;
 import com.resume_tailor.backend.utils.ResponseWrapper;
 import jakarta.validation.Valid;
@@ -17,6 +21,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ExperienceService experienceService;
+
+    @Autowired
+    private EducationService educationService;
+
+    @Autowired
+    private ProjectService projectService;
+
+    @Autowired
+    private SkillService skillService;
+
     @GetMapping
     public ResponseEntity<ResponseWrapper<List<User>>> getAllUsers() {
         try {
@@ -31,7 +47,7 @@ public class UserController {
     @GetMapping("/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable String userId) {
         try {
-            User user = userService.getUserById(userId);
+            User user = userService.getUserWithDetails(userId);
             if (user != null) {
                 return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User retrieved successfully.", user));
             } else {

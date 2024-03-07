@@ -3,12 +3,25 @@ package com.resume_tailor.backend.service.OpenAI;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.resume_tailor.backend.model.Education;
+import com.resume_tailor.backend.model.Experience;
+import com.resume_tailor.backend.model.Skill;
+import com.resume_tailor.backend.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+
+
+
+
+
 @Service
 public class OpenAIServiceImpl implements OpenAIService{
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM yyyy");
     @Override
     public void validateRequestParameters(Map<String, String> requestParams){
         if (requestParams == null || requestParams.isEmpty()) {
@@ -28,7 +41,7 @@ public class OpenAIServiceImpl implements OpenAIService{
     }
 
     public String createOpenAIPrompt(String jobDesc, String sampleResume){
-        return String.format("Given the job description:%n%s%n%n" +
+        return String.format("%s %s %s", "Given the job description:%n%s%n%n" +
                         "Generate a new resume in json format based on the Harvard resume template from the existing resume:%n%s%n%n" +
                         "Name: <<xxx>>%n" +
                         "Address: <<xxx>>%n" +
@@ -49,7 +62,7 @@ public class OpenAIServiceImpl implements OpenAIService{
                         "Position: <<Generate relevant position 3 to the Job description>>%n" +
                         "Responsibilities: <<Generate responsibilities relevant to position 3>>%n" +
                         "Skills: <<Generate List of Skills relevant to the positions above>>%n" +
-                        "JSON Output Template:%n" +
+                        "Here is the JSON Output Template for you to follow:%n" +
                         "{%n" +
                         "  \"name\": \"<<Name extracted from resume>>\",%n" +
                         "  \"contact\": {%n" +
@@ -119,5 +132,74 @@ public class OpenAIServiceImpl implements OpenAIService{
             System.out.println("An unexpected error occurred: " + e.getMessage());
             return jsonString;
         }
+    }
+    public String generateEscapedResume(User user) {
+        StringBuilder resume = new StringBuilder();
+
+        resume.append("\nHere is the existing Resume: \n\n")
+                .append(user.getUsername())
+                .append("\n")
+                .append(user.getAddress1())
+                .append(user.getAddress2() != null ? ", " + user.getAddress2() : "")
+                .append("\n")
+                .append(user.getCity())
+                .append(", ")
+                .append(user.getState())
+                .append(", ")
+                .append(user.getZip())
+                .append("\n")
+                .append(user.getEmail())
+                .append("\n")
+                .append(user.getPhone())
+                .append("\n\nEducation:\n");
+
+        List<Education> educationList = user.getEducation();
+        if (educationList != null) {
+            for (Education education : educationList) {
+                resume.append(education.getMajor())
+                        .append("\n")
+                        .append(education.getSchool())
+                        .append(", ")
+                        .append(education.getLocation())
+                        .append("\n")
+                        .append(dateFormat.format(education.getStartDate()))
+                        .append(" - ")
+                        .append(dateFormat.format(education.getEndDate()))
+                        .append("\n\n");
+            }
+        }
+
+        resume.append("\nPrevious Companies I worked At: \n");
+
+        List<Experience> experienceList = user.getExperiences();
+        if (experienceList != null) {
+            for (Experience experience : experienceList) {
+                resume.append("Name: ")
+                        .append(experience.getEmployer())
+                        .append("\nFrom - To: ")
+                        .append(dateFormat.format(experience.getStartDate()))
+                        .append(" - ")
+                        .append(dateFormat.format(experience.getEndDate()))
+                        .append("\nPosition: ")
+                        .append(experience.getPosition())
+                        .append("\nResponsibilities: ")
+                        .append(experience.getDescription())
+                        .append("\n\n");
+            }
+        }
+
+        resume.append("Skills:\n");
+
+        List<Skill> skills = user.getSkills();
+        if (skills != null) {
+            for (int i = 0; i < skills.size(); i++) {
+                resume.append(skills.get(i).getName());
+                if (i < skills.size() - 1) {
+                    resume.append(", ");
+                }
+            }
+        }
+
+        return resume.toString();
     }
 }

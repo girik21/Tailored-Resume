@@ -18,7 +18,7 @@ public class EducationController {
     private EducationService educationService;
 
     @GetMapping
-    public ResponseEntity<ResponseWrapper<List<Education>>> getUserEducations(@PathVariable String userId) {
+    public ResponseEntity<ResponseWrapper<List<Education>>> getUserEducation(@PathVariable String userId) {
         try {
             List<Education> educations = educationService.getUserEducation(userId);
             String successMessage = "Successfully retrieved user's education.";

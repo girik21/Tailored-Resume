@@ -42,17 +42,17 @@ public class OpenAIController {
      * Creates a chat request and sends it to the OpenAI API
      * Returns the first message from the API response
      *
-     * @param requestParams containing the jobDescription and sample resume to send to the API
+     * @param jobDesc containing the jobDescription and sample resume to send to the API
      *
      * @return first message from the API response
      */
-    @PostMapping("/chat")
-    public ResponseEntity<?> chat(@RequestBody Map<String, String> requestParams) {
+    @PostMapping("/chat/{userId}")
+    public ResponseEntity<?> chat(@PathVariable String userId, @RequestBody Map<String, String> requestBody) {
         try {
-            var test = userService.getUserById("65e505389eb0d0350c385d1b");
-            openAIService.validateRequestParameters(requestParams);
-            String jobDesc = requestParams.get("jobDesc");
-            String sampleResume = requestParams.get("sampleResume");
+            var user = userService.getUserWithDetails(userId);
+            //openAIService.validateRequestParameters(requestParams);
+            String jobDesc = requestBody.get("jobDesc");
+            String sampleResume = openAIService.generateEscapedResume(user); //requestParams.get("sampleResume");
             String prompt = openAIService.createOpenAIPrompt(jobDesc, sampleResume);
 
             ChatRequest request = new ChatRequest(model, prompt);
