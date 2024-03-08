@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Roboto Medium';
+  src: url('./Roboto-Medium.ttf') format('truetype');
+}
+
+
 .buttonClass {
   font-family: "Lobster";
   font-size: 30px;

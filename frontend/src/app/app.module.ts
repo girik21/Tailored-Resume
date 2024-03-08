@@ -18,8 +18,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { PdfMakerComponent } from './components/pdf-maker/pdf-maker.component';
 import { RegisterComponent } from './components/register/register.component';
 import { MatchPasswordDirective } from './directives/password-pattern.directive';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { MatchPasswordDirective } from './directives/password-pattern.directive'
     MatchPasswordDirective,
     FooterComponent,
     HomeComponent,
+    PdfMakerComponent,
     CarouselComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
