@@ -55,26 +55,21 @@ export class PdfMakerComponent {
         },
         { text: 'Skills:', style: 'subheader' },
         {
-          ul: [
-            { text: 'Programming Languages: ' + data.skills.programmingLanguages.join(', ') },
-            { text: 'Databases: ' + data.skills.databases.join(', ') },
-            { text: 'Frameworks: ' + data.skills.frameworks.join(', ') },
-            { text: 'Other Technologies: ' + data.skills.otherTechnologies.join(', ') },
-            { text: 'Cloud Platforms: ' + data.skills.cloudPlatforms.join(', ') },
-            { text: 'Development Practices: ' + data.skills.developmentPractices.join(', ') },
-            { text: 'Proficiency: ' + data.skills.proficiency.join(', ') }
-          ]
+          ul: Array.isArray(data.skills)
+            ? data.skills.map((skill: any) => ({ text: skill }))
+            : [{ text: data.skills }] // Fallback if data.skills is not an array
         },
         { text: 'Work History:', style: 'subheader' },
-        ...data.workHistory.flatMap((entry: any, index: number, array: any[]) => [
-          {
-            ul: [
-              { text: entry.position + ' at ' + entry.company + ', ' + entry.location + ', ' + entry.dates, bold: true },
-              { ul: entry.responsibilities }
-            ]
-          },
-          index !== array.length - 1 ? { text: '\n' } : null // Add space between different companies
-        ]),
+        {
+          ul: data.workHistory.map((entry: any) => {
+            return {
+              columns: [
+                { text: entry.position + ' at ' + entry.company + ', ' + entry.location + ', ' + entry.dates, bold: true },
+                { text: entry.responsibilities }
+              ]
+            };
+          })
+        },
         { text: 'Education:', style: 'subheader' },
         {
           ul: [
@@ -82,12 +77,13 @@ export class PdfMakerComponent {
           ]
         },
         { text: 'Projects:', style: 'subheader' },
-        ...data.projects.flatMap((project: any, index: number, array: any[]) => [
-          { text: project.name, style: 'projectName' },
-          { text: project.description, style: 'projectDescription' },
-          { text: 'Date: ' + project.date, style: 'projectDate' },
-          index !== array.length - 1 ? { text: '\n' } : null // Add space between different projects
-        ]),
+        ...data.projects.map((project: any) => {
+          return [
+            { text: project.name, style: 'projectName' },
+            { text: project.description, style: 'projectDescription' },
+            { text: 'Date: ' + project.date, style: 'projectDate' }
+          ];
+        }).flat(),
         { text: 'Mentorship:', style: 'subheader' },
         {
           ul: [
