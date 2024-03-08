@@ -1,7 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import jsonData from './experience.json';
 
 @Component({
   selector: 'app-pdf-maker',
@@ -9,15 +9,37 @@ import jsonData from './experience.json';
   styleUrls: ['./pdf-maker.component.css']
 })
 export class PdfMakerComponent {
-  jsonData: any = jsonData;
+  jobDescription: string = '';
+  responseData: any;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
   }
 
   generatePDF() {
-    const documentDefinition = this.createDocumentDefinition(this.jsonData);
-    pdfMake.createPdf(documentDefinition).open();
+    if (this.jobDescription.trim() !== '') {
+      const userToken = localStorage.getItem('accessToken'); // Get the user token from localStorage
+      if (!userToken) {
+        console.error('User token not found.');
+        return;
+      }
+
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + userToken,
+        'Content-Type': 'application/json'
+      });
+
+      this.http.post<any>('http://localhost:8080/api/openai/chat/65e505389eb0d0350c385d1b', { jobDesc: this.jobDescription }, { headers })
+        .subscribe(response => {
+          this.responseData = response.data;
+          const documentDefinition = this.createDocumentDefinition(this.responseData);
+          pdfMake.createPdf(documentDefinition).open();
+        }, error => {
+          console.error('Error occurred:', error);
+        });
+    } else {
+      console.error('Job description is required.');
+    }
   }
 
   createDocumentDefinition(data: any): any {
