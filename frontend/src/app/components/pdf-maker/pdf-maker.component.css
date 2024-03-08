@@ -1,8 +1,8 @@
+/* Define custom font */
 @font-face {
   font-family: 'Roboto Medium';
   src: url('./Roboto-Medium.ttf') format('truetype');
 }
-
 
 .buttonClass {
   font-family: "Lobster";
@@ -16,4 +16,14 @@
   cursor: pointer;
   text-align: center;
   text-decoration: none;
+}
+
+.job-description-input {
+  font-size: 15px;
+  padding: 25px;
+  width: 400px;
+  height: 130px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
 }
