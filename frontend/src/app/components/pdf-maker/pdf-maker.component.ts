@@ -49,33 +49,52 @@ export class PdfMakerComponent {
         { text: 'Contact Information:', style: 'subheader' },
         {
           columns: [
-            { text: 'LinkedIn: ' + data.contact.LinkedIn + '\nPhone: ' + data.contact.phone + '\nLocation: ' + data.contact.location },
-            { text: 'Portfolio: ' + data.contact.portfolio + '\nEmail: ' + data.contact.email + '\nGitHub: ' + data.contact.github }
+            { text: 'LinkedIn: ' + (data.contact.LinkedIn || 'Not Provided') + '\nPhone: ' + data.contact.phone + '\nLocation: ' + data.contact.location },
+            { text: 'Portfolio: ' + (data.contact.portfolio || 'Not Provided') + '\nEmail: ' + data.contact.email + '\nGitHub: ' + (data.contact.github || 'Not Provided') }
           ]
         },
         { text: 'Skills:', style: 'subheader' },
         {
-          ul: Array.isArray(data.skills)
-            ? data.skills.map((skill: any) => ({ text: skill }))
-            : [{ text: data.skills }] // Fallback if data.skills is not an array
+          ul: data.skills.programmingLanguages.map((lang: string) => ({ text: lang })),
+        },
+        { text: 'Databases:', style: 'subheader' },
+        {
+          ul: data.skills.databases.map((db: string) => ({ text: db })),
+        },
+        { text: 'Frameworks:', style: 'subheader' },
+        {
+          ul: data.skills.frameworks.map((framework: string) => ({ text: framework })),
+        },
+        { text: 'Other Technologies:', style: 'subheader' },
+        {
+          ul: data.skills.otherTechnologies.map((tech: string) => ({ text: tech })),
+        },
+        { text: 'Cloud Platforms:', style: 'subheader' },
+        {
+          ul: data.skills.cloudPlatforms.map((platform: string) => ({ text: platform })),
+        },
+        { text: 'Development Practices:', style: 'subheader' },
+        {
+          ul: data.skills.developmentPractices.map((practice: string) => ({ text: practice })),
         },
         { text: 'Work History:', style: 'subheader' },
-        {
-          ul: data.workHistory.map((entry: any) => {
-            return {
+        ...data.workHistory.map((entry: any) => {
+          return [
+            {
               columns: [
-                { text: entry.position + ' at ' + entry.company + ', ' + entry.location + ', ' + entry.dates, bold: true },
-                { text: entry.responsibilities }
+                { text: entry.company + ', ' + entry.location + ', ' + entry.from + ' - ' + entry.to, bold: true },
+                { text: entry.position, bold: true }
               ]
-            };
-          })
-        },
+            },
+            { text: entry.responsibilities }
+          ];
+        }),
         { text: 'Education:', style: 'subheader' },
-        {
-          ul: [
-            data.education.degree + ' in ' + data.education.major + ' from ' + data.education.institution + ', ' + data.education.location + ', ' + data.education.dates
-          ]
-        },
+        ...data.education.map((edu: any) => {
+          return [
+            { text: edu.degree + ' in ' + edu.school + ', ' + edu.from + ' - ' + edu.to, bold: true }
+          ];
+        }),
         { text: 'Projects:', style: 'subheader' },
         ...data.projects.map((project: any) => {
           return [
@@ -87,8 +106,8 @@ export class PdfMakerComponent {
         { text: 'Mentorship:', style: 'subheader' },
         {
           ul: [
-            'Role: ' + data.mentorship.role,
-            'Responsibilities: ' + data.mentorship.responsibilities
+            'Role: ' + (data.mentorship.role || 'Not Provided'),
+            'Responsibilities: ' + (data.mentorship.responsibilities || 'Not Provided')
           ]
         }
       ],
