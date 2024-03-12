@@ -1,8 +1,4 @@
-import "./chunk-LTO7VF2I.js";
-import {
-  FirebaseApp
-} from "./chunk-SFZM7K7F.js";
-import "./chunk-WXO7NFWH.js";
+import "./chunk-3YBXYBNI.js";
 import {
   FIREBASE_APP_NAME,
   FIREBASE_OPTIONS,
@@ -10,10 +6,14 @@ import {
   ɵcacheInstance,
   ɵfirebaseAppFactory,
   ɵlazySDKProxy
-} from "./chunk-OOBQ3B3V.js";
+} from "./chunk-36M7JOLY.js";
 import {
   firebase
-} from "./chunk-IZSXWLCR.js";
+} from "./chunk-FKFJIXCN.js";
+import {
+  FirebaseApp
+} from "./chunk-BENXBLB3.js";
+import "./chunk-EF5MFCMW.js";
 import {
   VERSION,
   keepUnstableUntilFirst,
@@ -23,7 +23,7 @@ import {
   ɵgetAllInstancesOf,
   ɵgetDefaultInstanceOf,
   ɵzoneWrap
-} from "./chunk-MXPCZGSD.js";
+} from "./chunk-JHLXXRUF.js";
 import {
   Component,
   Deferred,
@@ -38,10 +38,10 @@ import {
   isIndexedDBAvailable,
   registerVersion,
   uuidv4
-} from "./chunk-GGPOAGS5.js";
+} from "./chunk-ZZ47JO2S.js";
 import {
   isPlatformServer
-} from "./chunk-XVKCZCGE.js";
+} from "./chunk-6UA4HNOH.js";
 import {
   Inject,
   Injectable,
@@ -55,11 +55,11 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-NO2ATPW3.js";
-import "./chunk-M4ADVECS.js";
+} from "./chunk-R7NBPG36.js";
 import {
   merge
-} from "./chunk-IETETT4V.js";
+} from "./chunk-OI5GLHID.js";
+import "./chunk-MJV6UDH2.js";
 import {
   Observable,
   Subject,
@@ -76,10 +76,10 @@ import {
   switchMap,
   switchMapTo,
   timer
-} from "./chunk-V2GKM6XS.js";
+} from "./chunk-7WFCSKEP.js";
 import {
   __async
-} from "./chunk-NJK4OOTY.js";
+} from "./chunk-AR2SKMNP.js";
 
 // node_modules/@firebase/app-check/dist/esm/index.esm2017.js
 var APP_CHECK_STATES = /* @__PURE__ */ new Map();
@@ -969,7 +969,7 @@ var AngularFireAuth = class _AngularFireAuth {
   credential;
   constructor(options, name2, platformId, zone, schedulers, useEmulator, settings, tenantId, languageCode, useDeviceLanguage, persistence, _appCheckInstances) {
     const logins = new Subject();
-    const auth = of(void 0).pipe(observeOn(schedulers.outsideAngular), switchMap(() => zone.runOutsideAngular(() => import("./index.esm-AHARKZ66.js"))), map(() => ɵfirebaseAppFactory(options, zone, name2)), map((app) => ɵauthFactory(app, zone, useEmulator, tenantId, languageCode, useDeviceLanguage, settings, persistence)), shareReplay({
+    const auth = of(void 0).pipe(observeOn(schedulers.outsideAngular), switchMap(() => zone.runOutsideAngular(() => import("./index.esm-CFBXHJ6N.js"))), map(() => ɵfirebaseAppFactory(options, zone, name2)), map((app) => ɵauthFactory(app, zone, useEmulator, tenantId, languageCode, useDeviceLanguage, settings, persistence)), shareReplay({
       bufferSize: 1,
       refCount: false
     }));

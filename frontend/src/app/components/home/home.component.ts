@@ -8,6 +8,10 @@ import { AuthService } from '../../shared/auth.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  status = false;
+  addToggle() {
+    this.status = !this.status;
+  }
 
   constructor(private authService: AuthService) { }
 
