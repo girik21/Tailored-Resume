@@ -49,7 +49,7 @@ public class OpenAIController {
     @PostMapping("/chat/{userId}")
     public ResponseEntity<?> chat(@PathVariable String userId, @RequestBody Map<String, String> requestBody) {
         try {
-            var user = userService.getUserWithDetails(userId);
+            var user = userService.getUserById(userId);
             //openAIService.validateRequestParameters(requestParams);
             String jobDesc = requestBody.get("jobDesc");
             String sampleResume = openAIService.generateEscapedResume(user); //requestParams.get("sampleResume");
@@ -80,9 +80,6 @@ public class OpenAIController {
         } catch (JsonProcessingException e) {
             e.printStackTrace(); // Log the exception for debugging
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
-
         }
     }
-
-
 }

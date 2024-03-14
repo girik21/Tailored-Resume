@@ -14,11 +14,6 @@ import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-
-
-
-
-
 @Service
 public class OpenAIServiceImpl implements OpenAIService{
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM yyyy");

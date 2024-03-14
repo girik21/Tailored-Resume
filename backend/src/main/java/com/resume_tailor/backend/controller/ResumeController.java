@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users/{userId}/resume")
+@RequestMapping("/api/resume")
 public class ResumeController {
     @Autowired
     private ResumeService resumeService;
 
     @GetMapping
-    public ResponseEntity<ResponseWrapper<List<Resume>>> getUserResumes(@PathVariable String userId) {
+    public ResponseEntity<ResponseWrapper<List<Resume>>> getResumes() {
         try {
-            List<Resume> resumes = resumeService.getUserResumes(userId);
-            String successMessage = "Successfully retrieved user's Resumes.";
+            List<Resume> resumes = resumeService.getResumes();
+            String successMessage = "Successfully retrieved Resumes.";
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, successMessage, resumes));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
@@ -29,11 +29,11 @@ public class ResumeController {
     }
 
     @GetMapping("/{userResumeId}")
-    public ResponseEntity<?> getUserResumeById(@PathVariable String userResumeId) {
+    public ResponseEntity<?> getResumeById(@PathVariable String userResumeId) {
         try {
-            Resume resume = resumeService.getUserResumeById(userResumeId);
+            Resume resume = resumeService.getResumeById(userResumeId);
             if (resume != null) {
-                return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User Resume retrieved successfully.", resume));
+                return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Resume retrieved successfully.", resume));
             } else {
                 return ResponseEntity.notFound().build();
             }
@@ -43,9 +43,9 @@ public class ResumeController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseWrapper<Resume>> createUserResume(@PathVariable String userId, @Valid @RequestBody Resume resume) {
+    public ResponseEntity<ResponseWrapper<Resume>> createResume(@RequestParam("userId") String userId, @Valid @RequestBody Resume resume) {
         try {
-            Resume createdResume = resumeService.createUserResume(userId, resume);
+            Resume createdResume = resumeService.createResume(userId, resume);
             return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(true, "User Resume created successfully.", createdResume));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
@@ -53,9 +53,9 @@ public class ResumeController {
     }
 
     @PutMapping("/{resumeId}")
-    public ResponseEntity<ResponseWrapper<Resume>> updateUserResume(@PathVariable String userId, @PathVariable String resumeId, @Valid @RequestBody Resume updatedResume) {
+    public ResponseEntity<ResponseWrapper<Resume>> updateResume(@PathVariable String resumeId, @Valid @RequestBody Resume updatedResume) {
         try {
-            Resume resume = resumeService.updateUserResume(userId, resumeId, updatedResume);
+            Resume resume = resumeService.updateResume(resumeId, updatedResume);
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User Resume updated successfully.", updatedResume));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
@@ -63,9 +63,9 @@ public class ResumeController {
     }
 
     @DeleteMapping("/{resumeId}")
-    public ResponseEntity<ResponseWrapper<Void>> deleteUserResume(@PathVariable String resumeId) {
+    public ResponseEntity<ResponseWrapper<Void>> deleteResume(@PathVariable String resumeId) {
         try {
-            resumeService.deleteUserResume(resumeId);
+            resumeService.deleteResume(resumeId);
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User Resume deleted successfully.", null));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));

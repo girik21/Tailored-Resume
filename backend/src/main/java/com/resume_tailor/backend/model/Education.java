@@ -2,6 +2,7 @@ package com.resume_tailor.backend.model;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.validation.constraints.NotBlank;
@@ -13,9 +14,6 @@ import java.util.Date;
 public class Education {
     @Id
     private String id;
-
-    @NotNull(message = "User ID cannot be null.")
-    private String userId;
 
     @NotBlank(message = "Degree name cannot be null or empty.")
     private String degreeName;
@@ -52,14 +50,6 @@ public class Education {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getDegreeName() {

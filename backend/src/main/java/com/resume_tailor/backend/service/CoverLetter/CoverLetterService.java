@@ -8,11 +8,11 @@ public interface CoverLetterService {
 
     List<CoverLetter> getAllCoverLetters();
 
-    CoverLetter getCoverLetterById(Integer coverLetterId);
+    CoverLetter getCoverLetterById(String coverLetterId);
 
-    CoverLetter createCoverLetter(CoverLetter coverLetter);
+    CoverLetter createCoverLetter(String userId, CoverLetter coverLetter);
 
-    CoverLetter updateCoverLetter(Integer coverLetterId, CoverLetter updatedCoverLetter);
+    CoverLetter updateCoverLetter(String coverLetterId, CoverLetter updatedCoverLetter);
 
-    void deleteCoverLetter(Integer coverLetterId);
+    void deleteCoverLetter(String coverLetterId);
 }

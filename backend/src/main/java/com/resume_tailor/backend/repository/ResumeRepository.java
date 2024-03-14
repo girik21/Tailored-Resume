@@ -6,6 +6,4 @@ import com.resume_tailor.backend.model.Resume;
 import java.util.List;
 
 public interface ResumeRepository extends MongoRepository<Resume, String> {
-
-    List<Resume> findByUserId(String userId);
 }

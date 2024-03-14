@@ -46,33 +46,6 @@ public class UserServiceImpl implements UserService {
         return user.orElse(null);
     }
 
-    public User getUserWithDetails(String userId) {
-        User user = getUserById(userId);
-        if (user != null) {
-            List<Experience> experiences = experienceService.getUserExperiences(userId);
-            if (experiences != null) {
-                user.setExperiences(experiences);
-            }
-
-            List<Education> education = educationService.getUserEducation(userId);
-            if (education != null) {
-                user.setEducation(education);
-            }
-
-            List<Project> projects = projectService.getUserProjects(userId);
-            if (projects != null) {
-                user.setProjects(projects);
-            }
-
-            List<Skill> skills = skillService.getUserSkills(userId);
-            if (skills != null) {
-                user.setSkills(skills);
-            }
-        }
-        return user;
-    }
-
-
     @Override
     public User createUser(User user) {
         // Encrypt the password before saving

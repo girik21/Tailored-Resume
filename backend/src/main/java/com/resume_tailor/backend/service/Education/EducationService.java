@@ -5,13 +5,13 @@ import com.resume_tailor.backend.model.Education;
 import java.util.List;
 
 public interface EducationService {
-    List<Education> getUserEducation(String userId);
+    List<Education> getEducation();
 
-    Education getUserEducationById(String userEducationId);
+    Education getEducationById(String educationId);
 
-    Education createUserEducation(String userId, Education education);
+    Education createEducation(String userId, Education education);
 
-    Education updateUserEducation(String userId, String educationId, Education education);
+    Education updateEducation(String educationId, Education education);
 
-    void deleteUserEducation(String educationId);
+    void deleteEducation(String educationId);
 }

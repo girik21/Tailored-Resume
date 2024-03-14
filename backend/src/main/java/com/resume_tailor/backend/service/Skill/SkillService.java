@@ -5,13 +5,13 @@ import com.resume_tailor.backend.model.Skill;
 import java.util.List;
 
 public interface SkillService {
-    List<Skill> getUserSkills(String userId);
+    List<Skill> getSkills();
 
-    Skill getUserSkillById(String userSkillId);
+    Skill getSkillById(String skillId);
 
-    Skill createUserSkill(String userId, Skill skill);
+    Skill createSkill(String userId, Skill skill);
 
-    Skill updateUserSkill(String userId, String skillId, Skill skill);
+    Skill updateSkill(String skillId, Skill skill);
 
-    void deleteUserSkill(String skillId);
+    void deleteSkill(String skillId);
 }
