@@ -1,9 +1,10 @@
 package com.resume_tailor.backend.service.Experience;
 
-import com.resume_tailor.backend.model.Project;
 import com.resume_tailor.backend.model.Experience;
+import com.resume_tailor.backend.model.User;
 import com.resume_tailor.backend.repository.ProjectRepository;
 import com.resume_tailor.backend.repository.ExperienceRepository;
+import com.resume_tailor.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,84 +17,50 @@ public class ExperienceServiceImpl implements ExperienceService {
 
     @Autowired
     private ExperienceRepository experienceRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private ProjectRepository projectRepository;
 
     @Override
-    public List<Experience> getUserExperiences(String userId) {
-        return experienceRepository.findByUserIdOrderByStartDateDesc(userId);
+    public List<Experience> getExperiences() {
+        return experienceRepository.findAll();
     }
 
     @Override
-    public Experience getUserExperienceById(String userExperienceId) {
+    public Experience getExperienceById(String userExperienceId) {
         Optional<Experience> userExperience = experienceRepository.findById(userExperienceId);
         return userExperience.orElse(null);
     }
 
     @Override
-    public Experience createUserExperience(String userId, Experience experience) {
-        experience.setUserId(userId);
-        experience.setCreatedDate(new Date());
-        return experienceRepository.save(experience);
+    public Experience createExperience(String userId, Experience experience) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            experience.setCreatedDate(new Date());
+            Experience savedExperience = experienceRepository.save(experience);
+
+            // Associate with the user
+            user.addExperience(experience);
+            userRepository.save(user);
+
+            return savedExperience;
+        }
+        return null;
     }
 
     @Override
-    public Experience updateUserExperience(String userId, String experienceId, Experience updatedExperience) {
+    public Experience updateExperience(String experienceId, Experience updatedExperience) {
+        // Since you're using DBRef, you don't need to update the userId
         updatedExperience.setId(experienceId);
-        updatedExperience.setUserId(userId);
         return experienceRepository.save(updatedExperience);
     }
 
+
     @Override
-    public void deleteUserExperience(String experienceId) {
+    public void deleteExperience(String experienceId) {
         experienceRepository.deleteById(experienceId);
     }
 
-    public List<Project> getProjectsByExperienceId(String experienceId) {
-        Optional<Experience> experienceOptional = experienceRepository.findById(experienceId);
-        return experienceOptional.map(Experience::getProjects).orElse(null);
-    }
-
-    public Project addProjectToExperience(String experienceId, Project project) {
-        Optional<Experience> experienceOptional = experienceRepository.findById(experienceId);
-        if (experienceOptional.isPresent()) {
-            Experience experience = experienceOptional.get();
-            List<Project> projects = experience.getProjects();
-            projects.add(project);
-            experience.setProjects(projects);
-            experienceRepository.save(experience);
-            return project;
-        }
-        return null;
-    }
-
-    public Project updateProjectInExperience(String experienceId, String projectId, Project project) {
-        Optional<Experience> experienceOptional = experienceRepository.findById(experienceId);
-        if (experienceOptional.isPresent()) {
-            Experience experience = experienceOptional.get();
-            List<Project> projects = experience.getProjects();
-            for (int i = 0; i < projects.size(); i++) {
-                if (projects.get(i).getId().equals(projectId)) {
-                    project.setId(projectId);
-                    projects.set(i, project);
-                    experience.setProjects(projects);
-                    experienceRepository.save(experience);
-                    return project;
-                }
-            }
-        }
-        return null;
-    }
-
-    public void deleteProjectFromExperience(String experienceId, String projectId) {
-        Optional<Experience> experienceOptional = experienceRepository.findById(experienceId);
-        if (experienceOptional.isPresent()) {
-            Experience experience = experienceOptional.get();
-            List<Project> projects = experience.getProjects();
-            projects.removeIf(project -> project.getId().equals(projectId));
-            experience.setProjects(projects);
-            experienceRepository.save(experience);
-        }
-    }
 }

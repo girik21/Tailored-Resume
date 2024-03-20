@@ -6,13 +6,13 @@ import com.resume_tailor.backend.model.Resume;
 
 public interface ResumeService {
 
-    List<Resume> getUserResumes(String userId);
+    List<Resume> getResumes();
 
-    Resume getUserResumeById(String userResumeId);
+    Resume getResumeById(String resumeId);
 
-    Resume createUserResume(String userId, Resume resume);
+    Resume createResume(String userId, Resume resume);
 
-    Resume updateUserResume(String userId, String resumeId, Resume resume);
+    Resume updateResume(String resumeId, Resume resume);
 
-    void deleteUserResume(String resumeId);
+    void deleteResume(String resumeId);
 }

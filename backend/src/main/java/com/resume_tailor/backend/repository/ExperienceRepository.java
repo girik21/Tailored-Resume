@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface ExperienceRepository extends MongoRepository<Experience, String> {
 
-    List<Experience> findByUserIdOrderByStartDateDesc(String userId);
 }

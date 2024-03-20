@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users/{userId}/skills")
+@RequestMapping("/api/skills")
 public class SkillController {
     @Autowired
     private SkillService skillService;
 
     @GetMapping
-    public ResponseEntity<ResponseWrapper<List<Skill>>> getUserSkills(@PathVariable String userId) {
+    public ResponseEntity<ResponseWrapper<List<Skill>>> getSkills() {
         try {
-            List<Skill> skills = skillService.getUserSkills(userId);
+            List<Skill> skills = skillService.getSkills();
             String successMessage = "Successfully retrieved user's skills.";
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, successMessage, skills));
         } catch (Exception e) {
@@ -28,10 +28,10 @@ public class SkillController {
         }
     }
 
-    @GetMapping("/{userSkillId}")
-    public ResponseEntity<?> getUserSkillById(@PathVariable String userSkillId) {
+    @GetMapping("/{skillId}")
+    public ResponseEntity<?> getSkillById(@PathVariable String skillId) {
         try {
-            Skill skill = skillService.getUserSkillById(userSkillId);
+            Skill skill = skillService.getSkillById(skillId);
             if (skill != null) {
                 return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User Skill retrieved successfully.", skill));
             } else {
@@ -43,9 +43,9 @@ public class SkillController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseWrapper<Skill>> createUserSKill(@PathVariable String userId, @Valid @RequestBody Skill skill) {
+    public ResponseEntity<ResponseWrapper<Skill>> createSKill(@RequestParam("userId") String userId, @Valid @RequestBody Skill skill) {
         try {
-            Skill createdSkill = skillService.createUserSkill(userId, skill);
+            Skill createdSkill = skillService.createSkill(userId, skill);
             return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(true, "User skill created successfully.", createdSkill));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
@@ -53,9 +53,9 @@ public class SkillController {
     }
 
     @PutMapping("/{skillId}")
-    public ResponseEntity<ResponseWrapper<Skill>> updateUserSkill(@PathVariable String userId, @PathVariable String skillId, @Valid @RequestBody Skill updatedSkill) {
+    public ResponseEntity<ResponseWrapper<Skill>> updateSkill(@PathVariable String skillId, @Valid @RequestBody Skill updatedSkill) {
         try {
-            Skill skill = skillService.updateUserSkill(userId, skillId, updatedSkill);
+            Skill skill = skillService.updateSkill(skillId, updatedSkill);
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User skill updated successfully.", updatedSkill));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
@@ -63,9 +63,9 @@ public class SkillController {
     }
 
     @DeleteMapping("/{skillId}")
-    public ResponseEntity<ResponseWrapper<Void>> deleteUserSkill(@PathVariable String skillId) {
+    public ResponseEntity<ResponseWrapper<Void>> deleteSkill(@PathVariable String skillId) {
         try {
-            skillService.deleteUserSkill(skillId);
+            skillService.deleteSkill(skillId);
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User skill deleted successfully.", null));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));

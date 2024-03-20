@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../shared/auth.service';
 import { locale } from '../common/constants';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

@@ -4,5 +4,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.resume_tailor.backend.model.CoverLetter;
 
-public interface CoverLetterRepository extends MongoRepository<CoverLetter, Integer> {
+public interface CoverLetterRepository extends MongoRepository<CoverLetter, String> {
 }

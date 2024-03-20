@@ -12,10 +12,7 @@ import jakarta.validation.constraints.NotNull;
 @Document(collection = "cover_letters")
 public class CoverLetter {
     @Id
-    private Integer id;
-
-    @NotNull(message = "User ID cannot be null!")
-    private Integer userId;
+    private String id;
 
     @NotBlank(message = "Link cannot be null!")
     private String link;
@@ -29,20 +26,12 @@ public class CoverLetter {
     private String appliedJobLink;
 
     // Getters and Setters
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getLink() {

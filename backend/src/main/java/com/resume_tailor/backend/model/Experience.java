@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,9 +16,6 @@ import java.util.List;
 public class Experience {
     @Id
     private String id;
-
-    @NotNull(message = "User ID cannot be null.")
-    private String userId;
 
     @NotBlank(message = "Position cannot be null or empty.")
     private String position;
@@ -43,7 +41,7 @@ public class Experience {
     private Date createdDate;
 
     @DBRef
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<>();
 
     // Getters and setters
     public String getId() {
@@ -52,14 +50,6 @@ public class Experience {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getPosition() {
@@ -140,5 +130,9 @@ public class Experience {
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    public void addProject(Project project) {
+        this.projects.add(project);
     }
 }

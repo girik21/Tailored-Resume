@@ -13,11 +13,12 @@ button {
   color: inherit;
 }
 
-.loginContainer {
-  margin-top: 50px;
-  justify-content: center;
+.mainContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .loginButtons {
@@ -34,54 +35,16 @@ button {
   width: 200px;
   border-radius: 20px;
   margin: 0 10px;
-  border: none;
+  cursor: pointer;
 }
 
 .buttonClass:hover {
   background-color: #035e40;
 }
 
-
 .orText {
   font-family: "Lobster";
   font-size: 34px;
   color: #04724D;
   margin: 0 10px;
-}
-
-.mainContainer {
-  margin: 0 auto;
-  margin-top: 70px;
-  width: 1186px;
-  height: 455px;
-  background-color: #04724D;
-  border-radius: 82px;
-}
-
-.subContainer {
-  justify-content: center;
-  display: flex;
-  flex-direction: row;
-}
-
-.sloganText {
-  margin-top: 30px;
-  font-family: "Lobster";
-  font-size: 80px;
-  text-align: left;
-  color: #FFFCF2;
-  width: 630px;
-}
-
-.getStarted {
-  text-align: center;
-  background-color: #FFFCF2;
-  width: 400px;
-  height: 110px;
-  margin-top: 130px;
-  border-radius: 50px;
-  font-family: "Lobster";
-  font-size: 70px;
-  color: #04724D;
-  cursor: pointer;
 }

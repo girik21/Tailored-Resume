@@ -1,7 +1,11 @@
 package com.resume_tailor.backend.service.User;
 
-import com.resume_tailor.backend.model.User;
+import com.resume_tailor.backend.model.*;
 import com.resume_tailor.backend.repository.UserRepository;
+import com.resume_tailor.backend.service.Education.EducationService;
+import com.resume_tailor.backend.service.Experience.ExperienceService;
+import com.resume_tailor.backend.service.ExperienceProjects.ProjectService;
+import com.resume_tailor.backend.service.Skill.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,18 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ExperienceService experienceService;
+
+    @Autowired
+    private EducationService educationService;
+
+    @Autowired
+    private ProjectService projectService;
+
+    @Autowired
+    private SkillService skillService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

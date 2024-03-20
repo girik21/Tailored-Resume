@@ -1,8 +1,10 @@
 package com.resume_tailor.backend.model;
 
 import com.resume_tailor.backend.security.Role;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,6 +12,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Email;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +22,7 @@ public class User {
     private String id;
     @NotBlank(message = "Username cannot be null!")
     private String username;
+    @Indexed(unique = true)
     @Email(message = "Enter valid email!")
     private String email;
     @NotBlank(message = "Phone number cannot be null!")
@@ -44,13 +48,17 @@ public class User {
     @CreatedDate
     private Date createdDate;
     @DBRef
-    private List<Experience> experiences;
+    private List<Experience> experiences = new ArrayList<>();
     @DBRef
-    private List<Education> education;
+    private List<Education> education = new ArrayList<>();
     @DBRef
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<>();
     @DBRef
-    private List<Skill> skills;
+    private List<Skill> skills = new ArrayList<>();
+    @DBRef
+    private List<Resume> resumes = new ArrayList<>();
+    @DBRef
+    private List<CoverLetter> coverLetters = new ArrayList<>();
 
 
     // Getters and setters
@@ -182,12 +190,20 @@ public class User {
         this.experiences = experiences;
     }
 
+    public void addExperience(Experience experience) {
+        this.experiences.add(experience);
+    }
+
     public List<Education> getEducation() {
         return education;
     }
 
     public void setEducation(List<Education> education) {
         this.education = education;
+    }
+
+    public void addEducation(Education education) {
+        this.education.add(education);
     }
 
     public List<Project> getProjects() {
@@ -198,11 +214,43 @@ public class User {
         this.projects = projects;
     }
 
+    public void addProject(Project project) {
+        this.projects.add(project);
+    }
+
     public List<Skill> getSkills() {
         return skills;
     }
 
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
+    }
+
+    public void addSkill(Skill skill) {
+        this.skills.add(skill);
+    }
+
+    public List<Resume> getResumes() {
+        return resumes;
+    }
+
+    public void setResumes(List<Resume> resumes) {
+        this.resumes = resumes;
+    }
+
+    public void addResume(Resume resume) {
+        this.resumes.add(resume);
+    }
+
+    public List<CoverLetter> getCoverLetters() {
+        return coverLetters;
+    }
+
+    public void setCoverLetters(List<CoverLetter> coverLetters) {
+        this.coverLetters = coverLetters;
+    }
+
+    public void addCoverLetter(CoverLetter coverLetter) {
+        this.coverLetters.add(coverLetter);
     }
 }

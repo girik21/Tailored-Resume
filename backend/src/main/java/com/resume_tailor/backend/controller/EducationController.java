@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users/{userId}/education")
+@RequestMapping("/api/education")
 public class EducationController {
     @Autowired
     private EducationService educationService;
 
     @GetMapping
-    public ResponseEntity<ResponseWrapper<List<Education>>> getUserEducation(@PathVariable String userId) {
+    public ResponseEntity<ResponseWrapper<List<Education>>> getEducation() {
         try {
-            List<Education> educations = educationService.getUserEducation(userId);
-            String successMessage = "Successfully retrieved user's education.";
+            List<Education> educations = educationService.getEducation();
+            String successMessage = "Successfully retrieved education.";
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, successMessage, educations));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
@@ -29,11 +29,11 @@ public class EducationController {
     }
 
     @GetMapping("/{educationId}")
-    public ResponseEntity<?> getUserEducationById(@PathVariable String educationId) {
+    public ResponseEntity<?> getEducationById(@PathVariable String educationId) {
         try {
-            Education education = educationService.getUserEducationById(educationId);
+            Education education = educationService.getEducationById(educationId);
             if (education != null) {
-                return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User Education retrieved successfully.", education));
+                return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Education retrieved successfully.", education));
             } else {
                 return ResponseEntity.notFound().build();
             }
@@ -43,9 +43,9 @@ public class EducationController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseWrapper<Education>> createUserEducation(@PathVariable String userId, @Valid @RequestBody Education education) {
+    public ResponseEntity<ResponseWrapper<Education>> createEducation(@RequestParam("userId") String userId, @Valid @RequestBody Education education) {
         try {
-            Education createdEducation = educationService.createUserEducation(userId, education);
+            Education createdEducation = educationService.createEducation(userId, education);
             return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(true, "User education created successfully.", createdEducation));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
@@ -53,9 +53,9 @@ public class EducationController {
     }
 
     @PutMapping("/{educationId}")
-    public ResponseEntity<ResponseWrapper<Education>> updateUserEducation(@PathVariable String userId, @PathVariable String educationId, @Valid @RequestBody Education updatedEducation) {
+    public ResponseEntity<ResponseWrapper<Education>> updateEducation(@PathVariable String educationId, @Valid @RequestBody Education updatedEducation) {
         try {
-            Education education = educationService.updateUserEducation(userId, educationId, updatedEducation);
+            Education education = educationService.updateEducation(educationId, updatedEducation);
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User education updated successfully.", education));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
@@ -63,9 +63,9 @@ public class EducationController {
     }
 
     @DeleteMapping("/{educationId}")
-    public ResponseEntity<ResponseWrapper<Void>> deleteUserEducation(@PathVariable String educationId) {
+    public ResponseEntity<ResponseWrapper<Void>> deleteEducation(@PathVariable String educationId) {
         try {
-            educationService.deleteUserEducation(educationId);
+            educationService.deleteEducation(educationId);
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User education deleted successfully.", null));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));

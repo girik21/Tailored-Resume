@@ -1,7 +1,6 @@
 package com.resume_tailor.backend.model;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,9 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Project {
     @Id
     private String id;
-
-    @NotNull(message = "User ID cannot be null!")
-    private String userId;
 
     @NotBlank(message = "Project name can not be null!")
     private String name;
@@ -28,14 +24,6 @@ public class Project {
 
     public void setId(String id){
         this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getName(){
