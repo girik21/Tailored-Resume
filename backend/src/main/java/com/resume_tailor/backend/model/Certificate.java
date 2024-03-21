@@ -7,12 +7,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Document(collection = "projects")
-public class Project {
+@Document(collection = "certifications")
+public class Certificate {
     @Id
     private String id;
 
-    @NotBlank(message = "Project name can not be null!")
+    @NotBlank(message = "Certification name can not be null!")
     private String name;
 
     @NotNull(message = "Start date cannot be null.")
@@ -20,10 +20,8 @@ public class Project {
 
     private Date endDate;
 
-    @NotBlank(message = "Employer cannot be null or empty.")
-    private String employer;
-
-    private String link;
+    @NotBlank(message = "Issuer cannot be null or empty.")
+    private String issuer;
 
     @NotBlank(message = "Project description can not be null")
     private String description ;
@@ -45,20 +43,12 @@ public class Project {
         this.name = name;
     }
 
-    public String getEmployer() {
-        return employer;
+    public String getIssuer() {
+        return issuer;
     }
 
-    public void setEmployer(String employer) {
-        this.employer = employer;
-    }
-
-    public String getLink(){
-        return this.link;
-    }
-
-    public void setLink(String link){
-        this.link = link;
+    public void setIssuer(String issuer) {
+        this.issuer = issuer;
     }
 
     public Date getStartDate() {
@@ -81,12 +71,7 @@ public class Project {
         return this.description;
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public String toString(){
-        return "Project [id=" + id + ", name=" + name + ", desc=" + description + ", link =" + link + "]";
     }
 }

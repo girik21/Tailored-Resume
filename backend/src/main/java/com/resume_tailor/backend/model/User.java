@@ -1,7 +1,6 @@
 package com.resume_tailor.backend.model;
 
 import com.resume_tailor.backend.security.Role;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -56,10 +55,11 @@ public class User {
     @DBRef
     private List<Skill> skills = new ArrayList<>();
     @DBRef
+    private List<Certificate> certificates = new ArrayList<>();
+    @DBRef
     private List<Resume> resumes = new ArrayList<>();
     @DBRef
     private List<CoverLetter> coverLetters = new ArrayList<>();
-
 
     // Getters and setters
     public String getId() {
@@ -228,6 +228,19 @@ public class User {
 
     public void addSkill(Skill skill) {
         this.skills.add(skill);
+    }
+
+
+    public List<Certificate> getCertificates() {
+        return certificates;
+    }
+
+    public void setCertificates(List<Certificate> certificates) {
+        this.certificates = certificates;
+    }
+
+    public void addCertificate(Certificate certificate) {
+        this.certificates.add(certificate);
     }
 
     public List<Resume> getResumes() {
