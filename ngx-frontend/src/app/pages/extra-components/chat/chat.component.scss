@@ -33,15 +33,18 @@
     margin-top: 2.75rem;
   }
 
-  .chat-icon{
+  .chat-icon {
     border: none;
   }
 
   .image-class {
     width: 90px;
-    height: 90px; /* Ensure height matches width for a circular shape */
-    border-radius: 50%; /* Make the image circular */
-    border: 2px solid #0084ff; /* Messenger-like border color */
+    height: 90px;
+    /* Ensure height matches width for a circular shape */
+    border-radius: 50%;
+    /* Make the image circular */
+    border: 2px solid #0084ff;
+    /* Messenger-like border color */
   }
 
 
@@ -72,7 +75,8 @@
   }
 
   .minimize-button img {
-    width: 20px; /* Adjust the size of the minimize icon */
+    width: 20px;
+    /* Adjust the size of the minimize icon */
     height: auto;
   }
 
