@@ -9,6 +9,11 @@ import { ChatService } from './chat.service';
   providers: [ ChatService ],
 })
 export class ChatComponent {
+  isChatboxOpen: boolean = false;
+
+  toggleChatbox() {
+    this.isChatboxOpen = !this.isChatboxOpen;
+  }
 
   messages: any[];
 
