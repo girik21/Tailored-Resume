@@ -480,6 +480,7 @@
                     <button
                       nbButton
                       [status]="'danger'"
+                      *ngIf="i !== 0"
                       (click)="removeProject(i)"
                     >
                       <nb-icon class="ion-trash-b"></nb-icon>
