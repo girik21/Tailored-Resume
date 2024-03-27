@@ -18,9 +18,9 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<ResponseWrapper<List<User>>> getAllUsers() {
+    public ResponseEntity<ResponseWrapper<List<User>>> getAllUsers(@RequestParam(required = false) String email) {
         try {
-            List<User> users = userService.getAllUsers();
+            List<User> users = userService.getAllUsers(email);
             String successMessage = "Successfully retrieved all users.";
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, successMessage, users));
         } catch (Exception e) {
