@@ -285,9 +285,11 @@ isEducationEndDateDisabled(index: number): boolean {
       // Check if there are projects and save if not empty
       const projectsArray = this.projectForm.get('projects') as FormArray;
       if (projectsArray.length > 0) {
-        const projectGroup = this.projectGroups[0];
-        if (projectGroup.value.name !== '' || projectGroup.value.startDate !== '' || projectGroup.value.endDate !== '' || projectGroup.value.employer !== '' || projectGroup.value.description !== '') {
-          await this.userAPI.saveProjects(projectGroup.value, this.userId).toPromise();
+        const checkProjectGroup = this.projectGroups[0];
+        if (checkProjectGroup.value.name !== '' || checkProjectGroup.value.startDate !== '' || checkProjectGroup.value.endDate !== '' || checkProjectGroup.value.employer !== '' || checkProjectGroup.value.description !== '') {
+          for (const projectGroup of this.projectGroups) {
+            await this.userAPI.saveProjects(projectGroup.value, this.userId).toPromise();
+          }
         }
       }
 
@@ -299,9 +301,11 @@ isEducationEndDateDisabled(index: number): boolean {
       // Check if there are certifications and save if not empty
       const certificationsArray = this.certificationForm.get('certifications') as FormArray;
       if (certificationsArray.length > 0) {
-        const certificationGroup = this.certificationGroups[0];
-        if (certificationGroup.value.name !== '' || certificationGroup.value.startDate !== '' || certificationGroup.value.endDate !== '' || certificationGroup.value.issuer !== '' || certificationGroup.value.description !== '') {
-          await this.userAPI.saveCertifications(certificationGroup.value, this.userId).toPromise();
+        const checkCertificationGroup = this.certificationGroups[0];
+        if (checkCertificationGroup.value.name !== '' || checkCertificationGroup.value.startDate !== '' || checkCertificationGroup.value.endDate !== '' || checkCertificationGroup.value.issuer !== '' || checkCertificationGroup.value.description !== '') {
+          for (const certificationGroup of this.certificationGroups) {
+            await this.userAPI.saveCertifications(certificationGroup.value, this.userId).toPromise();
+          }
         }
       }
 

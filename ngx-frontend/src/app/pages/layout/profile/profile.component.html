@@ -35,6 +35,36 @@
                         Full Name is required.
                       </nb-error>
                     </div>
+                  </div>
+                  <div class="col-md-6"></div>
+
+                  <div class="col-md-6">
+                    <div class="form-group text-left">
+                      <label
+                        for="email"
+                        class="text-muted font-weight-bold small"
+                        >Email Address</label
+                      >
+                      <input
+                        type="email"
+                        class="form-control bg-light"
+                        id="email"
+                        formControlName="email"
+                        placeholder="Email address"
+                      />
+                      <nb-error
+                        class="caption status-danger"
+                        *ngIf="
+                          personalDetails.get('email').invalid &&
+                          personalDetails.get('email').touched
+                        "
+                      >
+                        Email is required and must be a valid email address.
+                      </nb-error>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
                     <div class="form-group text-left">
                       <label
                         for="phone"
@@ -59,7 +89,9 @@
                         Phone number is required.
                       </nb-error>
                     </div>
+                  </div>
 
+                  <div class="col-md-6">
                     <div class="form-group text-left">
                       <label
                         for="linkedin"
@@ -85,31 +117,8 @@
                       </nb-error>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group text-left">
-                      <label
-                        for="email"
-                        class="text-muted font-weight-bold small"
-                        >Email Address</label
-                      >
-                      <input
-                        type="email"
-                        class="form-control bg-light"
-                        id="email"
-                        formControlName="email"
-                        placeholder="Email address"
-                      />
-                      <nb-error
-                        class="caption status-danger"
-                        *ngIf="
-                          personalDetails.get('email').invalid &&
-                          personalDetails.get('email').touched
-                        "
-                      >
-                        Email is required and must be a valid email address.
-                      </nb-error>
-                    </div>
 
+                  <div class="col-md-6">
                     <div class="form-group text-left">
                       <label
                         for="website"
@@ -155,6 +164,26 @@
                         Address 1 is required.
                       </nb-error>
                     </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group text-left">
+                      <label
+                        for="address2"
+                        class="text-muted font-weight-bold small"
+                        >Address 2</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control bg-light"
+                        id="address2"
+                        formControlName="address2"
+                        placeholder="Address 2"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
                     <div class="form-group text-left">
                       <label
                         for="city"
@@ -179,46 +208,9 @@
                         City is required.
                       </nb-error>
                     </div>
-
-                    <div class="form-group text-left">
-                      <label for="zip" class="text-muted font-weight-bold small"
-                        >Zip</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control bg-light"
-                        id="zip"
-                        formControlName="zip"
-                        placeholder="Zip"
-                      />
-                      <nb-error
-                        class="caption status-danger"
-                        *ngIf="
-                          personalDetails.get('zip').invalid &&
-                          personalDetails.get('zip').touched
-                        "
-                      >
-                        Please enter a valid ZIP code consisting of numeric
-                        digits.
-                      </nb-error>
-                    </div>
                   </div>
 
                   <div class="col-md-6">
-                    <div class="form-group text-left">
-                      <label
-                        for="address2"
-                        class="text-muted font-weight-bold small"
-                        >Address 2</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control bg-light"
-                        id="address2"
-                        formControlName="address2"
-                        placeholder="Address 2"
-                      />
-                    </div>
                     <div class="form-group text-left">
                       <label
                         for="state"
@@ -241,6 +233,31 @@
                         "
                       >
                         State is required.
+                      </nb-error>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group text-left">
+                      <label for="zip" class="text-muted font-weight-bold small"
+                        >Zip</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control bg-light"
+                        id="zip"
+                        formControlName="zip"
+                        placeholder="Zip"
+                      />
+                      <nb-error
+                        class="caption status-danger"
+                        *ngIf="
+                          personalDetails.get('zip').invalid &&
+                          personalDetails.get('zip').touched
+                        "
+                      >
+                        Please enter a valid ZIP code consisting of numeric
+                        digits.
                       </nb-error>
                     </div>
                   </div>
@@ -310,6 +327,37 @@
                             Position is required.
                           </nb-error>
                         </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="company_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >For which company did you work?</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="company_{{ i }}"
+                            formControlName="employer"
+                            placeholder="Company name"
+                          />
+
+                          <!-- Error message -->
+                          <nb-error
+                            class="caption status-danger"
+                            *ngIf="
+                              experienceGroup.get('employer').invalid &&
+                              experienceGroup.get('employer').touched
+                            "
+                          >
+                            Company name is required.
+                          </nb-error>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
                         <div class="form-group text-left">
                           <label
                             for="location_{{ i }}"
@@ -335,6 +383,26 @@
                             Company's location is required.
                           </nb-error>
                         </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="companyLink_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >Company Website</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="companyLink_{{ i }}"
+                            formControlName="companyLink"
+                            placeholder="Website of the company.."
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
                         <div class="form-group text-left">
                           <label
                             for="duration_{{ i }}"
@@ -363,46 +431,8 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group text-left">
-                          <label
-                            for="company_{{ i }}"
-                            class="text-muted font-weight-bold small"
-                            >For which company did you work?</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control bg-light"
-                            id="company_{{ i }}"
-                            formControlName="employer"
-                            placeholder="Company name"
-                          />
 
-                          <!-- Error message -->
-                          <nb-error
-                            class="caption status-danger"
-                            *ngIf="
-                              experienceGroup.get('employer').invalid &&
-                              experienceGroup.get('employer').touched
-                            "
-                          >
-                            Company name is required.
-                          </nb-error>
-                        </div>
-                        <div class="form-group text-left">
-                          <label
-                            for="companyLink_{{ i }}"
-                            class="text-muted font-weight-bold small"
-                            >Company Website</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control bg-light"
-                            id="companyLink_{{ i }}"
-                            formControlName="companyLink"
-                            placeholder="Website of the company.."
-                          />
-                        </div>
+                      <div class="col-md-6">
                         <div class="form-group text-left">
                           <label
                             for="currentJob_{{ i }}"
@@ -508,6 +538,27 @@
                             placeholder="Project title"
                           />
                         </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="organization_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >In which organization did you do your
+                            project?</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="organization_{{ i }}"
+                            formControlName="employer"
+                            placeholder="Organization name"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
                         <div class="form-group text-left">
                           <label
                             for="projectDuration_{{ i }}"
@@ -534,22 +585,8 @@
                           </div>
                         </div>
                       </div>
+
                       <div class="col-md-6">
-                        <div class="form-group text-left">
-                          <label
-                            for="organization_{{ i }}"
-                            class="text-muted font-weight-bold small"
-                            >In which organization did you do your
-                            project?</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control bg-light"
-                            id="organization_{{ i }}"
-                            formControlName="employer"
-                            placeholder="Organization name"
-                          />
-                        </div>
                         <div class="form-group text-left">
                           <label
                             for="projectURL_{{ i }}"
