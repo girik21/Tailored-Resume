@@ -36,7 +36,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: "Chatbot",
-        link: "/pages/custom-chat",
+        link: "/pages/extra-components/chat",
       },
     ],
   },

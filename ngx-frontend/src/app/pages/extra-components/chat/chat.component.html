@@ -1,4 +1,3 @@
-<!-- chat.component.html -->
 <button class="chat-icon" (click)="toggleChatbox()">
   <img src="../../../../assets/images/kitten-default.png" alt="Chat Icon" class="image-class">
 </button>
@@ -12,9 +11,19 @@
           [longitude]="msg.longitude" [avatar]="msg.user.avatar">
         </nb-chat-message>
         <nb-chat-form (send)="sendMessage($event)" [dropFiles]="true">
+          <input nbInput fullWidth type="text"
+            class="with-button ng-pristine ng-valid input-full-width size-medium shape-rectangle nb-transition ng-touched status-basic"
+            placeholder="Type a message">
         </nb-chat-form>
       </nb-chat>
-
+      <div class="upload-document">
+        <!-- Button to toggle file input -->
+        <button nbButton class="attach-document-button" (click)="toggleFileInput()">
+          <nb-icon icon="attach-outline" class="icons" width="20"></nb-icon>
+        </button>
+        <!-- File input -->
+        <input nbButton type="file" (change)="onFileSelected($event)" class="file-input" *ngIf="isFileInputVisible">
+      </div>
     </div>
   </div>
 </nb-card-body>

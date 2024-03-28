@@ -12,46 +12,11 @@
   nb-chat {
     margin: 3rem auto 0;
     width: 500px;
-
   }
 
-  .chat-container {
-    margin-bottom: 2rem;
-
-    li {
-      padding-top: 1rem;
-    }
-  }
-
-  .chart-description {
-    text-align: center;
-    margin: 0 auto;
-    width: 52%;
-  }
-
-  .chart-features {
-    margin-top: 2.75rem;
-  }
-
-  .chat-icon {
-    border: none;
-  }
-
-  .image-class {
-    width: 90px;
-    height: 90px;
-    /* Ensure height matches width for a circular shape */
-    border-radius: 50%;
-    /* Make the image circular */
-    border: 2px solid #0084ff;
-    /* Messenger-like border color */
-  }
-
-
-  /* chat.component.scss */
   .chat-container {
     position: fixed;
-    bottom: 30%;
+    bottom: 40%;
     right: 20%;
     transform: translateX(50%);
     width: 300px;
@@ -76,9 +41,53 @@
 
   .minimize-button img {
     width: 20px;
-    /* Adjust the size of the minimize icon */
     height: auto;
   }
+
+  .chat-icon {
+    border: none;
+  }
+
+  .icons {
+    width: 30px; /* Set the desired width */
+    height: 30px; /* Set the desired height */
+  }
+
+
+  .image-class {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid #0084ff;
+  }
+
+  .attach-document-button {
+    position: absolute;
+    bottom: 20px;
+    left: -65px;
+    width: 70px;
+    height: 70px;
+    border-radius: 40px;
+    z-index: 999;
+    background-color: #3366ff;
+    color: white;
+  }
+
+
+  .file-input{
+    position: absolute;
+    bottom: -35px;
+    left:  -92px;
+    z-index: 1;
+    background-color: #3366ff;
+    color: white;
+    width: 75%;
+    border-radius: 30px;
+    padding: 1px;
+  }
+
+
+
 
 
   @include media-breakpoint-down(xxl) {
