@@ -26,8 +26,6 @@ public class User {
     private String email;
     @NotBlank(message = "Phone number cannot be null!")
     private String phone;
-    @NotBlank(message = "Password cannot be null!")
-    private String password;
     @NotNull(message = "Address 1 cannot be null!")
     private String address1;
     private String address2;
@@ -39,7 +37,7 @@ public class User {
     private String zip;
     @NotNull(message = "Linked in Link cannot be null!")
     private String linkedinLink;
-    @NotNull(message = "Portfolio link cannot be null!")
+    
     private String portfolioLink;
     private String professionalSummary;
     @NotNull(message = "Role cannot be null!")
@@ -84,14 +82,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhone() {
