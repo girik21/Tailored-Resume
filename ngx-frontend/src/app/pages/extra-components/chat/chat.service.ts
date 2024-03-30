@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-
+import { botReplies } from './bot-replies';
 import { messages } from './messages';
-import { botReplies, gifsLinks, imageLinks } from './bot-replies';
+
+const botAvatar: string = 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg';
+
 
 @Injectable()
 export class ChatService {
-
 
   loadMessages() {
     return messages;
@@ -16,27 +17,28 @@ export class ChatService {
   }
 
   reply(message: string) {
-    const botReply: any =  this.loadBotReplies()
+    const botReply: any = this.loadBotReplies()
       .find((reply: any) => message.search(reply.regExp) !== -1);
 
     if (botReply.reply.type === 'quote') {
       botReply.reply.quote = message;
     }
 
-    if (botReply.type === 'gif') {
-      botReply.reply.files[0].url = gifsLinks[Math.floor(Math.random() * gifsLinks.length)];
-    }
-
-    if (botReply.type === 'pic') {
-      botReply.reply.files[0].url = imageLinks[Math.floor(Math.random() * imageLinks.length)];
-    }
-
-    if (botReply.type === 'group') {
-      botReply.reply.files[1].url = gifsLinks[Math.floor(Math.random() * gifsLinks.length)];
-      botReply.reply.files[2].url = imageLinks[Math.floor(Math.random() * imageLinks.length)];
-    }
-
     botReply.reply.text = botReply.answerArray[Math.floor(Math.random() * botReply.answerArray.length)];
     return { ...botReply.reply };
+  }
+
+  replyWithRating(rating: number) {
+    // Create a bot reply for the resume rating
+    const ratingBotReply = {
+      text: `Thank you for submitting! Your resume has been rated above ${rating} %.  Create a tailored resume to beat the ats score by a good margin `,
+      reply: false,
+      date: new Date(),
+      user: {
+        name: 'Tailored Bot',
+        avatar: botAvatar,
+      },
+    };
+    messages.push(ratingBotReply);
   }
 }

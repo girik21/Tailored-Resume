@@ -18,7 +18,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: "Resume",
-        link: "/pages/layout/stepper/profile",
+        link: "/pages/layout/profile",
       },
       {
         title: "Cover Letter",
@@ -33,10 +33,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: "AI Resume",
         link: "/pages/forms/ai-resume",
-      },
-      {
-        title: "AI Cover Letter",
-        link: "",
       },
     ],
   },

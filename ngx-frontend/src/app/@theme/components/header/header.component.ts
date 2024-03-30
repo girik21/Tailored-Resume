@@ -1,12 +1,12 @@
+import { MatFabMenu } from '@angular-material-extensions/fab-menu';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService, NbMenuItem } from '@nebular/theme';
-
+import { Router } from '@angular/router';
+import { NbMediaBreakpointsService, NbMenuItem, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
+import { Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
-import { map, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 import { AuthService } from '../../../service/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -40,16 +40,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
   constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService,
-              private themeService: NbThemeService,
-              private userService: UserData,
-              private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService,
-              private authService: AuthService,
-              private router: Router) {
+    private menuService: NbMenuService,
+    private themeService: NbThemeService,
+    private userService: UserData,
+    private layoutService: LayoutService,
+    private breakpointService: NbMediaBreakpointsService,
+    private authService: AuthService,
+    private router: Router) {
+  }
+
+  navigateToChat() {
+    this.router.navigate(['/pages/extra-components/chat']);
   }
 
   ngOnInit() {
@@ -107,4 +111,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logout(): void {
     this.authService.logout();
   }
+
+  fabButtonsRandom: MatFabMenu[] = [
+    {
+      id: 1,
+      imgUrl: 'assets/images/kitten-dark.png',
+    },
+  ];
+
 }
