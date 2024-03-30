@@ -1,0 +1,1188 @@
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card-body>
+    <nb-stepper orientation="horizontal">
+      <nb-step label="Personal Details">
+        <form [formGroup]="personalDetails">
+          <!-- Start of form  -->
+          <nb-card>
+            <nb-card-header> <h3>Personal Details</h3></nb-card-header>
+            <nb-card-body>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group text-left">
+                      <label
+                        for="username"
+                        class="text-muted font-weight-bold small"
+                        >Full Name</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control bg-light"
+                        id="username"
+                        placeholder="Full name"
+                        formControlName="username"
+                        autofocus
+                      />
+
+                      <nb-error
+                        class="caption status-danger"
+                        *ngIf="
+                          personalDetails.get('username').invalid &&
+                          personalDetails.get('username').touched
+                        "
+                      >
+                        Full Name is required.
+                      </nb-error>
+                    </div>
+                  </div>
+                  <div class="col-md-6"></div>
+
+                  <div class="col-md-6">
+                    <div class="form-group text-left">
+                      <label
+                        for="email"
+                        class="text-muted font-weight-bold small"
+                        >Email Address</label
+                      >
+                      <input
+                        type="email"
+                        class="form-control bg-light"
+                        id="email"
+                        formControlName="email"
+                        placeholder="Email address"
+                      />
+                      <nb-error
+                        class="caption status-danger"
+                        *ngIf="
+                          personalDetails.get('email').invalid &&
+                          personalDetails.get('email').touched
+                        "
+                      >
+                        Email is required and must be a valid email address.
+                      </nb-error>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group text-left">
+                      <label
+                        for="phone"
+                        class="text-muted font-weight-bold small"
+                        >Phone Number</label
+                      >
+                      <input
+                        type="tel"
+                        class="form-control bg-light"
+                        id="phone"
+                        formControlName="phone"
+                        placeholder="Phone number"
+                      />
+
+                      <nb-error
+                        class="caption status-danger"
+                        *ngIf="
+                          personalDetails.get('phone').invalid &&
+                          personalDetails.get('phone').touched
+                        "
+                      >
+                        Phone number is required.
+                      </nb-error>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group text-left">
+                      <label
+                        for="linkedin"
+                        class="text-muted font-weight-bold small"
+                        >LinkedIn URL</label
+                      >
+                      <input
+                        type="url"
+                        class="form-control bg-light"
+                        id="linkedin"
+                        formControlName="linkedinLink"
+                        placeholder="LinkedIn URL"
+                      />
+
+                      <nb-error
+                        class="caption status-danger"
+                        *ngIf="
+                          personalDetails.get('linkedinLink').invalid &&
+                          personalDetails.get('linkedinLink').touched
+                        "
+                      >
+                        You must provide you Linked In Profile.
+                      </nb-error>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group text-left">
+                      <label
+                        for="website"
+                        class="text-muted font-weight-bold small"
+                        >Portfolio Link / Website</label
+                      >
+                      <input
+                        type="url"
+                        class="form-control bg-light"
+                        id="website"
+                        formControlName="portfolioLink"
+                        placeholder="Website link"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <hr />
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group text-left">
+                      <label
+                        for="address1"
+                        class="text-muted font-weight-bold small"
+                        >Street Address</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control bg-light"
+                        id="address1"
+                        formControlName="address1"
+                        placeholder="Address 1"
+                      />
+
+                      <nb-error
+                        class="caption status-danger"
+                        *ngIf="
+                          personalDetails.get('address1').invalid &&
+                          personalDetails.get('address1').touched
+                        "
+                      >
+                        Address 1 is required.
+                      </nb-error>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group text-left">
+                      <label
+                        for="address2"
+                        class="text-muted font-weight-bold small"
+                        >Address 2</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control bg-light"
+                        id="address2"
+                        formControlName="address2"
+                        placeholder="Address 2"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group text-left">
+                      <label
+                        for="city"
+                        class="text-muted font-weight-bold small"
+                        >City</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control bg-light"
+                        id="city"
+                        formControlName="city"
+                        placeholder="City"
+                      />
+
+                      <nb-error
+                        class="caption status-danger"
+                        *ngIf="
+                          personalDetails.get('city').invalid &&
+                          personalDetails.get('city').touched
+                        "
+                      >
+                        City is required.
+                      </nb-error>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group text-left">
+                      <label
+                        for="state"
+                        class="text-muted font-weight-bold small"
+                        >State</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control bg-light"
+                        id="state"
+                        formControlName="state"
+                        placeholder="State"
+                      />
+
+                      <nb-error
+                        class="caption status-danger"
+                        *ngIf="
+                          personalDetails.get('state').invalid &&
+                          personalDetails.get('state').touched
+                        "
+                      >
+                        State is required.
+                      </nb-error>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group text-left">
+                      <label for="zip" class="text-muted font-weight-bold small"
+                        >Zip</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control bg-light"
+                        id="zip"
+                        formControlName="zip"
+                        placeholder="Zip"
+                      />
+                      <nb-error
+                        class="caption status-danger"
+                        *ngIf="
+                          personalDetails.get('zip').invalid &&
+                          personalDetails.get('zip').touched
+                        "
+                      >
+                        Please enter a valid ZIP code consisting of numeric
+                        digits.
+                      </nb-error>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+          <!-- end of form  -->
+        </form>
+
+        <!-- <button nbButton disabled nbStepperNext>prev</button> -->
+        <button nbButton nbStepperNext [disabled]="!personalDetails.valid">
+          next
+        </button>
+      </nb-step>
+
+      <nb-step label="Experience">
+        <form [formGroup]="experienceForm">
+          <!-- Start of form -->
+          <ng-container formArrayName="experiences">
+            <ng-container
+              *ngFor="let experienceGroup of experienceGroups; let i = index"
+              [formGroupName]="i"
+            >
+              <nb-card>
+                <nb-card-header>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <h3>Experience {{ i + 1 }}</h3>
+                    <button
+                      nbButton
+                      [status]="'danger'"
+                      *ngIf="i !== 0"
+                      (click)="removeExperience(i)"
+                    >
+                      <nb-icon class="ion-trash-a"></nb-icon>
+                    </button>
+                  </div>
+                </nb-card-header>
+                <nb-card-body>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="role_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >What was your role at the company?</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="role_{{ i }}"
+                            formControlName="position"
+                            placeholder="Your role at the company"
+                          />
+
+                          <!-- Error message -->
+                          <nb-error
+                            class="caption status-danger"
+                            *ngIf="
+                              experienceGroup.get('position').invalid &&
+                              experienceGroup.get('position').touched
+                            "
+                          >
+                            Position is required.
+                          </nb-error>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="company_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >For which company did you work?</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="company_{{ i }}"
+                            formControlName="employer"
+                            placeholder="Company name"
+                          />
+
+                          <!-- Error message -->
+                          <nb-error
+                            class="caption status-danger"
+                            *ngIf="
+                              experienceGroup.get('employer').invalid &&
+                              experienceGroup.get('employer').touched
+                            "
+                          >
+                            Company name is required.
+                          </nb-error>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="location_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >Where was the company located?</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="location_{{ i }}"
+                            formControlName="location"
+                            placeholder="Company location"
+                          />
+
+                          <!-- Error message -->
+                          <nb-error
+                            class="caption status-danger"
+                            *ngIf="
+                              experienceGroup.get('location').invalid &&
+                              experienceGroup.get('location').touched
+                            "
+                          >
+                            Company's location is required.
+                          </nb-error>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="companyLink_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >Company Website</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="companyLink_{{ i }}"
+                            formControlName="companyLink"
+                            placeholder="Website of the company.."
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="duration_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >How long were you with the company?
+                          </label>
+                          <div class="input-group">
+                            <input
+                              nbInput
+                              type="date"
+                              class="form-control bg-light"
+                              id="duration_{{ i }}"
+                              formControlName="startDate"
+                              placeholder="Start date"
+                            />
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">-</span>
+                            </div>
+                            <input
+                              type="date"
+                              formControlName="endDate"
+                              class="form-control bg-light"
+                              placeholder="End date"
+                              [disabled]="isEndDateDisabled(i)"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="currentJob_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >Current Job</label
+                          >
+                          <input
+                            type="checkbox"
+                            class="form-control bg-light"
+                            id="currentJob_{{ i }}"
+                            formControlName="currentJob"
+                            (change)="toggleEndDate(i)"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group text-left">
+                          <div>
+                            <label
+                              for="responsibilities_{{ i }}"
+                              class="text-muted font-weight-bold small"
+                              >What did you do at the company?</label
+                            >
+                            <button
+                              nbButton
+                              [status]="status"
+                              outline
+                              [size]="size"
+                            >
+                              AI Generate
+                            </button>
+                          </div>
+                          <textarea
+                            class="form-control bg-light"
+                            id="responsibilities_{{ i }}"
+                            rows="5"
+                            formControlName="description"
+                            placeholder="Enter your responsibilities"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </ng-container>
+          </ng-container>
+          <!-- end of form -->
+          <div class="text-center mb-3">
+            <button nbButton [status]="'success'" (click)="addExperience()">
+              Add Experience
+            </button>
+          </div>
+        </form>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext [disabled]="!experienceForm.valid">
+          next
+        </button>
+      </nb-step>
+
+      <nb-step label="Project">
+        <strong>
+          If you don't have any projects, just press "Next" button below.
+        </strong>
+        <form [formGroup]="projectForm">
+          <!-- Start of form -->
+          <ng-container formArrayName="projects">
+            <ng-container
+              *ngFor="let projectGroup of projectGroups; let i = index"
+              [formGroupName]="i"
+            >
+              <nb-card>
+                <nb-card-header>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <h3>Project {{ i + 1 }}</h3>
+                    <button
+                      nbButton
+                      [status]="'danger'"
+                      *ngIf="i !== 0"
+                      (click)="removeProject(i)"
+                    >
+                      <nb-icon class="ion-trash-b"></nb-icon>
+                    </button>
+                  </div>
+                </nb-card-header>
+                <nb-card-body>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="projectTitle_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >Give your project a title</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="projectTitle_{{ i }}"
+                            formControlName="name"
+                            placeholder="Project title"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="organization_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >In which organization did you do your
+                            project?</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="organization_{{ i }}"
+                            formControlName="employer"
+                            placeholder="Organization name"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="projectDuration_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >When did you do your project?</label
+                          >
+                          <div class="input-group">
+                            <input
+                              type="date"
+                              class="form-control bg-light"
+                              id="projectDuration_{{ i }}"
+                              formControlName="startDate"
+                              placeholder="Start date"
+                            />
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">-</span>
+                            </div>
+                            <input
+                              type="date"
+                              formControlName="endDate"
+                              class="form-control bg-light"
+                              placeholder="End date"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="projectURL_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >Project URL</label
+                          >
+                          <input
+                            type="url"
+                            class="form-control bg-light"
+                            id="projectURL_{{ i }}"
+                            formControlName="link"
+                            placeholder="Project URL"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group text-left">
+                          <div>
+                            <label
+                              for="projectDescription_{{ i }}"
+                              class="text-muted font-weight-bold small"
+                              >Now describe what you did</label
+                            >
+                            <button
+                              nbButton
+                              [status]="status"
+                              outline
+                              [size]="size"
+                            >
+                              AI Generate
+                            </button>
+                          </div>
+                          <textarea
+                            class="form-control bg-light"
+                            id="projectDescription_{{ i }}"
+                            rows="5"
+                            formControlName="description"
+                            placeholder="Describe your project"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </ng-container>
+          </ng-container>
+          <!-- end of form -->
+          <div class="text-center mb-3">
+            <button nbButton (click)="addProject()" [status]="'success'">
+              Add Project
+            </button>
+          </div>
+        </form>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+
+      <nb-step label="Education">
+        <form [formGroup]="educationForm">
+          <!-- Start of form -->
+          <ng-container formArrayName="educations">
+            <ng-container
+              *ngFor="let educationGroup of educationGroups; let i = index"
+              [formGroupName]="i"
+            >
+              <nb-card>
+                <nb-card-header>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <h3>Education {{ i + 1 }}</h3>
+                    <button
+                      nbButton
+                      [status]="'danger'"
+                      *ngIf="i !== 0"
+                      (click)="removeEducation(i)"
+                    >
+                      <nb-icon class="ion-trash-b"></nb-icon>
+                    </button>
+                  </div>
+                </nb-card-header>
+                <nb-card-body>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="degreeName_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >What is your degree earned?</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="degreeName_{{ i }}"
+                            formControlName="degreeName"
+                            placeholder="Your degree and major"
+                          />
+
+                          <!-- Error message -->
+                          <nb-error
+                            class="caption status-danger"
+                            *ngIf="
+                              educationGroup.get('degreeName').invalid &&
+                              educationGroup.get('degreeName').touched
+                            "
+                          >
+                            Degree Name is required.
+                          </nb-error>
+                        </div>
+                      </div>
+                      <div class="col-md-6"></div>
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="school_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >Where did you earn your
+                            degree/qualification?</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="school_{{ i }}"
+                            formControlName="school"
+                            placeholder="Institution name"
+                          />
+
+                          <!-- Error message -->
+                          <nb-error
+                            class="caption status-danger"
+                            *ngIf="
+                              educationGroup.get('school').invalid &&
+                              educationGroup.get('school').touched
+                            "
+                          >
+                            School Name is required.
+                          </nb-error>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="location_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >Where is the institution located?</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="location_{{ i }}"
+                            formControlName="location"
+                            placeholder="Institution location"
+                          />
+
+                          <!-- Error message -->
+                          <nb-error
+                            class="caption status-danger"
+                            *ngIf="
+                              educationGroup.get('location').invalid &&
+                              educationGroup.get('location').touched
+                            "
+                          >
+                            Your school location is required.
+                          </nb-error>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="major_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >What is your major field of study?</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="major_{{ i }}"
+                            formControlName="major"
+                            placeholder="Your major"
+                          />
+                          <!-- Error message -->
+                          <nb-error
+                            class="caption status-danger"
+                            *ngIf="
+                              educationGroup.get('major').invalid &&
+                              educationGroup.get('major').touched
+                            "
+                          >
+                            Your major is required.
+                          </nb-error>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="minor_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >Did you minor in anything?</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="minor_{{ i }}"
+                            formControlName="minor"
+                            placeholder="Minor subject"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="startDate_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >What is your education duration?</label
+                          >
+                          <div class="input-group">
+                            <input
+                              type="date"
+                              class="form-control bg-light"
+                              id="educationDuration_{{ i }}"
+                              formControlName="startDate"
+                              placeholder="Start date"
+                            />
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">-</span>
+                            </div>
+                            <input
+                              type="date"
+                              class="form-control bg-light"
+                              id="endDate_{{ i }}"
+                              formControlName="endDate"
+                              placeholder="End date"
+                              [disabled]="isEducationEndDateDisabled(i)"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="graduated_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >Graduated</label
+                          >
+                          <input
+                            type="checkbox"
+                            class="form-control bg-light"
+                            id="graduated_{{ i }}"
+                            formControlName="graduated"
+                            (change)="toggleEducationEndDate(i)"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="grade_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >GPA (if applicable)</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="grade_{{ i }}"
+                            formControlName="grade"
+                            placeholder="Your GPA"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group text-left">
+                          <label
+                            for="description_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >Open field for additional information</label
+                          >
+                          <textarea
+                            class="form-control bg-light"
+                            id="description_{{ i }}"
+                            rows="5"
+                            formControlName="description"
+                            placeholder="Additional information"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </ng-container>
+          </ng-container>
+          <!-- end of form -->
+          <div class="text-center mb-3">
+            <button nbButton (click)="addEducation()" [status]="'success'">
+              Add Education
+            </button>
+          </div>
+        </form>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext [disabled]="!educationForm.valid">
+          next
+        </button>
+      </nb-step>
+
+      <nb-step label="Certifications">
+        <strong>
+          If you don't have any certifications, just press "Next" button below.
+        </strong>
+        <form [formGroup]="certificationForm">
+          <!-- Start of form -->
+          <ng-container formArrayName="certifications">
+            <ng-container
+              *ngFor="
+                let certificationGroup of certificationGroups;
+                let i = index
+              "
+              [formGroupName]="i"
+            >
+              <nb-card>
+                <nb-card-header>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <h3>Certification {{ i + 1 }}</h3>
+                    <button
+                      nbButton
+                      [status]="'danger'"
+                      *ngIf="i !== 0"
+                      (click)="removeCertification(i)"
+                    >
+                      <nb-icon class="ion-trash-b"></nb-icon>
+                    </button>
+                  </div>
+                </nb-card-header>
+                <nb-card-body>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="certificateName_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >What was the certificate name?</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="certificateName_{{ i }}"
+                            formControlName="name"
+                            placeholder="Certificate name"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="startDate_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >When did you obtain the certificate?</label
+                          >
+                          <input
+                            nbInput
+                            type="date"
+                            class="form-control bg-light"
+                            id="startDate_{{ i }}"
+                            formControlName="startDate"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="endDate_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >When did the certificate expire?</label
+                          >
+                          <input
+                            nbInput
+                            type="date"
+                            class="form-control bg-light"
+                            id="endDate_{{ i }}"
+                            formControlName="endDate"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="certificateIssuer_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >Where did you get the certificate?</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="certificateIssuer_{{ i }}"
+                            formControlName="issuer"
+                            placeholder="Certificate issuer"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group text-left">
+                          <label
+                            for="description_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >How is the certificate relevant?</label
+                          >
+                          <textarea
+                            class="form-control bg-light"
+                            id="description_{{ i }}"
+                            rows="5"
+                            formControlName="description"
+                            placeholder="Certificate relevance"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </ng-container>
+          </ng-container>
+          <!-- end of form -->
+          <div class="text-center mb-3">
+            <button nbButton (click)="addCertification()" [status]="'success'">
+              Add Certification
+            </button>
+          </div>
+        </form>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+
+      <nb-step label="Skills">
+        <form [formGroup]="skillForm">
+          <!-- Start of form -->
+          <ng-container formArrayName="skills">
+            <ng-container
+              *ngFor="let skillGroup of skillGroups; let i = index"
+              [formGroupName]="i"
+            >
+              <nb-card>
+                <nb-card-header>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <h3>Skill {{ i + 1 }}</h3>
+                    <button
+                      nbButton
+                      [status]="'danger'"
+                      *ngIf="i !== 0"
+                      (click)="removeSkill(i)"
+                    >
+                      <nb-icon class="ion-trash-b"></nb-icon>
+                    </button>
+                  </div>
+                </nb-card-header>
+                <nb-card-body>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group text-left">
+                          <label
+                            for="skillName_{{ i }}"
+                            class="text-muted font-weight-bold small"
+                            >Enter the skill you possess</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control bg-light"
+                            id="skillName_{{ i }}"
+                            formControlName="name"
+                            placeholder="Skill name"
+                          />
+                          <!-- Error message -->
+                          <nb-error
+                            class="caption status-danger"
+                            *ngIf="
+                              skillGroup.get('name').invalid &&
+                              skillGroup.get('name').touched
+                            "
+                          >
+                            Skill Name is required.
+                          </nb-error>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </ng-container>
+          </ng-container>
+          <!-- end of form -->
+          <div class="text-center mb-3">
+            <button nbButton (click)="addSkill()" [status]="'success'">
+              Add Skill
+            </button>
+          </div>
+        </form>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext [disabled]="!skillForm.valid">
+          next
+        </button>
+      </nb-step>
+
+      <nb-step label="Summary">
+        <form [formGroup]="professionalSummary">
+          <!-- Start of form -->
+          <nb-card>
+            <nb-card-header><h3>Summary</h3></nb-card-header>
+            <nb-card-body>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group text-left">
+                      <div>
+                        <label
+                          for="professionalSummary"
+                          class="text-muted font-weight-bold small"
+                          >Write a professional summary</label
+                        ><button
+                          nbButton
+                          [status]="status"
+                          outline
+                          [size]="size"
+                        >
+                          AI Generate
+                        </button>
+                      </div>
+                      <textarea
+                        class="form-control bg-light"
+                        id="professionalSummary"
+                        rows="5"
+                        formControlName="professionalSummary"
+                        placeholder="Write your professional summary"
+                      ></textarea>
+                      <nb-error
+                        class="caption status-danger"
+                        *ngIf="
+                          professionalSummary.get('professionalSummary')
+                            .invalid &&
+                          professionalSummary.get('professionalSummary').touched
+                        "
+                      >
+                        Write your professional summary in few words.
+                      </nb-error>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+          <!-- end of form -->
+        </form>
+
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext [disabled]="!professionalSummary.valid">
+          next
+        </button>
+        <button
+          nbButton
+          (click)="submitForms()"
+          [disabled]="!professionalSummary.valid"
+        >
+          Submit
+        </button>
+      </nb-step>
+
+      <nb-step [label]="labelFive">
+        <ng-template #labelFive>Preview</ng-template>
+
+        <form [formGroup]="labelFive">
+          <!-- Start of form -->
+          <nb-card>
+            <nb-card-header><h3>Preview</h3></nb-card-header>
+            <nb-card-body>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group text-left">
+                      <div>--- placeholder for viewer ---</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+          <!-- end of form -->
+        </form>
+
+        <button nbButton nbStepperPrevious>prev</button>
+      </nb-step>
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>

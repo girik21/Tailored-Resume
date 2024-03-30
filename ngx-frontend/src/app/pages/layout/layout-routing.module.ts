@@ -7,18 +7,14 @@ import { AccordionComponent } from './accordion/accordion.component';
 import { InfiniteListComponent } from './infinite-list/infinite-list.component';
 import { ListComponent } from './list/list.component';
 import { StepperComponent } from './stepper/stepper.component';
-import { ProfileComponent } from './stepper/profile/profile.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [{
   path: '',
   component: LayoutComponent,
   children: [
     {
-      path: 'stepper',
-      component: StepperComponent,
-    },
-    {
-      path: 'stepper/profile',
+      path: 'profile',
       component: ProfileComponent,
     },
     {

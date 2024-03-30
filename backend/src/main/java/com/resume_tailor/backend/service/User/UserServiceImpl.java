@@ -36,7 +36,10 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers(String email) {
+        if (email != null) {
+            return userRepository.findByEmail(email);
+        }
         return userRepository.findAllByOrderByCreatedDateDesc();
     }
 
@@ -49,7 +52,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(User user) {
         // Encrypt the password before saving
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setCreatedDate(new Date());
         return userRepository.save(user);
     }
