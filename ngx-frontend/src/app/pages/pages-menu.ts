@@ -36,9 +36,4 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-  {
-    title: "Chatbot",
-    icon: "person-outline",
-    link: "/pages/extra-components/chat",
-  },
 ];

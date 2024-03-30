@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { ChatComponent } from './pages/extra-components/chat/chat.component';
 import { AuthGuard } from './service/auth-guard.service';
 
 export const routes: Routes = [
@@ -12,6 +13,9 @@ export const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.NgxAuthModule)
+  },
+  {
+    path: 'pages/extra-components/chat', component: ChatComponent
   },
   { path: '**', redirectTo: 'pages' },
 ];

@@ -10,6 +10,7 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
 
+
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -20,7 +21,7 @@ import { PagesComponent } from './pages.component';
     MiscellaneousModule,
     NbChatModule,
     NbCardModule,
-    NbIconModule
+    NbIconModule,
   ],
   declarations: [
     PagesComponent,

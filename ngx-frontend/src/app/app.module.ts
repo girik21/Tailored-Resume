@@ -20,6 +20,7 @@ import { ThemeModule } from './@theme/theme.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+
 import { AuthGuard } from './service/auth-guard.service';
 
 @NgModule({
@@ -42,7 +43,7 @@ import { AuthGuard } from './service/auth-guard.service';
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
-    NbCheckboxModule
+    NbCheckboxModule,
   ],
   providers: [
     AuthGuard
