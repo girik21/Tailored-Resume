@@ -31,11 +31,11 @@ export class ChatService {
   replyWithRating(rating: number) {
     // Create a bot reply for the resume rating
     const ratingBotReply = {
-      text: `Your resume has been rated ${rating}/100. Thank you for submitting!`,
+      text: `Thank you for submitting! Your resume has been rated above ${rating} %.  Create a tailored resume to beat the ats score by a good margin `,
       reply: false,
       date: new Date(),
       user: {
-        name: 'Bot',
+        name: 'Tailored Bot',
         avatar: botAvatar,
       },
     };
