@@ -16,7 +16,7 @@
 
   .chat-container {
     position: fixed;
-    bottom: 40%;
+    bottom: 30%;
     right: 20%;
     transform: translateX(50%);
     width: 300px;
@@ -46,19 +46,20 @@
 
   .chat-icon {
     border: none;
+    background-color: transparent;
   }
+
 
   .icons {
     width: 30px;
-    /* Set the desired width */
     height: 30px;
-    /* Set the desired height */
   }
 
 
   .image-class {
     width: 90px;
     height: 90px;
+    border: none;
     border-radius: 50%;
     border: 2px solid #0084ff;
   }

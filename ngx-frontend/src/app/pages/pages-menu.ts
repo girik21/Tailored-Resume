@@ -34,10 +34,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: "AI Resume",
         link: "/pages/forms/ai-resume",
       },
-      {
-        title: "Chatbot",
-        link: "/pages/extra-components/chat",
-      },
     ],
+  },
+  {
+    title: "Chatbot",
+    icon: "person-outline",
+    link: "/pages/extra-components/chat",
   },
 ];
