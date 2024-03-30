@@ -269,6 +269,7 @@
         </form>
 
         <!-- <button nbButton disabled nbStepperNext>prev</button> -->
+        <button (click)="getUserData()">Get User Data</button>
         <button nbButton nbStepperNext [disabled]="!personalDetails.valid">
           next
         </button>

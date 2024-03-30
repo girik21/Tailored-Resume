@@ -36,6 +36,8 @@ export class ProfileComponent implements OnInit {
   status: NbComponentStatus =  'primary' ;
   shapes: NbComponentShape[] = [ 'rectangle', 'semi-round', 'round' ];
   size: NbComponentSize =  'tiny';
+
+  userData: any;
   constructor(private fb: FormBuilder, private userAPI: UserAPI, private router: Router, private fireAuth: AngularFireAuth) {
   }
 
@@ -318,5 +320,20 @@ isEducationEndDateDisabled(index: number): boolean {
       console.error('Error occurred while saving user details:', error);
       // Handle error
     }
+  }
+
+  getUserData(): void {
+    const userId = '6607446b04d3bb099d1bc4dc'; // Replace with the actual user ID
+    this.userAPI.getUserDetails(userId).subscribe(
+      (data) => {
+        // Success: Handle the data received from the API
+        this.userData = data;
+        console.log('User data:', this.userData);
+      },
+      (error) => {
+        // Error: Handle the error
+        console.error('Error fetching user data:', error);
+      }
+    );
   }
 }
