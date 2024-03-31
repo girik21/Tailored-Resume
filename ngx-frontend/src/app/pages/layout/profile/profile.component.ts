@@ -49,8 +49,8 @@ export class ProfileComponent implements OnInit {
 
   loading: boolean = false;
 
-  jobPosition: string;
-  company: string;
+  jobPosition: string = null;
+  company: string = null;
 
   timer: any;
   seconds: number = 0;
@@ -403,16 +403,25 @@ export class ProfileComponent implements OnInit {
   }
 
   onGenerateResponsibilitiesClick(index: number) {
+
+    if (this.jobPosition === null || this.company === null){
+      alert("Please fill out the following details \n - Job Position \n - Company name" ); 
+      return; 
+    }
     this.loading = true;
     const requestBody = { jobPosition:this.jobPosition, company:this.company };
 
+    // alert(`${this.jobPosition}, \n ${this.company}`);
+
     this.startTimer();
 
-    this.userAPI.generateResponsibilities(requestBody, this.userId).subscribe(
-      (responsibilities: any) => {
+    this.userAPI.generateResponsibilities2(requestBody, this.userId).subscribe(
+      (response) => {
         this.loading = false;
         this.stopTimer();
-        //this.updateTextArea(index, responsibilities);
+        //console.log(response)
+        this.updateTextArea(index, response.data);
+        
       },
       (error: any) => {
         console.error("Error fetching responsibilities:", error);
@@ -422,12 +431,12 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  updateTextArea(index: number, responsibilities: string[]) {
+  updateTextArea(index: number, responsibilities) {
     const formattedResponsibilities = responsibilities
-      .map((responsibility) => `- ${responsibility}`)
+      .map((responsibility) => `- ${responsibility.responsibility}`)
       .join("\n");
     const controlName = this.getFormControlName(index);
-    console.log(controlName);
+    //console.log(formattedResponsibilities);
     this.experienceForm.get(controlName).patchValue(formattedResponsibilities);
   }
 
