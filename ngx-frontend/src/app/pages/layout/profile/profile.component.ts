@@ -259,10 +259,11 @@ export class ProfileComponent implements OnInit {
 
   // Add a method to toggle the end date based on graduation status
   toggleEducationEndDate(index: number): void {
-    const educationsArray = this.educationForm.get("educations") as FormArray;
+
+    const educationsArray = this.educationForm.get('educations') as FormArray;
     const educationGroup = educationsArray.at(index);
-    const graduatedControl = educationGroup.get("graduated");
-    const endDateControl = educationGroup.get("endDate");
+    const graduatedControl = educationGroup.get('graduated');
+    const endDateControl = educationGroup.get('endDate');
 
     if (graduatedControl && endDateControl) {
       if (graduatedControl.value) {
@@ -275,9 +276,10 @@ export class ProfileComponent implements OnInit {
 
   // Add a method to check if end date should be disabled based on graduation status
   isEducationEndDateDisabled(index: number): boolean {
-    const educationsArray = this.educationForm.get("educations") as FormArray;
+const educationsArray = this.educationForm.get('educations') as FormArray;
     const educationGroup = educationsArray.at(index);
-    const graduatedControl = educationGroup.get("graduated");
+    const graduatedControl = educationGroup.get('graduated');
+
 
     return graduatedControl ? !graduatedControl.value : true; // Return true if not graduated
   }
