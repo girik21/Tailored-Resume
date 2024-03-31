@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError} from 'rxjs';
+
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -73,5 +75,23 @@ export class UserAPI {
   saveCertifications(data: any, userId: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${this.baseUrl}/certifications?userId=${userId}`, data, { headers });
+  }
+
+  //generate experience responsibilities 
+  generateResponsibilities(requestBody: any, userId: string): Observable<any> {
+    // const apiUrl = 'http://localhost:8080/api/openai/chat/experiences/65e505389eb0d0350c385d1b';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.post(`${this.baseUrl}/openai/chat/experiences/${userId}`, requestBody, { headers }).pipe(
+      map((response: any) => response.data.map((item: any) =>// item.responsibility
+      console.log(item)
+      )),
+      catchError((error: any) => throwError(error))
+    );
+  }
+
+  // save user skills
+  generateResponsibilities2(requestBody: any, userId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.post(`${this.baseUrl}/openai/chat/experiences/${userId}`, requestBody, { headers });
   }
 }

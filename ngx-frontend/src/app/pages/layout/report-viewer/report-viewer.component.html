@@ -1,0 +1,44 @@
+<div class="report-viewer">
+  <div class="menu-bar">
+    <nb-actions size="medium">
+      <nb-action
+        icon="maximize-outline"
+        (click)="increaseFontSize()"
+      ></nb-action>
+      <nb-action
+        icon="minimize-outline"
+        (click)="decreaseFontSize()"
+      ></nb-action>
+      <nb-action icon="file-outline" (click)="downloadAsPDF()"></nb-action>
+      <nb-action
+        icon="file-text-outline"
+        (click)="downloadAsWord()"
+      ></nb-action>
+    </nb-actions>
+
+    <nb-select [(selected)]="selectedFont" (selectedChange)="changeFontType(selectedFont)"  fieldSize="small">
+        <nb-option  fieldSize="small" *ngFor="let item of fontOptions" [value]="item.value">{{ item.label }}</nb-option>
+      </nb-select>
+  </div>
+
+  <div class="headers">
+    <h5>Dawit Woldemichael</h5>
+  </div>
+  <div class="resume-preview" #reportContent>
+    <div *ngIf="formData">
+      <div *ngFor="let group of formData | keyvalue">
+        <h6>{{ group.key }}</h6>
+        <div class="resume-section">
+          <div *ngFor="let field of group.value | keyvalue">
+            <p>
+              <strong>{{ field.key }}:</strong> {{ field.value }}
+            </p>
+            <ng-container
+              *ngIf="field.key === 'username'; then assignName"
+            ></ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
