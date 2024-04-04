@@ -3,6 +3,7 @@ import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule } from '@ne
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ThemeModule } from '../../@theme/theme.module';
+import { DetailsComponent } from './details/details.component';
 import { TablesRoutingModule, routedComponents } from './tables-routing.module';
 import { FsIconComponent } from './tree-grid/tree-grid.component';
 
@@ -19,6 +20,7 @@ import { FsIconComponent } from './tree-grid/tree-grid.component';
   declarations: [
     ...routedComponents,
     FsIconComponent,
+    DetailsComponent,
   ],
 })
 export class TablesModule { }

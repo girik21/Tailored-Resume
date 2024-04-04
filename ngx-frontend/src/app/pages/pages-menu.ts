@@ -36,4 +36,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+  {
+    title: "Details",
+    icon: "folder-outline",
+    children: [
+      {
+        title: "Personal Details",
+        link: "/pages/details",
+        icon: "person-outline",
+      },
+    ],
+  },
 ];
