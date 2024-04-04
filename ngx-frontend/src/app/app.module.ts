@@ -22,6 +22,12 @@ import { AppComponent } from './app.component';
 
 
 import { AuthGuard } from './service/auth-guard.service';
+// import { RouterState } from './shared/router.state';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from './shared/app.state';
+import { RouterState } from './shared/router.state';
 
 @NgModule({
   declarations: [AppComponent],
@@ -44,6 +50,12 @@ import { AuthGuard } from './service/auth-guard.service';
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     NbCheckboxModule,
+    NgxsModule.forRoot([
+      RouterState,
+      AppState
+    ]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot()
   ],
   providers: [
     AuthGuard
