@@ -51,7 +51,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
-        // Encrypt the password before saving
         user.setCreatedDate(new Date());
         return userRepository.save(user);
     }
