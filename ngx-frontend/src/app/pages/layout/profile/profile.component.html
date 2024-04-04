@@ -158,7 +158,7 @@
         </form>
 
         <!-- <button nbButton disabled nbStepperNext>prev</button> -->
-        
+
         <button nbButton nbStepperNext [disabled]="!personalDetails.valid">
           next
         </button>
@@ -187,8 +187,8 @@
                             company?</label>
                           <!-- <input type="text" class="form-control bg-light" id="role_{{ i }}" formControlName="position"
                             placeholder="Your role at the company" /> -->
-                            
-                            <input type="text" class="form-control bg-light" id="role_{{ i }}" formControlName="position" 
+
+                            <input type="text" class="form-control bg-light" id="role_{{ i }}" formControlName="position"
                             placeholder="Your role at the company" (input)="jobPosition = $event.target.value" />
                           <!-- Error message -->
                           <nb-error class="caption status-danger" *ngIf="
@@ -207,7 +207,7 @@
                           <!-- <input type="text" class="form-control bg-light" id="company_{{ i }}"
                             formControlName="employer" placeholder="Company name" /> -->
 
-                          <input type="text" class="form-control bg-light" id="company_{{ i }}" 
+                          <input type="text" class="form-control bg-light" id="company_{{ i }}"
                             formControlName="employer" placeholder="Company name" (input)="company = $event.target.value" />
 
                           <!-- Error message -->
@@ -274,7 +274,7 @@
                         <div class="form-group text-left">
                           <nb-card size="tiny" [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="large"
                             nbSpinnerMessage="" id="card.exp.resp_{{ i }}">
-                            
+
                             <nb-card-body height="300">
                               <label for="responsibilities_{{ i }}" class="text-muted font-weight-bold small">What did
                                 you do at the company?</label>
@@ -289,7 +289,7 @@
                       </div>
 
 
-                    
+
                     </div>
                   </div>
                 </nb-card-body>
@@ -740,7 +740,7 @@
                   <div class="col-md-12">
                     <div class="form-group text-left">
                       <div class="border-5">
-                        <app-report-viewer [formData]="getFormData()"></app-report-viewer>
+                        <ngx-app-report-viewer [formData]="getFormData()"></ngx-app-report-viewer>
                       </div>
                     </div>
                   </div>

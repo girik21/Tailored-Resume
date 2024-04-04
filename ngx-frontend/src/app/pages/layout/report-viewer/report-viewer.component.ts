@@ -17,7 +17,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 @Component({
-  selector: 'app-report-viewer',
+  selector: 'ngx-app-report-viewer',
   templateUrl: './report-viewer.component.html',
   styleUrls: ['./report-viewer.component.scss']
 })
