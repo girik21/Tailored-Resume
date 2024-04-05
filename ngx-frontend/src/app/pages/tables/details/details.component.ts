@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { UserAPI } from '../../../service/api/user-api.service';
+import { AuthService } from '../../../service/auth.service';
 
 @Component({
   selector: 'ngx-details',
@@ -8,6 +9,7 @@ import { UserAPI } from '../../../service/api/user-api.service';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent {
+
 
   settings = {
     add: {
@@ -71,7 +73,7 @@ export class DetailsComponent {
   source: LocalDataSource = new LocalDataSource();
   userData: any; // Declare userData variable
 
-  constructor(private userService: UserAPI) { }
+  constructor(private userService: UserAPI, private authService: AuthService) { }
 
   ngOnInit(): void {
     // Get user details and load data into the table
@@ -79,7 +81,7 @@ export class DetailsComponent {
   }
 
   getUserDetails(): void {
-    const userId = '66085a5f9eb7556f98c69056'; // Replace 'userId' with the actual user ID
+    const userId = '660f4e170f92554442777eae'; // Replace 'userId' with the actual user ID
     this.userService.getUserDetails(userId).subscribe(
       (userData: any) => {
         console.log(userData); // Log the fetched user data to the console

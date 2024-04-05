@@ -6,6 +6,11 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { DetailsComponent } from './details/details.component';
 import { TablesRoutingModule, routedComponents } from './tables-routing.module';
 import { FsIconComponent } from './tree-grid/tree-grid.component';
+import { ExperiencesComponent } from './experiences/experiences.component';
+import { EducationComponent } from './education/education.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { CertificationsComponent } from './certifications/certifications.component';
+import { SkillsComponent } from './skills/skills.component';
 
 @NgModule({
   imports: [
@@ -21,6 +26,11 @@ import { FsIconComponent } from './tree-grid/tree-grid.component';
     ...routedComponents,
     FsIconComponent,
     DetailsComponent,
+    ExperiencesComponent,
+    EducationComponent,
+    ProjectsComponent,
+    CertificationsComponent,
+    SkillsComponent,
   ],
 })
 export class TablesModule { }
