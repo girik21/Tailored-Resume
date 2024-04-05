@@ -5,7 +5,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { PagesComponent } from './pages.component';
+import { CertificationsComponent } from './tables/certifications/certifications.component';
 import { DetailsComponent } from './tables/details/details.component';
+import { EducationComponent } from './tables/education/education.component';
+import { ExperiencesComponent } from './tables/experiences/experiences.component';
+import { ProjectsComponent } from './tables/projects/projects.component';
+import { SkillsComponent } from './tables/skills/skills.component';
 
 const routes: Routes = [{
   path: '',
@@ -22,6 +27,26 @@ const routes: Routes = [{
     {
       path: 'details',
       component: DetailsComponent,
+    },
+    {
+      path: 'experiences',
+      component: ExperiencesComponent,
+    },
+    {
+      path: 'skills',
+      component: SkillsComponent,
+    },
+    {
+      path: 'certifications',
+      component: CertificationsComponent,
+    },
+    {
+      path: 'education',
+      component: EducationComponent,
+    },
+    {
+      path: 'projects',
+      component: ProjectsComponent,
     },
     {
       path: 'layout',

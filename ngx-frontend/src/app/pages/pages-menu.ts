@@ -45,6 +45,31 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: "/pages/details",
         icon: "person-outline",
       },
+      {
+        title: "Experiences",
+        link: "/pages/experiences",
+        icon: "briefcase-outline",
+      },
+      {
+        title: "Education",
+        link: "/pages/education",
+        icon: "book-outline",
+      },
+      {
+        title: "Projects",
+        link: "/pages/projects",
+        icon: "file-outline",
+      },
+      {
+        title: "Certifications",
+        link: "/pages/certifications",
+        icon: "award-outline",
+      },
+      {
+        title: "Skills",
+        link: "/pages/skills",
+        icon: "star-outline",
+      },
     ],
   },
 ];
