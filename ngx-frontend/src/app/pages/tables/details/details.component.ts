@@ -81,7 +81,7 @@ export class DetailsComponent {
   }
 
   getUserDetails(): void {
-    const userId = '660f4e170f92554442777eae'; // Replace 'userId' with the actual user ID
+    const userId = '66073ef404d3bb099d1bc4d3'; // Replace 'userId' with the actual user ID
     this.userService.getUserDetails(userId).subscribe(
       (userData: any) => {
         console.log(userData); // Log the fetched user data to the console
