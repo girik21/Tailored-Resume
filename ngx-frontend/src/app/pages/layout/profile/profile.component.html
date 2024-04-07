@@ -43,20 +43,20 @@
                       <label
                         for="email"
                         class="text-muted font-weight-bold small"
-                        >Email Address</label
+                        >Professional Email Address</label
                       >
                       <input
                         type="email"
                         class="form-control bg-light"
-                        id="email"
-                        formControlName="email"
+                        id="professional_email"
+                        formControlName="professional_email"
                         placeholder="Email address"
                       />
                       <nb-error
                         class="caption status-danger"
                         *ngIf="
-                          personalDetails.get('email').invalid &&
-                          personalDetails.get('email').touched
+                          personalDetails.get('professional_email').invalid &&
+                          personalDetails.get('professional_email').touched
                         "
                       >
                         Email is required and must be a valid email address.

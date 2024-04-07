@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.personalDetails = this.fb.group({
       username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      professional_email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       address1: ['', Validators.required],
       address2: [''],
@@ -264,9 +264,11 @@ export class ProfileComponent implements OnInit {
 
   async submitForms() {
     try {
+      const loggedInEmail = localStorage.getItem("loggedInEmail")
       // Combine professional summary with personal details
       const personalDetailsWithSummary = {
         ...this.personalDetails.value,
+        email: loggedInEmail,
         professionalSummary: this.professionalSummary.value.professionalSummary,
         role: 'USER'
       };

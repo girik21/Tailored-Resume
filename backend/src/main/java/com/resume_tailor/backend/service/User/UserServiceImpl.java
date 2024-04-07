@@ -50,6 +50,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByEmail(String email) {
+        Optional<User> user = Optional.ofNullable(userRepository.getUserByEmail(email));
+        return user.orElse(null);
+    }
+
+    @Override
     public User createUser(User user) {
         user.setCreatedDate(new Date());
         return userRepository.save(user);
