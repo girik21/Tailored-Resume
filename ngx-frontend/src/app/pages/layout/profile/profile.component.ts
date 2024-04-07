@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.personalDetails = this.fb.group({
       username: ['', Validators.required],
-      professional_email: ['', [Validators.required, Validators.email]],
+      professionalEmail: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       address1: ['', Validators.required],
       address2: [''],

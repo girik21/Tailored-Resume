@@ -48,15 +48,15 @@
                       <input
                         type="email"
                         class="form-control bg-light"
-                        id="professional_email"
-                        formControlName="professional_email"
+                        id="professionalEmail"
+                        formControlName="professionalEmail"
                         placeholder="Email address"
                       />
                       <nb-error
                         class="caption status-danger"
                         *ngIf="
-                          personalDetails.get('professional_email').invalid &&
-                          personalDetails.get('professional_email').touched
+                          personalDetails.get('professionalEmail').invalid &&
+                          personalDetails.get('professionalEmail').touched
                         "
                       >
                         Email is required and must be a valid email address.
