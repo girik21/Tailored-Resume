@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
+  NbSelectModule,
+  NbActionsModule,
   NbAccordionModule,
   NbButtonModule,
   NbCardModule,
@@ -8,6 +10,9 @@ import {
   NbRouteTabsetModule,
   NbStepperModule,
   NbTabsetModule, NbUserModule,
+  	NbIconModule,
+  	NbProgressBarModule,
+    NbSpinnerModule,
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -22,6 +27,8 @@ import { NewsPostPlaceholderComponent } from './infinite-list/news-post-placehol
 import { AccordionComponent } from './accordion/accordion.component';
 import { NewsService } from './news.service';
 import { ProfileComponent } from './profile/profile.component';
+import { ReportViewerComponent } from './report-viewer/report-viewer.component';
+import { SpinnerColorComponent } from './spinner-color/spinner-color.component';
 
 @NgModule({
   imports: [
@@ -37,6 +44,11 @@ import { ProfileComponent } from './profile/profile.component';
     NbAccordionModule,
     NbUserModule,
     LayoutRoutingModule,
+    NbActionsModule,
+    NbSelectModule,
+    NbIconModule,
+  	NbProgressBarModule,
+    NbSpinnerModule
   ],
   declarations: [
     LayoutComponent,
@@ -50,6 +62,8 @@ import { ProfileComponent } from './profile/profile.component';
     NewsPostComponent,
     AccordionComponent,
     ProfileComponent,
+    ReportViewerComponent,
+    SpinnerColorComponent
   ],
   providers: [
     NewsService,
