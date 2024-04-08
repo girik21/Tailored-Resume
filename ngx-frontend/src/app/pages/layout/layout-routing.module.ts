@@ -6,8 +6,8 @@ import { Tab1Component, Tab2Component, TabsComponent } from './tabs/tabs.compone
 import { AccordionComponent } from './accordion/accordion.component';
 import { InfiniteListComponent } from './infinite-list/infinite-list.component';
 import { ListComponent } from './list/list.component';
-import { StepperComponent } from './stepper/stepper.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserInfoGuard } from '../user-info.guard';
 
 const routes: Routes = [{
   path: '',
@@ -16,6 +16,7 @@ const routes: Routes = [{
     {
       path: 'profile',
       component: ProfileComponent,
+      canActivate: [UserInfoGuard],
     },
     {
       path: 'list',

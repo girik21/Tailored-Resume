@@ -35,7 +35,21 @@ public class UserController {
             if (user != null) {
                 return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User retrieved successfully.", user));
             } else {
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseWrapper<>(false, "User not found.", null));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
+        }
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
+        try {
+            User user = userService.getUserByEmail(email);
+            if (user != null) {
+                return ResponseEntity.ok().body(new ResponseWrapper<>(true, "User retrieved successfully.", user));
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseWrapper<>(false, "User not found.", null));
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));

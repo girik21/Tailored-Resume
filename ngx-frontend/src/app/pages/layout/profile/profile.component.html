@@ -29,13 +29,25 @@
 
                   <div class="col-md-6">
                     <div class="form-group text-left">
-                      <label for="email" class="text-muted font-weight-bold small">Email Address</label>
-                      <input type="email" class="form-control bg-light" id="email" formControlName="email"
-                        placeholder="Email address" />
-                      <nb-error class="caption status-danger" *ngIf="
-                          personalDetails.get('email').invalid &&
-                          personalDetails.get('email').touched
-                        ">
+                      <label
+                        for="email"
+                        class="text-muted font-weight-bold small"
+                        >Professional Email Address</label
+                      >
+                      <input
+                        type="email"
+                        class="form-control bg-light"
+                        id="professionalEmail"
+                        formControlName="professionalEmail"
+                        placeholder="Email address"
+                      />
+                      <nb-error
+                        class="caption status-danger"
+                        *ngIf="
+                          personalDetails.get('professionalEmail').invalid &&
+                          personalDetails.get('professionalEmail').touched
+                        "
+                      >
                         Email is required and must be a valid email address.
                       </nb-error>
                     </div>
