@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { User } from '../model/user.model';
-import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
+import { User } from '../model/user.model';
 
 import { catchError, map } from 'rxjs/operators';
 

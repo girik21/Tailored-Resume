@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { LocalDataSource } from 'ng2-smart-table';
 import { UserAPI } from '../../../service/api/user-api.service';
 import { AuthService } from '../../../service/auth.service';
+import { UserState } from '../../../shared/user.state';
 
 @Component({
   selector: 'ngx-details',
@@ -71,9 +73,9 @@ export class DetailsComponent {
   };
 
   source: LocalDataSource = new LocalDataSource();
-  userData: any; // Declare userData variable
+  userData: any;
 
-  constructor(private userService: UserAPI, private authService: AuthService) { }
+  constructor(private userService: UserAPI, private authService: AuthService, private store: Store) { }
 
   ngOnInit(): void {
     // Get user details and load data into the table
@@ -81,7 +83,13 @@ export class DetailsComponent {
   }
 
   getUserDetails(): void {
-    const userId = '66073ef404d3bb099d1bc4d3'; // Replace 'userId' with the actual user ID
+    // Retrieve userId from the state
+    const userId = this.store.selectSnapshot(UserState.getUserId); // Get userId from the state
+    if (!userId) {
+      console.error('User ID not found in the state.');
+      return;
+    }
+
     this.userService.getUserDetails(userId).subscribe(
       (userData: any) => {
         console.log(userData); // Log the fetched user data to the console

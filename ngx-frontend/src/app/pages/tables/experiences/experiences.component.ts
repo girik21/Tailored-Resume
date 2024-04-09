@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { LocalDataSource } from 'ng2-smart-table';
 import { UserAPI } from '../../../service/api/user-api.service';
-import { AuthService } from '../../../service/auth.service';
+import { UserState } from '../../../shared/user.state';
 
 @Component({
   selector: 'ngx-experiences',
@@ -64,24 +65,25 @@ export class ExperiencesComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
   experiencesData: any[] = [];
 
-  constructor(private userService: UserAPI, private authService: AuthService) { }
+  constructor(private userService: UserAPI, private store: Store ) { }
 
   ngOnInit(): void {
     this.getUserExperiences();
   }
 
   getUserExperiences(): void {
-    const userId = '66073ef404d3bb099d1bc4d3'; // Replace 'userId' with the actual user ID
+    const userId = this.store.selectSnapshot(UserState.getUserId)
+
     this.userService.getUserDetails(userId).subscribe(
       (userData: any) => {
-        console.log(userData); // Log the fetched user data to the console
-        this.experiencesData = userData.data.experiences; // Assign experiences data to class variable
-        this.mapExperiencesToTable(); // Map experiences data to table columns
+        this.experiencesData = userData.data.experiences;
+        console.log(userData)
+        this.mapExperiencesToTable();
       },
       (error: any) => {
-        console.error('Error fetching user experiences:', error);
+        console.error('Error fetching user education:', error);
       }
-    );
+    )
   }
 
   mapExperiencesToTable(): void {

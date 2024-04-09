@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { LocalDataSource } from 'ng2-smart-table';
 import { UserAPI } from '../../../service/api/user-api.service';
 import { AuthService } from '../../../service/auth.service';
+import { UserState } from '../../../shared/user.state';
 
 @Component({
   selector: 'ngx-education',
@@ -71,14 +73,19 @@ export class EducationComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
   educationData: any[] = [];
 
-  constructor(private userService: UserAPI, private authService: AuthService) { }
+  constructor(private userService: UserAPI, private authService: AuthService, private store: Store) { }
 
   ngOnInit(): void {
     this.getUserEducation();
   }
 
   getUserEducation(): void {
-    const userId = '6607446b04d3bb099d1bc4dc'; // Replace 'userId' with the actual user ID
+    const userId = this.store.selectSnapshot(UserState.getUserId);
+    if (!userId) {
+      console.error('User Id not found')
+      return;
+    }
+
     this.userService.getUserDetails(userId).subscribe(
       (userData: any) => {
         console.log(userData); // Log the fetched user data to the console
@@ -97,7 +104,13 @@ export class EducationComponent implements OnInit {
 
   onSaveConfirm(event): void {
     if (window.confirm('Are you sure you want to save the changes?')) {
-      const userId = '66073ef404d3bb099d1bc4d3'; // Replace 'userId' with the actual user ID
+      // Retrieve userId from the state
+      const userId = this.store.selectSnapshot(UserState.getUserId); // Get userId from the state
+      if (!userId) {
+        console.error('User ID not found in the state.');
+        return;
+      }
+
       const data = event.newData;
       this.userService.saveEducation(data, userId).subscribe(
         (response: any) => {
@@ -110,7 +123,7 @@ export class EducationComponent implements OnInit {
         }
       );
     } else {
-      event.confirm.reject(); // Reject the edit event
+      event.confirm.reject();
     }
   }
 

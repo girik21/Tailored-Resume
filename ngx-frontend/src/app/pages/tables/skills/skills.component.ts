@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { LocalDataSource } from 'ng2-smart-table';
 import { UserAPI } from '../../../service/api/user-api.service';
-import { AuthService } from '../../../service/auth.service';
+import { UserState } from '../../../shared/user.state';
 
 @Component({
   selector: 'ngx-skills',
@@ -36,24 +37,21 @@ export class SkillsComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
   skillsData: any[] = [];
 
-  constructor(private userService: UserAPI, private authService: AuthService) { }
+  constructor(private userService: UserAPI, private store: Store) { }
 
   ngOnInit(): void {
     this.getUserSkills();
   }
 
   getUserSkills(): void {
-    const userId = '66084a049eb7556f98c69050'; // Replace 'userId' with the actual user ID
+    const userId = this.store.selectSnapshot(UserState.getUserId)
+
     this.userService.getUserDetails(userId).subscribe(
       (userData: any) => {
-        console.log(userData); // Log the fetched user data to the console
-        this.skillsData = userData.data.skills; // Assign skills data to class variable
-        this.mapSkillsToTable(); // Map skills data to table columns
-      },
-      (error: any) => {
-        console.error('Error fetching user skills:', error);
+        this.skillsData = userData.data.skills
+        this.mapSkillsToTable();
       }
-    );
+    )
   }
 
   mapSkillsToTable(): void {

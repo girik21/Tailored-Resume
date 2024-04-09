@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { LocalDataSource } from 'ng2-smart-table';
 import { UserAPI } from '../../../service/api/user-api.service';
-import { AuthService } from '../../../service/auth.service';
+import { UserState } from '../../../shared/user.state';
 
 @Component({
   selector: 'ngx-projects',
@@ -44,24 +45,25 @@ export class ProjectsComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
   projectsData: any[] = [];
 
-  constructor(private userService: UserAPI, private authService: AuthService) { }
+  constructor(private userService: UserAPI, private store: Store) { }
 
   ngOnInit(): void {
     this.getUserProjects();
   }
 
   getUserProjects(): void {
-    const userId = '66073ef404d3bb099d1bc4d3'; // Replace 'userId' with the actual user ID
+    const userId = this.store.selectSnapshot(UserState.getUserId)
+
     this.userService.getUserDetails(userId).subscribe(
       (userData: any) => {
-        console.log(userData); // Log the fetched user data to the console
-        this.projectsData = userData.data.projects; // Assign projects data to class variable
-        this.mapProjectsToTable(); // Map projects data to table columns
+        this.projectsData = userData.data.projects
+        console.log(this.projectsData)
+        this.mapProjectsToTable();
       },
       (error: any) => {
-        console.error('Error fetching user projects:', error);
+        console.error('Error fetching user education:', error);
       }
-    );
+    )
   }
 
   mapProjectsToTable(): void {

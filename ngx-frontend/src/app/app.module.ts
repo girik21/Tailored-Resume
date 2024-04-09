@@ -28,6 +28,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from './shared/app.state';
 import { RouterState } from './shared/router.state';
+import { UserState } from './shared/user.state';
 
 @NgModule({
   declarations: [AppComponent],
@@ -52,7 +53,8 @@ import { RouterState } from './shared/router.state';
     NbCheckboxModule,
     NgxsModule.forRoot([
       RouterState,
-      AppState
+      AppState,
+      UserState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot()
