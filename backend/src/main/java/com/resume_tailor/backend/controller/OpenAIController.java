@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.resume_tailor.backend.dto.ChatRequest;
 import com.resume_tailor.backend.dto.ChatResponse;
+import com.resume_tailor.backend.dto.Responsibility;
 import com.resume_tailor.backend.service.OpenAI.OpenAIService;
 import com.resume_tailor.backend.service.User.UserService;
 import com.resume_tailor.backend.utils.ResponseWrapper;
@@ -17,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -43,7 +46,6 @@ public class OpenAIController {
      * Returns the first message from the API response
      *
      * @param requestBody containing the jobDescription and sample resume to send to the API
-     *
      * @return first message from the API response
      */
     @PostMapping("/chat/{userId}")
@@ -81,5 +83,36 @@ public class OpenAIController {
             e.printStackTrace(); // Log the exception for debugging
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
         }
+
     }
+
+    @PostMapping("/chat/experiences/{userId}")
+    public ResponseEntity<?> experienceGenerator(@PathVariable String userId, @RequestBody Map<String, String> requestBody) {
+        try {
+
+            String jobDesc = requestBody.get("jobPosition");
+            String company = requestBody.get("company");
+
+            JsonNode responsibilities  = openAIService.generateExperienceResponsibilities(jobDesc, company);
+
+
+
+             //Return the JsonNode
+            return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Responsibilities generated successfully", responsibilities));
+
+//            List<Responsibility> responsibilities = generateResponsibilities();
+//            return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Enhanced resume generated successfully.", responsibilities));
+
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception for debugging
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
+        }
+
+    }
+
+
 }
+
+
+
