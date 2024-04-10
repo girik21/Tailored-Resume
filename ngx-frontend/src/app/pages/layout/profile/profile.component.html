@@ -170,7 +170,6 @@
         </form>
 
         <!-- <button nbButton disabled nbStepperNext>prev</button> -->
-
         <button nbButton nbStepperNext [disabled]="!personalDetails.valid">
           next
         </button>
@@ -218,6 +217,7 @@
                             you work?</label>
                           <!-- <input type="text" class="form-control bg-light" id="company_{{ i }}"
                             formControlName="employer" placeholder="Company name" /> -->
+
 
                           <input type="text" class="form-control bg-light" id="company_{{ i }}"
                             formControlName="employer" placeholder="Company name" (input)="company = $event.target.value" />
@@ -299,9 +299,6 @@
                           </nb-card>
                         </div>
                       </div>
-
-
-
                     </div>
                   </div>
                 </nb-card-body>
@@ -752,7 +749,7 @@
                   <div class="col-md-12">
                     <div class="form-group text-left">
                       <div class="border-5">
-                        <ngx-app-report-viewer [formData]="getFormData()"></ngx-app-report-viewer>
+                        <app-report-viewer [formData]="getFormData()"></app-report-viewer>
                       </div>
                     </div>
                   </div>

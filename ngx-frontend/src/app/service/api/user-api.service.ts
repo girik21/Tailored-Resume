@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { User } from '../model/user.model';
 
+
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
@@ -54,7 +55,7 @@ export class UserAPI {
 
   // save user experience
   saveExperience(data: any, userId: string): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);    
     return this.http.post(`${this.baseUrl}/experiences?userId=${userId}`, data, { headers });
   }
 
