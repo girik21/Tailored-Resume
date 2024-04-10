@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.resume_tailor.backend.dto.Responsibility;
-import org.apache.commons.text.StringEscapeUtils;
+//import org.apache.commons.text.StringEscapeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,8 @@ public class ResponsibilityConverter {
 
     }
 
-    private static String convertToEscapedString(String jsonString) {
-        return StringEscapeUtils.unescapeJson(jsonString);
-    }
+//    private static String convertToEscapedString(String jsonString) {
+//        return StringEscapeUtils.unescapeJson(jsonString);
+//    }
 }
 
