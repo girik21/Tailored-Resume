@@ -1,6 +1,6 @@
-import { Component, Input, ViewChild, ElementRef, AfterViewInit, Renderer2  } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import jsPDF from 'jspdf';
-import * as htmlDocx from 'html-docx-js';
+
 
 import { Packer } from "docx";
 import { saveAs } from "file-saver";
@@ -30,13 +30,9 @@ export class ReportViewerComponent {
   full_name: string = '';
   fontSize = 16;
   fontMenuOpen = false;
-  
-  
-  items = [
-    { value: '1', label: 'Option 1' },
-    { value: '2', label: 'Option 2' },
-    // Add more items as needed
-  ];
+
+
+
   selectedValue = '1';
 
   fontTypes: string[] = [
@@ -50,25 +46,14 @@ export class ReportViewerComponent {
   ];
 
   fontOptions = [
-    { value: 'Arial', label: 'Arial' },
-    { value: 'Verdana', label: 'Verdana' },
-    { value: 'Helvetica', label: 'Helvetica' },
-    { value: 'Times New Roman', label: 'Times New Roman' },
-    { value: 'Calibri', label: 'Calibri' },
-    { value: 'Georgia', label: 'Georgia' },
-    { value: 'Garamond', label: 'Garamond' },
-    { value: 'Cambria', label: 'Cambria' },
-    { value: 'Lato', label: 'Lato' },
-    { value: 'Roboto', label: 'Roboto' },
-    { value: 'Open Sans', label: 'Open Sans' },
-    { value: 'Trebuchet MS', label: 'Trebuchet MS' },
+    { value: 'Arial', label: 'Arial' },    { value: 'Verdana', label: 'Verdana' },    { value: 'Helvetica', label: 'Helvetica' },    { value: 'Times New Roman', label: 'Times New Roman' },    { value: 'Calibri', label: 'Calibri' },    { value: 'Georgia', label: 'Georgia' },    { value: 'Garamond', label: 'Garamond' },    { value: 'Cambria', label: 'Cambria' },    { value: 'Lato', label: 'Lato' },    { value: 'Roboto', label: 'Roboto' },    { value: 'Open Sans', label: 'Open Sans' },    { value: 'Trebuchet MS', label: 'Trebuchet MS' },
     { value: 'Palatino Linotype', label: 'Palatino Linotype' }
     // Add more fonts as needed
   ];
-  
-  selectedFont = 'Arial';
-  
-  constructor(private renderer: Renderer2) {}
+
+  selectedFont = 'Times New Roman';
+
+  constructor(private renderer: Renderer2) { }
 
   ngAfterViewInit() {
     // Set the default font for the report content after view initialization
@@ -83,6 +68,7 @@ export class ReportViewerComponent {
     this.changeFontType(defaultFont);
   }
   increaseFontSize() {
+
     this.fontSize += 2;
     this.updateFontSize();
   }
@@ -95,22 +81,22 @@ export class ReportViewerComponent {
   }
 
   updateFontSize() {
-    const elements = this.reportContent.nativeElement.querySelectorAll('p, h6');
+    const elements = this.reportContent.nativeElement.querySelectorAll('*');
     elements.forEach((element: HTMLElement) => {
       element.style.fontSize = this.fontSize + 'px';
     });
   }
-  
-    changeFontType(font: string) {
-      const elements = this.reportContent.nativeElement.querySelectorAll('p, h6, headers');
+
+  changeFontType(font: string) {
+    const elements = this.reportContent.nativeElement.querySelectorAll('*');
     elements.forEach((element: HTMLElement) => {
       element.style.fontFamily = font;
     });
-    }
-    
- 
+  }
 
-  
+
+
+
   toggleFontMenu() {
     this.fontMenuOpen = !this.fontMenuOpen;
   }
@@ -141,33 +127,140 @@ export class ReportViewerComponent {
 
   downloadAsWord() {
     const documentCreator = new DocumentCreator();
+
+    const contactInfo = {
+      NAME: this.formData["Personal Details"].username,
+      PHONE_NUMBER: this.formData["Personal Details"].phone,
+      PROFILE_URL: this.formData["Personal Details"].linkedinLink,
+      EMAIL: this.formData["Personal Details"].email,
+      ADDRESS: `${this.formData["Personal Details"].address1}, ${this.formData["Personal Details"].city}, ${this.formData["Personal Details"].state} ${this.formData["Personal Details"].zip}`
+    };
+
+    // Iterate through formData.Experience and transform each experience
+    const transformedExperiences = this.formData.Experience.map(this.transformExperience);
+
+    const transformedEducations = this.formData.Education.map(this.transformEducation);
+   
+    const transformedSkills = this.formData.Skills;
+   
+
+   const transformedProjects = this.formData.Project.map(this.transformProject);
+
+   console.log(this.formData["Professional Summary"].professionalSummary)
+   const professionalSummary = {
+    description: this.formData["Professional Summary"].professionalSummary
+      };
+
     const doc = documentCreator.create([
-      experiences,
-      education,
-      skills,
-      achievements
+      contactInfo,
+      transformedExperiences,//experiences,
+      transformedEducations,//education,
+      transformedSkills,//skills,
+      transformedProjects,// projects,
+      // certifications,
+       professionalSummary
     ]);
 
     Packer.toBlob(doc).then(blob => {
       console.log(blob);
-      saveAs(blob, "example.docx");
+      saveAs(blob, "resue-tailor.docx");
       console.log("Document created successfully");
     });
   }
 
-  downloadAsPDF2() {
-    const documentCreator = new DocumentCreator();
-    const doc = documentCreator.create([
-        experiences,
-        education,
-        skills,
-        achievements
-    ]);
 
-    const pdfDocGenerator = pdfMake.createPdf(doc);
-    pdfDocGenerator.getBlob((blob) => {
-        saveAs(blob, 'example.pdf');
-        console.log('Document created successfully');
-    });
+
+  formatSkills(): string {
+    if (this.formData && this.formData.Skills) {
+      return this.formData.Skills.map(skill => skill.name).join(', ');
+    }
+    return '';
+  }
+
+  // Function to transform dynamic experience to match the structure of static experience
+  transformExperience(dynamicExperience: Experience) {
+    // Parse start date string into a Date object
+    const startDate = dynamicExperience.startDate ? new Date(dynamicExperience.startDate) : null;
+
+    // Extract month and year from the start date
+    const startMonth = startDate ? startDate.getMonth() + 1 : 1; // Adding 1 because getMonth() returns zero-based month index
+    const startYear = startDate ? startDate.getFullYear() : 2000; // Default year if startDate is null
+
+    // Parse end date string into a Date object
+    const endDate = dynamicExperience.endDate ? new Date(dynamicExperience.endDate) : null;
+
+    // Extract month and year from the end date
+    const endMonth = endDate ? endDate.getMonth() + 1 : 1; // Adding 1 because getMonth() returns zero-based month index
+    const endYear = endDate ? endDate.getFullYear() : 2000; // Default year if endDate is null
+
+    return {
+      isCurrent: false, // Assuming all experiences in formData are historical, not current
+      summary: dynamicExperience.description,
+      title: dynamicExperience.position,
+      startDate: {
+        month: startMonth,
+        year: startYear
+      },
+      endDate: {
+        month: endMonth,
+        year: endYear
+      },
+      company: {
+        name: dynamicExperience.employer
+      }
+    };
+  }
+
+  // Function to transform dynamic experience to match the structure of static experience
+  transformEducation(dynamicEducation) {
+    // Parse start date string into a Date object
+    const startDate = dynamicEducation.startDate ? new Date(dynamicEducation.startDate) : null;
+
+    // Extract month and year from the start date
+    const startMonth = startDate ? startDate.getMonth() + 1 : 1; // Adding 1 because getMonth() returns zero-based month index
+    const startYear = startDate ? startDate.getFullYear() : 2000; // Default year if startDate is null
+
+    // Parse end date string into a Date object
+    const endDate = dynamicEducation.endDate ? new Date(dynamicEducation.endDate) : null;
+
+    // Extract month and year from the end date
+    const endMonth = endDate ? endDate.getMonth() + 1 : 1; // Adding 1 because getMonth() returns zero-based month index
+    const endYear = endDate ? endDate.getFullYear() : 2000; // Default year if endDate is null
+   
+    return {
+
+      fieldOfStudy: dynamicEducation.degreeName, // Assuming fieldOfStudy is not provided in formData
+      notes: dynamicEducation.description,
+      schoolName: dynamicEducation.school,
+      startDate: {
+        year: startYear
+      },
+      endDate: {
+        year: endYear
+      }
+    };
+  }
+
+  // Function to transform dynamic project to match the structure of static project
+transformProject(dynamicProject) {
+  
+  return {
+      title: dynamicProject.name,
+      startDate: dynamicProject.startDate,
+      endDate: dynamicProject.endDate,
+      company: dynamicProject.employer 
+      };
 }
+
 }
+
+
+
+interface Experience {
+  employer: string;
+  startDate: string;
+  endDate: string;
+  position: string;
+  description: string;
+}
+

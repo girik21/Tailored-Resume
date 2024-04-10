@@ -8,22 +8,21 @@ import {
     TabStopType,
     TextRun
   } from "docx";
-  const PHONE_NUMBER = "925-663-9114";
-  const PROFILE_URL = "https://www.linkedin.com/in/dawit-kiros-w/";
-  const EMAIL = "dwt.krs@gmail.com";
   
   export class DocumentCreator {
     // tslint:disable-next-line: typedef
-    public create([experiences, educations, skills, achivements]): Document {
+    public create([contactInfo, experiences, educations, skills,  projects, professionalSummary]): Document {
       const document = new Document({
         sections: [
           {
             children: [
               new Paragraph({
-                text: "Dawit Woldemichael",
+                text: contactInfo.NAME,
                 heading: HeadingLevel.TITLE
               }),
-              this.createContactInfo(PHONE_NUMBER, PROFILE_URL, EMAIL),
+              this.createContactInfo(contactInfo.PHONE_NUMBER, contactInfo.PROFILE_URL, contactInfo.EMAIL, contactInfo.ADDRESS),
+              this.createHeading("Professional Summary"),
+              new Paragraph(professionalSummary.description),
               this.createHeading("Education"),
               ...educations
                 .map(education => {
@@ -78,20 +77,51 @@ import {
                   return arr;
                 })
                 .reduce((prev, curr) => prev.concat(curr), []),
-              this.createHeading("Skills, Achievements"),
-              this.createSubHeading("Skills"),
+                ////////////////////////////////////////////////////////////
+                this.createHeading("projects"),
+                ...projects
+                  .map(project => {
+                    const arr: Paragraph[] = [];
+    
+                    arr.push(
+                      this.createInstitutionHeader(
+                        project.company,
+                        this.createProjectDateText(
+                          project.startDate,
+                          project.endDate,
+                          
+                        )
+                      )
+                    );
+                    arr.push(this.createRoleText(project.title));
+    
+                    // const bulletPoints = this.splitParagraphIntoBullets(
+                    //   position.summary
+                    // );
+    
+                    // bulletPoints.forEach(bulletPoint => {
+                    //   arr.push(this.createBullet(bulletPoint));
+                    // });
+    
+                    return arr;
+                  })
+                  .reduce((prev, curr) => prev.concat(curr), []),
+
+                ////////////////////////////////////////////////////////////////
+              this.createHeading("Skills"),
+              //this.createSubHeading("Skills"),
               this.createSkillList(skills),
-              this.createSubHeading("Achievements"),
-              ...this.createAchivementsList(achivements),
-              this.createSubHeading("Interests"),
-              this.createInterests(
-                "Programming, Technology, Music Production, Web Design, 3D Modelling, Dancing."
-              ),
-              this.createHeading("References"),
-              new Paragraph(
-                "Dr. Ahmed Banafa SFBU Department of Computer Science, "
-              ),
-              new Paragraph("More references upon request"),
+              //this.createSubHeading("Achievements"),
+              //...this.createAchivementsList(achivements),
+              //this.createSubHeading("Interests"),
+              // this.createInterests(
+              //   "Programming, Technology, Music Production, Web Design, 3D Modelling, Dancing."
+              // ),
+              // this.createHeading("References"),
+              // new Paragraph(
+              //   "Dr. Ahmed Banafa SFBU Department of Computer Science, "
+              // ),
+              new Paragraph("References upon request"),
               new Paragraph({
                 text:
                   "This CV was generated in real-time using Resume Tailor",
@@ -108,7 +138,8 @@ import {
     public createContactInfo(
       phoneNumber: string,
       profileUrl: string,
-      email: string
+      email: string,
+      address: string
     ): Paragraph {
       return new Paragraph({
         alignment: AlignmentType.CENTER,
@@ -117,7 +148,7 @@ import {
             `Mobile: ${phoneNumber} | LinkedIn: ${profileUrl} | Email: ${email}`
           ),
           new TextRun({
-            text: "2593 Lambert Court, Union City, CA 94587",
+            text: address,
             break: 1
           })
         ]
@@ -228,6 +259,16 @@ import {
       return `${startDateText} - ${endDateText}`;
     }
   
+    // tslint:disable-next-line:no-any
+    public createProjectDateText(
+      startDate: any,
+      endDate: any,
+      
+    ): string {
+      
+  
+      return `${startDate} - ${endDate}`;
+    }
     public getMonthFromInt(value: number): string {
       switch (value) {
         case 1:

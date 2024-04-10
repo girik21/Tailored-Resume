@@ -89,9 +89,14 @@ export class UserAPI {
     );
   }
 
-  // save user skills
+  
   generateResponsibilities2(requestBody: any, userId: string): Observable<any> {
+    
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${this.baseUrl}/openai/chat/experiences/${userId}`, requestBody, { headers });
+  }
+  generateResume(requestBody: any, userId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.post(`${this.baseUrl}/openai/chat/${userId}`, requestBody, { headers });
   }
 }

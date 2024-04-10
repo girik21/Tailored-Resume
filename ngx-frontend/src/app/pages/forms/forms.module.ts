@@ -9,6 +9,7 @@ import {
   NbRadioModule,
   NbSelectModule,
   NbUserModule,
+  NbSpinnerModule,
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -20,6 +21,7 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { FormsModule as ngFormsModule } from '@angular/forms';
 import { AiResumeComponent } from './ai-resume/ai-resume.component';
+import { LayoutModule } from '../layout/layout.module';
 
 @NgModule({
   imports: [
@@ -36,6 +38,8 @@ import { AiResumeComponent } from './ai-resume/ai-resume.component';
     NbSelectModule,
     NbIconModule,
     ngFormsModule,
+    NbSpinnerModule,
+    LayoutModule // Import LayoutsModule here
   ],
   declarations: [
     FormsComponent,
@@ -44,6 +48,8 @@ import { AiResumeComponent } from './ai-resume/ai-resume.component';
     FormInputsComponent,
     FormLayoutsComponent,
     DatepickerComponent,
+  
+    
   ],
 })
 export class FormsModule { }

@@ -51,6 +51,7 @@ export class NgxLoginComponent extends NbLoginComponent {
         
         // Check if the user exists in the backend API
         this.userApi.getAllUsersByEmail(user.email, accessToken).subscribe((users: any[]) => {
+          console.log(users); // Logging the response
           if (users.length > 0) {
             // User found, redirect to dashboard
             this.router.navigate(['dashboard']);

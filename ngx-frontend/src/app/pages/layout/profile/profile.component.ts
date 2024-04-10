@@ -303,6 +303,7 @@ export class ProfileComponent implements OnInit {
   }
 
   async submitForms() {
+    
     try {
       // Combine professional summary with personal details
       const personalDetailsWithSummary = {
@@ -386,16 +387,36 @@ export class ProfileComponent implements OnInit {
   getFormData(): any {
     let experienceData = [];
     for (const experienceGroup of this.experienceGroups) {
-      experienceData.push(experienceGroup.value);
+      experienceData.push(experienceGroup.value);   
     }
+
+    let projectData = [];
+    for (const projectGroup of this.projectGroups) {
+      projectData.push(projectGroup.value);   
+    }
+    
+    let educationData = [];
+    for (const educationGroup of this.educationGroups) {
+      educationData.push(educationGroup.value);   
+    }
+
+    let certificationData = [];
+    for (const certificationGroup of this.certificationGroups) {
+      certificationData.push(certificationGroup.value);   
+    }
+
+    let skillData = [];
+    for (const skillGroup of this.skillGroups) {
+      skillData.push(skillGroup.value);   
+    }
+
     this.formData = {
       "Personal Details": this.personalDetails.value,
-      //'Experience': experienceData
-      //,
-      // 'Project':  this.projectForm.value,
-      // 'Education': this.educationForm.value,
-      // 'Certifications': this.certificationForm.value,
-      // 'Skills': this.skillForm.value,
+      'Experience': experienceData,      
+      'Project':  projectData,
+      'Education':educationData,
+      'Certifications': certificationData,
+      'Skills': skillData,
       "Professional Summary": this.professionalSummary.value,
     };
 
@@ -411,15 +432,15 @@ export class ProfileComponent implements OnInit {
     this.loading = true;
     const requestBody = { jobPosition:this.jobPosition, company:this.company };
 
-    // alert(`${this.jobPosition}, \n ${this.company}`);
+   
 
     this.startTimer();
 
+    
     this.userAPI.generateResponsibilities2(requestBody, this.userId).subscribe(
       (response) => {
         this.loading = false;
-        this.stopTimer();
-        //console.log(response)
+        this.stopTimer();        
         this.updateTextArea(index, response.data);
         
       },
