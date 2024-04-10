@@ -133,10 +133,10 @@ export class ReportViewerComponent {
 
     doc.setFontSize(this.fontSize);
     
-    doc.fromHTML(tempElement, 10, 10, {}, () => {
-      doc.save('report.pdf');
-      document.body.removeChild(tempElement);
-    });
+    // doc.fromHTML(tempElement, 10, 10, {}, () => {
+    //   doc.save('report.pdf');
+    //   document.body.removeChild(tempElement);
+    // });
   }
 
 
