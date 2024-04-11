@@ -489,6 +489,16 @@
                                 formControlName="description"
                                 placeholder="Enter your responsibilities"
                               ></textarea>
+
+                              <nb-error
+                                class="caption status-danger"
+                                *ngIf="
+                                  experienceGroup.get('description').invalid &&
+                                  experienceGroup.get('description').touched
+                                "
+                              >
+                                Description is required.
+                              </nb-error>
                             </nb-card-body>
                           </nb-card>
                         </div>

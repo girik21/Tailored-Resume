@@ -24,6 +24,12 @@ export class UserAPI {
     return this.http.post(`${this.baseUrl}/users`, data, { headers });
   }
 
+  // Update user details
+  updateUserDetails(data: any, userId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.put(`${this.baseUrl}/users/${userId}`, data, { headers });
+  }
+
   // Get single user
   getUserDetails(userId: string): Observable<any> {
     let test_token: String;
@@ -59,10 +65,22 @@ export class UserAPI {
     return this.http.post(`${this.baseUrl}/experiences?userId=${userId}`, data, { headers });
   }
 
+  // delete user experience
+  deleteExperience(experienceId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);    
+    return this.http.delete(`${this.baseUrl}/experiences/${experienceId}`, { headers });
+  }
+
   // save user education
   saveEducation(data: any, userId: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${this.baseUrl}/education?userId=${userId}`, data, { headers });
+  }
+
+  // delete user education
+  deleteEducation(educationId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);    
+    return this.http.delete(`${this.baseUrl}/education/${educationId}`, { headers });
   }
 
   // save user projects
@@ -71,16 +89,34 @@ export class UserAPI {
     return this.http.post(`${this.baseUrl}/projects?userId=${userId}`, data, { headers });
   }
 
+  // delete user experience
+  deleteProject(projectId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);    
+    return this.http.delete(`${this.baseUrl}/projects/${projectId}`, { headers });
+  }
+
   // save user skills
   saveSkills(data: any, userId: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${this.baseUrl}/skills?userId=${userId}`, data, { headers });
   }
 
+  // delete user experience
+  deleteSkill(skillId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);    
+    return this.http.delete(`${this.baseUrl}/skills/${skillId}`, { headers });
+  }
+
   // save user certifications
   saveCertifications(data: any, userId: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${this.baseUrl}/certifications?userId=${userId}`, data, { headers });
+  }
+
+  // delete user experience
+  deleteCertification(certificationId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);    
+    return this.http.delete(`${this.baseUrl}/certifications/${certificationId}`, { headers });
   }
 
   //generate experience responsibilities

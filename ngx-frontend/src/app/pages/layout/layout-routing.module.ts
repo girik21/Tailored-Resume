@@ -16,7 +16,7 @@ const routes: Routes = [{
     {
       path: 'profile',
       component: ProfileComponent,
-      canActivate: [UserInfoGuard],
+      // canActivate: [UserInfoGuard],
     },
     {
       path: 'list',

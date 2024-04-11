@@ -5,6 +5,7 @@ import { NbComponentShape, NbComponentSize, NbComponentStatus } from '@nebular/t
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 import { UserAPI } from '../../../service/api/user-api.service';
+import { User } from '../../../service/model/user.model';
 
 @Component({
   selector: 'ngx-profile',
@@ -46,7 +47,12 @@ export class ProfileComponent implements OnInit {
 
   timer: any;
   seconds: number = 0;
-  constructor(private fb: FormBuilder, private userAPI: UserAPI, private router: Router, private fireAuth: AngularFireAuth) {
+  constructor(
+    private fb: FormBuilder, 
+    private userAPI: UserAPI, 
+    private router: Router, 
+    private fireAuth: AngularFireAuth
+  ) {
   }
 
   startTimer() {
@@ -60,6 +66,41 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    // Initialize the forms
+    this.initPersonalDetailsForm();
+    this.initProfessionalSummaryForm();
+
+    // For experiences
+    this.experienceForm = this.fb.group({
+      experiences: this.fb.array([]) // Initialize an empty array for experiences
+    });
+
+    // For projects
+    this.projectForm = this.fb.group({
+      projects: this.fb.array([]) // Initialize an empty array for projects
+    });
+
+    // For educations
+    this.educationForm = this.fb.group({
+      educations: this.fb.array([]) // Initialize an empty array for educations
+    });
+
+    // For certifications
+    this.certificationForm = this.fb.group({
+      certifications: this.fb.array([]) // Initialize an empty array for certifications
+    });
+
+    // For skills
+    this.skillForm = this.fb.group({
+      skills: this.fb.array([]) // Initialize an empty array for skills
+    });
+
+    // Get Logged In User Data
+    this.getUserData();
+  }
+
+  initPersonalDetailsForm() {
     this.personalDetails = this.fb.group({
       username: ['', Validators.required],
       professionalEmail: ['', [Validators.required, Validators.email]],
@@ -72,39 +113,133 @@ export class ProfileComponent implements OnInit {
       linkedinLink: ['', Validators.required],
       portfolioLink: [''],
     });
+  }
 
-    // For experiences
-    this.experienceForm = this.fb.group({
-      experiences: this.fb.array([]) // Initialize an empty array for experiences
-    });
-    this.addExperience(); // Add the first experience form on component initialization
-
-    // For projects
-    this.projectForm = this.fb.group({
-      projects: this.fb.array([]) // Initialize an empty array for projects
-    });
-    this.addProject(); // Add the first project form on component initialization
-
-    // For educations
-    this.educationForm = this.fb.group({
-      educations: this.fb.array([]) // Initialize an empty array for educations
-    });
-    this.addEducation(); // Add the first education form on component initialization
-
-    // For certifications
-    this.certificationForm = this.fb.group({
-      certifications: this.fb.array([]) // Initialize an empty array for certifications
-    });
-    this.addCertification(); // Add the first certification form on component initialization
-
-    // For skills
-    this.skillForm = this.fb.group({
-      skills: this.fb.array([]) // Initialize an empty array for skills
-    });
-    this.addSkill(); // Add the first skill form on component initialization
-
+  initProfessionalSummaryForm() {
     this.professionalSummary = this.fb.group({
       professionalSummary: ['', Validators.required],
+    });
+  }
+
+  getUserData() {
+    const loggedInEmail = localStorage.getItem("loggedInEmail")
+    const accessToken = localStorage.getItem("accessToken")
+
+    // Make a request to fetch user data based on the userId
+    this.userAPI.getAllUsersByEmail(loggedInEmail, accessToken).subscribe(
+      (userData: User[]) => {
+
+        if (userData && userData.length > 0) {
+
+          // Prefill the personal details form with user's data
+          this.prefillPersonalDetailsForm(userData[0]);
+          this.prefillProfessionalSummaryForm(userData[0]);
+
+          this.prefillExperiencesForm(userData[0].experiences);
+
+          // Prefill projects if present in user data
+          if (userData[0].projects.length > 0) {
+            this.prefillProjectForm(userData[0].projects);
+          } else {
+            // If no projects, add the first experience form
+            this.addProject();
+          }
+
+          this.prefillEducationForm(userData[0].education);
+
+          // Prefill certificates if present in user data
+          if (userData[0].certificates.length > 0) {
+            this.prefillCertificationForm(userData[0].certificates);
+          } else {
+            // If no education, add the first experience form
+            this.addCertification();
+          }
+
+          this.prefillSkillsForm(userData[0].skills);
+          
+        } else {
+          this.addExperience()
+          this.addEducation()
+          this.addProject()
+          this.addCertification()
+          this.addSkill()
+        }
+      },
+      (error) => {
+        console.error('Error fetching user data:', error);
+        // Handle error
+      }
+    );
+  }
+
+  prefillPersonalDetailsForm(userData: User) {
+    this.personalDetails.patchValue({
+      username: userData.username || '',
+      professionalEmail: userData.professionalEmail || '',      
+      phone: userData.phone || '', 
+      address1: userData.address1 || '', 
+      address2: userData.address2 || '', 
+      city: userData.city || '', 
+      state: userData.state || '', 
+      zip: userData.zip || '', 
+      linkedinLink: userData.linkedinLink || '', 
+      portfolioLink: userData.portfolioLink || '', 
+    });
+  }
+
+  prefillProfessionalSummaryForm(userData: User) {
+    this.professionalSummary.patchValue({
+      professionalSummary: userData.professionalSummary || '', 
+    });
+  }
+
+  prefillExperiencesForm(experiences: any[]) {
+    // Prefill experiences form if present in user data
+    experiences.forEach((experience) => {
+      const experienceGroup = this.createExperienceGroup();
+      experienceGroup.patchValue(experience);
+      this.experienceGroups.push(experienceGroup);
+      (this.experienceForm.get('experiences') as FormArray).push(experienceGroup);
+    });
+  }
+
+  prefillProjectForm(projects: any[]) {
+    // Prefill projects form if present in user data
+    projects.forEach((project) => {
+      const projectGroup = this.createProjectGroup();
+      projectGroup.patchValue(project);
+      this.projectGroups.push(projectGroup);
+      (this.projectForm.get('projects') as FormArray).push(projectGroup);
+    });
+  }
+
+  prefillEducationForm(education: any[]) {
+    // Prefill education form if present in user data
+    education.forEach((singleEducation) => {
+      const educationGroup = this.createEducationGroup();
+      educationGroup.patchValue(singleEducation);
+      this.educationGroups.push(educationGroup);
+      (this.educationForm.get('educations') as FormArray).push(educationGroup);
+    });
+  }
+
+  prefillCertificationForm(certicates: any[]) {
+    // Prefill certicates form if present in user data
+    certicates.forEach((certification) => {
+      const certificationGroup = this.createCertificationGroup();
+      certificationGroup.patchValue(certification);
+      this.certificationGroups.push(certificationGroup);
+      (this.certificationForm.get('certifications') as FormArray).push(certificationGroup);
+    });
+  }
+
+  prefillSkillsForm(skills: any[]) {
+    // Prefill skills form if present in user data
+    skills.forEach((skill) => {
+      const skillGroup = this.createSkillGroup();
+      skillGroup.patchValue(skill);
+      this.skillGroups.push(skillGroup);
+      (this.skillForm.get('skills') as FormArray).push(skillGroup);
     });
   }
 
@@ -284,7 +419,10 @@ export class ProfileComponent implements OnInit {
 
   async submitForms() {
     try {
+      
       const loggedInEmail = localStorage.getItem("loggedInEmail")
+      const accessToken = localStorage.getItem("accessToken")
+
       // Combine professional summary with personal details
       const personalDetailsWithSummary = {
         ...this.personalDetails.value,
@@ -293,50 +431,128 @@ export class ProfileComponent implements OnInit {
         role: 'USER'
       };
 
-      // Save personal details including professional summary
-      const userDetailsResponse = await this.userAPI.saveUserDetails(personalDetailsWithSummary).toPromise();
-      this.userId = userDetailsResponse.data.id;
+      // Make a request to fetch user data based on the userId
+      this.userAPI.getAllUsersByEmail(loggedInEmail, accessToken).subscribe(
+        async (userData: User[]) => {
+          if (userData && userData.length > 0) {
+            // Update personal details including professional summary
+            await this.userAPI.updateUserDetails(personalDetailsWithSummary, userData[0].id).toPromise();
+            this.userId = userData[0].id
+
+            // Delete existing experiences
+            for (const experience of userData[0].experiences) {
+              await this.userAPI.deleteExperience(experience.id).toPromise();
+            }
+
+            // Delete existing education
+            for (const education of userData[0].education) {
+              await this.userAPI.deleteEducation(education.id).toPromise();
+            }
+
+            // Delete existing projects
+            if (userData[0].projects.length > 0) {
+              for (const project of userData[0].projects) {
+                await this.userAPI.deleteProject(project.id).toPromise();
+              }
+            }
+
+            // Delete existing skills
+            for (const skill of userData[0].skills) {
+              await this.userAPI.deleteSkill(skill.id).toPromise();
+            }
+
+            // Delete existing certifications
+            if (userData[0].certificates.length > 0) {
+              for (const certification of userData[0].certificates) {
+                await this.userAPI.deleteCertification(certification.id).toPromise();
+              }
+            }
+
+            //Let's save the new ones
+            // Save each experience
+            for (const experienceGroup of this.experienceGroups) {
+              await this.userAPI.saveExperience(experienceGroup.value, this.userId).toPromise();
+            }
+
+            // Check if there are projects and save if not empty
+            const projectsArray = this.projectForm.get('projects') as FormArray;
+            if (projectsArray.length > 0) {
+              const checkProjectGroup = this.projectGroups[0];
+              if (checkProjectGroup.value.name !== '' || checkProjectGroup.value.startDate !== '' || checkProjectGroup.value.endDate !== '' || checkProjectGroup.value.employer !== '' || checkProjectGroup.value.description !== '') {
+                for (const projectGroup of this.projectGroups) {
+                  await this.userAPI.saveProjects(projectGroup.value, this.userId).toPromise();
+                }
+              }
+            }
+
+            // Save each education
+            for (const educationGroup of this.educationGroups) {
+              await this.userAPI.saveEducation(educationGroup.value, this.userId).toPromise();
+            }
+
+            // Check if there are certifications and save if not empty
+            const certificationsArray = this.certificationForm.get('certifications') as FormArray;
+            if (certificationsArray.length > 0) {
+              const checkCertificationGroup = this.certificationGroups[0];
+              if (checkCertificationGroup.value.name !== '' || checkCertificationGroup.value.startDate !== '' || checkCertificationGroup.value.endDate !== '' || checkCertificationGroup.value.issuer !== '' || checkCertificationGroup.value.description !== '') {
+                for (const certificationGroup of this.certificationGroups) {
+                  await this.userAPI.saveCertifications(certificationGroup.value, this.userId).toPromise();
+                }
+              }
+            }
+
+            // Save each skill
+            for (const skillGroup of this.skillGroups) {
+              await this.userAPI.saveSkills(skillGroup.value, this.userId).toPromise();
+            }
+          } else {
+
+            // Save personal details including professional summary
+            const userDetailsResponse = await this.userAPI.saveUserDetails(personalDetailsWithSummary).toPromise();
+            this.userId = userDetailsResponse.data.id;
 
 
-      // Save each experience
-      for (const experienceGroup of this.experienceGroups) {
-        await this.userAPI.saveExperience(experienceGroup.value, this.userId).toPromise();
-      }
+            // Save each experience
+            for (const experienceGroup of this.experienceGroups) {
+              await this.userAPI.saveExperience(experienceGroup.value, this.userId).toPromise();
+            }
 
-      // Check if there are projects and save if not empty
-      const projectsArray = this.projectForm.get('projects') as FormArray;
-      if (projectsArray.length > 0) {
-        const checkProjectGroup = this.projectGroups[0];
-        if (checkProjectGroup.value.name !== '' || checkProjectGroup.value.startDate !== '' || checkProjectGroup.value.endDate !== '' || checkProjectGroup.value.employer !== '' || checkProjectGroup.value.description !== '') {
-          for (const projectGroup of this.projectGroups) {
-            await this.userAPI.saveProjects(projectGroup.value, this.userId).toPromise();
+            // Check if there are projects and save if not empty
+            const projectsArray = this.projectForm.get('projects') as FormArray;
+            if (projectsArray.length > 0) {
+              const checkProjectGroup = this.projectGroups[0];
+              if (checkProjectGroup.value.name !== '' || checkProjectGroup.value.startDate !== '' || checkProjectGroup.value.endDate !== '' || checkProjectGroup.value.employer !== '' || checkProjectGroup.value.description !== '') {
+                for (const projectGroup of this.projectGroups) {
+                  await this.userAPI.saveProjects(projectGroup.value, this.userId).toPromise();
+                }
+              }
+            }
+
+            // Save each education
+            for (const educationGroup of this.educationGroups) {
+              await this.userAPI.saveEducation(educationGroup.value, this.userId).toPromise();
+            }
+
+            // Check if there are certifications and save if not empty
+            const certificationsArray = this.certificationForm.get('certifications') as FormArray;
+            if (certificationsArray.length > 0) {
+              const checkCertificationGroup = this.certificationGroups[0];
+              if (checkCertificationGroup.value.name !== '' || checkCertificationGroup.value.startDate !== '' || checkCertificationGroup.value.endDate !== '' || checkCertificationGroup.value.issuer !== '' || checkCertificationGroup.value.description !== '') {
+                for (const certificationGroup of this.certificationGroups) {
+                  await this.userAPI.saveCertifications(certificationGroup.value, this.userId).toPromise();
+                }
+              }
+            }
+
+            // Save each skill
+            for (const skillGroup of this.skillGroups) {
+              await this.userAPI.saveSkills(skillGroup.value, this.userId).toPromise();
+            }
           }
         }
-      }
-
-      // Save each education
-      for (const educationGroup of this.educationGroups) {
-        await this.userAPI.saveEducation(educationGroup.value, this.userId).toPromise();
-      }
-
-      // Check if there are certifications and save if not empty
-      const certificationsArray = this.certificationForm.get('certifications') as FormArray;
-      if (certificationsArray.length > 0) {
-        const checkCertificationGroup = this.certificationGroups[0];
-        if (checkCertificationGroup.value.name !== '' || checkCertificationGroup.value.startDate !== '' || checkCertificationGroup.value.endDate !== '' || checkCertificationGroup.value.issuer !== '' || checkCertificationGroup.value.description !== '') {
-          for (const certificationGroup of this.certificationGroups) {
-            await this.userAPI.saveCertifications(certificationGroup.value, this.userId).toPromise();
-          }
-        }
-      }
-
-      // Save each skill
-      for (const skillGroup of this.skillGroups) {
-        await this.userAPI.saveSkills(skillGroup.value, this.userId).toPromise();
-      }
+      );
     } catch (error) {
       console.error('Error occurred while saving user details:', error);
-      // Handle error
     }
   }
 

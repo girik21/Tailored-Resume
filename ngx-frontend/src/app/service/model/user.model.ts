@@ -10,7 +10,7 @@ export interface User {
     id: string;
     username: string;
     email: string;
-    workEmail?: string;
+    professionalEmail: string;
     phone: string;
     address1: string;
     address2?: string;
