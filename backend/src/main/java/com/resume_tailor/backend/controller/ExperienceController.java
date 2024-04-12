@@ -35,7 +35,7 @@ public class ExperienceController {
             if (experience != null) {
                 return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Experience retrieved successfully.", experience));
             } else {
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseWrapper<>(false, "Experience not found.", null));
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));

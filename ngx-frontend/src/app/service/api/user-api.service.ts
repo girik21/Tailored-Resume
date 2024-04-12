@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, throwError} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { User } from '../model/user.model';
+
 
 import { catchError, map } from 'rxjs/operators';
 
@@ -22,6 +24,12 @@ export class UserAPI {
     return this.http.post(`${this.baseUrl}/users`, data, { headers });
   }
 
+  // Update user details
+  updateUserDetails(data: any, userId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.put(`${this.baseUrl}/users/${userId}`, data, { headers });
+  }
+
   // Get single user
   getUserDetails(userId: string): Observable<any> {
     let test_token: String;
@@ -37,26 +45,55 @@ export class UserAPI {
     return this.http.get<any>(`${this.baseUrl}/users`);
   }
 
-  // Get all users
-  getAllUsersByEmail(email: string, token: string): Observable<any> {
+  getAllUsersByEmail(email: string, token: string): Observable<User[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     let params = new HttpParams();
     if (email) {
       params = params.set('email', email);
     }
-    return this.http.get<any>(`${this.baseUrl}/users`, { headers, params });
+    return this.http.get<any>(`${this.baseUrl}/users`, { headers, params }).pipe(
+      map(response => {
+        // API response contains a property named 'data' which holds the users array
+        return response.data as User[];
+      })
+    );
   }
 
   // save user experience
   saveExperience(data: any, userId: string): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);    
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${this.baseUrl}/experiences?userId=${userId}`, data, { headers });
   }
-  
+
+  updateExperience(experienceId: string, updatedData: any): Observable<any> {
+    const url = `${this.baseUrl}/experiences/${experienceId}`;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+
+    return this.http.put(url, updatedData, { headers }).pipe(
+      catchError((error: any) => {
+        // Handle error here, for example, log the error and re-throw it
+        console.error('Error updating experience:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  // delete user experience
+  deleteExperience(experienceId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.delete(`${this.baseUrl}/experiences/${experienceId}`, { headers });
+  }
+
   // save user education
   saveEducation(data: any, userId: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${this.baseUrl}/education?userId=${userId}`, data, { headers });
+  }
+
+  // delete user education
+  deleteEducation(educationId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.delete(`${this.baseUrl}/education/${educationId}`, { headers });
   }
 
   // save user projects
@@ -65,10 +102,22 @@ export class UserAPI {
     return this.http.post(`${this.baseUrl}/projects?userId=${userId}`, data, { headers });
   }
 
+  // delete user experience
+  deleteProject(projectId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.delete(`${this.baseUrl}/projects/${projectId}`, { headers });
+  }
+
   // save user skills
   saveSkills(data: any, userId: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${this.baseUrl}/skills?userId=${userId}`, data, { headers });
+  }
+
+  // delete user experience
+  deleteSkill(skillId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.delete(`${this.baseUrl}/skills/${skillId}`, { headers });
   }
 
   // save user certifications
@@ -77,13 +126,19 @@ export class UserAPI {
     return this.http.post(`${this.baseUrl}/certifications?userId=${userId}`, data, { headers });
   }
 
-  //generate experience responsibilities 
+  // delete user experience
+  deleteCertification(certificationId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.delete(`${this.baseUrl}/certifications/${certificationId}`, { headers });
+  }
+
+  //generate experience responsibilities
   generateResponsibilities(requestBody: any, userId: string): Observable<any> {
     // const apiUrl = 'http://localhost:8080/api/openai/chat/experiences/65e505389eb0d0350c385d1b';
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${this.baseUrl}/openai/chat/experiences/${userId}`, requestBody, { headers }).pipe(
       map((response: any) => response.data.map((item: any) =>// item.responsibility
-      console.log(item)
+        console.log(item)
       )),
       catchError((error: any) => throwError(error))
     );
@@ -95,3 +150,6 @@ export class UserAPI {
     return this.http.post(`${this.baseUrl}/openai/chat/experiences/${userId}`, requestBody, { headers });
   }
 }
+
+
+// so this is my experience.html you need to fetch the experienceId frm the api and pass the experienceId on the updateExperience that we just created but we a
