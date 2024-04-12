@@ -97,7 +97,7 @@ export class DetailsComponent {
         this.mapUserDataToTable(); // Map user data to table columns
       },
       (error: any) => {
-        console.error('Error fetching user details:', error);
+        console.error('Error fetching user details. Please referesh', error);
       }
     );
   }

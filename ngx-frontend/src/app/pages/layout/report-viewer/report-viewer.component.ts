@@ -1,12 +1,11 @@
-import { Component, Input, ViewChild, ElementRef, AfterViewInit, Renderer2  } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
 import jsPDF from 'jspdf';
-import * as htmlDocx from 'html-docx-js';
 
 import { Packer } from "docx";
 import { saveAs } from "file-saver";
 
 
-import { experiences, education, skills, achievements } from "./cv-data";
+import { achievements, education, experiences, skills } from "./cv-data";
 import { DocumentCreator } from "./cv-generator";
 
 
@@ -31,7 +30,7 @@ export class ReportViewerComponent {
   full_name: string = '';
   fontSize = 16;
   fontMenuOpen = false;
-  
+
   items = [
     { value: '1', label: 'Option 1' },
     { value: '2', label: 'Option 2' },
@@ -66,10 +65,10 @@ export class ReportViewerComponent {
     // Add more fonts as needed
   ];
 
-  
+
   selectedFont = 'Arial';
-  
-  constructor(private renderer: Renderer2) {}
+
+  constructor(private renderer: Renderer2) { }
 
 
   ngAfterViewInit() {
@@ -102,15 +101,15 @@ export class ReportViewerComponent {
       element.style.fontSize = this.fontSize + 'px';
     });
   }
-  
-    changeFontType(font: string) {
-      const elements = this.reportContent.nativeElement.querySelectorAll('p, h6, headers');
+
+  changeFontType(font: string) {
+    const elements = this.reportContent.nativeElement.querySelectorAll('p, h6, headers');
     elements.forEach((element: HTMLElement) => {
       element.style.fontFamily = font;
     });
-    }
-    
- 
+  }
+
+
   toggleFontMenu() {
     this.fontMenuOpen = !this.fontMenuOpen;
   }
@@ -132,7 +131,7 @@ export class ReportViewerComponent {
     });
 
     doc.setFontSize(this.fontSize);
-    
+
     // doc.fromHTML(tempElement, 10, 10, {}, () => {
     //   doc.save('report.pdf');
     //   document.body.removeChild(tempElement);
@@ -159,16 +158,16 @@ export class ReportViewerComponent {
   downloadAsPDF2() {
     const documentCreator = new DocumentCreator();
     const doc = documentCreator.create([
-        experiences,
-        education,
-        skills,
-        achievements
+      experiences,
+      education,
+      skills,
+      achievements
     ]);
 
     const pdfDocGenerator = pdfMake.createPdf(doc);
     pdfDocGenerator.getBlob((blob) => {
-        saveAs(blob, 'example.pdf');
-        console.log('Document created successfully');
+      saveAs(blob, 'example.pdf');
+      console.log('Document created successfully');
     });
-}
+  }
 }

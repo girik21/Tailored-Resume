@@ -128,10 +128,31 @@ export class EducationComponent implements OnInit {
   }
 
   onDeleteConfirm(event): void {
+    if (this.educationData.length === 1) {
+      window.alert('You cannot delete the last item.');
+      event.confirm.reject();
+      return;
+    }
+
     if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
+      const educationId = event.data.id;
+      this.userService.deleteEducation(educationId).subscribe(
+        () => {
+          const index = this.educationData.findIndex(item => item.id === educationId);
+          if (index !== -1) {
+            this.educationData.splice(index, 1);
+            this.source.load(this.educationData);
+          }
+          event.confirm.resolve();
+        },
+        (error) => {
+          console.error('Error deleting education:', error);
+          event.confirm.reject();
+        }
+      );
     } else {
       event.confirm.reject();
     }
   }
+
 }

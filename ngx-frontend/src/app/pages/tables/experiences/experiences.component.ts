@@ -65,7 +65,7 @@ export class ExperiencesComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
   experiencesData: any[] = [];
 
-  constructor(private userService: UserAPI, private store: Store ) { }
+  constructor(private userService: UserAPI, private store: Store) { }
 
   ngOnInit(): void {
     this.getUserExperiences();
@@ -91,10 +91,32 @@ export class ExperiencesComponent implements OnInit {
   }
 
   onDeleteConfirm(event): void {
+    if (this.experiencesData.length === 1) {
+      window.alert('You cannot delete the last item.');
+      event.confirm.reject();
+      return;
+    }
+
     if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
+      const experienceId = event.data.id;
+      this.userService.deleteExperience(experienceId).subscribe(
+        () => {
+          const index = this.experiencesData.findIndex(item => item.id === experienceId);
+          if (index !== -1) {
+            this.experiencesData.splice(index, 1);
+            this.source.load(this.experiencesData);
+          }
+          event.confirm.resolve();
+        },
+        (error) => {
+          console.error('Error deleting experience:', error);
+          event.confirm.reject();
+        }
+      );
     } else {
       event.confirm.reject();
     }
   }
+
+
 }

@@ -96,10 +96,32 @@ export class CertificationsComponent implements OnInit {
   }
 
   onDeleteConfirm(event): void {
+
+    if (this.certificationsData.length === 1) {
+      window.alert('You cannot delete the last item.');
+      event.confirm.reject();
+      return;
+    }
+
     if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
+      const certificationId = event.data.id;
+      this.userService.deleteCertification(certificationId).subscribe(
+        () => {
+          const index = this.certificationsData.findIndex(item => item.id === certificationId);
+          if (index !== -1) {
+            this.certificationsData.splice(index, 1);
+            this.source.load(this.certificationsData);
+          }
+          event.confirm.resolve();
+        },
+        (error) => {
+          console.error('Error deleting certification:', error);
+          event.confirm.reject();
+        }
+      );
     } else {
       event.confirm.reject();
     }
   }
+
 }

@@ -58,17 +58,27 @@ export class SkillsComponent implements OnInit {
     this.source.load(this.skillsData);
   }
 
-  onSaveConfirm(event): void {
-    if (window.confirm('Are you sure you want to save the changes?')) {
-      const userId = '66084a049eb7556f98c69050'; //
-      const data = event.newData;
-      this.userService.saveSkills(data, userId).subscribe(
-        (response: any) => {
-          console.log('Skills saved successfully:', response);
+
+  onDeleteConfirm(event): void {
+    if (this.skillsData.length === 1) {
+      window.alert('You cannot delete the last item.');
+      event.confirm.reject();
+      return;
+    }
+
+    if (window.confirm('Are you sure you want to delete?')) {
+      const skillId = event.data.id;
+      this.userService.deleteSkill(skillId).subscribe(
+        () => {
+          const index = this.skillsData.findIndex(item => item.id === skillId);
+          if (index !== -1) {
+            this.skillsData.splice(index, 1);
+            this.source.load(this.skillsData);
+          }
           event.confirm.resolve();
         },
-        (error: any) => {
-          console.error('Error saving skills:', error);
+        (error) => {
+          console.error('Error deleting skill:', error);
           event.confirm.reject();
         }
       );
@@ -77,11 +87,4 @@ export class SkillsComponent implements OnInit {
     }
   }
 
-  onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
-  }
 }

@@ -90,10 +90,32 @@ export class ProjectsComponent implements OnInit {
   }
 
   onDeleteConfirm(event): void {
+
+    if (this.projectsData.length === 1) {
+      window.alert('You cannot delete the last item.');
+      event.confirm.reject();
+      return;
+    }
+
     if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
+      const projectId = event.data.id;
+      this.userService.deleteProject(projectId).subscribe(
+        () => {
+          const index = this.projectsData.findIndex(item => item.id === projectId);
+          if (index !== -1) {
+            this.projectsData.splice(index, 1);
+            this.source.load(this.projectsData);
+          }
+          event.confirm.resolve();
+        },
+        (error) => {
+          console.error('Error deleting project:', error);
+          event.confirm.reject();
+        }
+      );
     } else {
       event.confirm.reject();
     }
   }
+
 }
