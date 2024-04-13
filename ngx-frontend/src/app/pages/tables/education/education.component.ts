@@ -21,6 +21,7 @@ export class EducationComponent implements OnInit {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true,
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
@@ -104,6 +105,8 @@ export class EducationComponent implements OnInit {
 
   onSaveConfirm(event): void {
     if (window.confirm('Are you sure you want to save the changes?')) {
+      const educationId = event.data.id; // Get the education ID from the event data
+
       // Retrieve userId from the state
       const userId = this.store.selectSnapshot(UserState.getUserId); // Get userId from the state
       if (!userId) {
@@ -112,20 +115,27 @@ export class EducationComponent implements OnInit {
       }
 
       const data = event.newData;
-      this.userService.saveEducation(data, userId).subscribe(
-        (response: any) => {
-          console.log('Education saved successfully:', response);
-          event.confirm.resolve(); // Resolve the edit event
-        },
-        (error: any) => {
-          console.error('Error saving education:', error);
-          event.confirm.reject(); // Reject the edit event
-        }
-      );
+      // Check if any field is empty before saving
+      if (Object.values(data).every(value => !!value)) {
+        this.userService.updateEducation(educationId, data).subscribe(
+          (response: any) => {
+            console.log('Education updated successfully:', response);
+            event.confirm.resolve(); // Resolve the edit event
+          },
+          (error: any) => {
+            console.error('Error updating education:', error);
+            event.confirm.reject(); // Reject the edit event
+          }
+        );
+      } else {
+        window.alert('Please fill in all fields before saving.');
+        event.confirm.reject(); // Reject the edit event
+      }
     } else {
       event.confirm.reject();
     }
   }
+
 
   onDeleteConfirm(event): void {
     if (this.educationData.length === 1) {

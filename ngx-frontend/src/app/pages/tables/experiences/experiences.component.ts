@@ -21,6 +21,7 @@ export class ExperiencesComponent implements OnInit {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true,
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
@@ -89,6 +90,32 @@ export class ExperiencesComponent implements OnInit {
   mapExperiencesToTable(): void {
     this.source.load(this.experiencesData);
   }
+
+  onSaveConfirm(event): void {
+    if (window.confirm('Are you sure you want to save the changes?')) {
+      const experienceId = event.data.id; // Get the experience ID from the event data
+      const data = event.newData;
+      // Check if any field is empty before updating
+      if (Object.values(data).every(value => !!value)) {
+        this.userService.updateExperience(experienceId, data).subscribe(
+          (response: any) => {
+            console.log('Experience updated successfully:', response);
+            event.confirm.resolve(); // Resolve the edit event
+          },
+          (error: any) => {
+            console.error('Error updating experience:', error);
+            event.confirm.reject(); // Reject the edit event
+          }
+        );
+      } else {
+        window.alert('Please fill in all fields before saving.');
+        event.confirm.reject(); // Reject the edit event
+      }
+    } else {
+      event.confirm.reject(); // Reject the edit event
+    }
+  }
+
 
   onDeleteConfirm(event): void {
     if (this.experiencesData.length === 1) {

@@ -65,17 +65,9 @@ export class UserAPI {
     return this.http.post(`${this.baseUrl}/experiences?userId=${userId}`, data, { headers });
   }
 
-  updateExperience(experienceId: string, updatedData: any): Observable<any> {
-    const url = `${this.baseUrl}/experiences/${experienceId}`;
+  updateExperience(experienceId: string, data: any): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-
-    return this.http.put(url, updatedData, { headers }).pipe(
-      catchError((error: any) => {
-        // Handle error here, for example, log the error and re-throw it
-        console.error('Error updating experience:', error);
-        return throwError(error);
-      })
-    );
+    return this.http.put(`${this.baseUrl}/experiences/${experienceId}`, data, { headers });
   }
 
   // delete user experience
@@ -90,6 +82,11 @@ export class UserAPI {
     return this.http.post(`${this.baseUrl}/education?userId=${userId}`, data, { headers });
   }
 
+  updateEducation(educationId: string, data: any): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.put(`${this.baseUrl}/education/${educationId}`, data, { headers });
+  }
+
   // delete user education
   deleteEducation(educationId: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
@@ -100,6 +97,12 @@ export class UserAPI {
   saveProjects(data: any, userId: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${this.baseUrl}/projects?userId=${userId}`, data, { headers });
+  }
+
+  updateProject(projectId: string, updatedData: any): Observable<any> {
+    const url = `${this.baseUrl}/projects/${projectId}`;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.put(url, updatedData, { headers });
   }
 
   // delete user experience
@@ -114,6 +117,11 @@ export class UserAPI {
     return this.http.post(`${this.baseUrl}/skills?userId=${userId}`, data, { headers });
   }
 
+  updateSkill(skillId: string, data: any): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.put(`${this.baseUrl}/skills/${skillId}`, data, { headers });
+  }
+
   // delete user experience
   deleteSkill(skillId: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
@@ -124,6 +132,12 @@ export class UserAPI {
   saveCertifications(data: any, userId: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${this.baseUrl}/certifications?userId=${userId}`, data, { headers });
+  }
+
+  // Update certification details
+  updateCertification(certificationId: string, data: any): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.put(`${this.baseUrl}/certifications/${certificationId}`, data, { headers });
   }
 
   // delete user experience
