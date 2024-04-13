@@ -21,6 +21,7 @@ export class ProjectsComponent implements OnInit {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true,
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
@@ -72,25 +73,32 @@ export class ProjectsComponent implements OnInit {
 
   onSaveConfirm(event): void {
     if (window.confirm('Are you sure you want to save the changes?')) {
-      const userId = '66073ef404d3bb099d1bc4d3'; // Replace 'userId' with the actual user ID
+      const projectId = event.data.id;
       const data = event.newData;
-      this.userService.saveProjects(data, userId).subscribe(
+
+      if (Object.values(data).some(value => !value)) {
+        window.alert('Please fill in all fields before saving.');
+        event.confirm.reject();
+        return;
+      }
+
+      this.userService.updateProject(projectId, data).subscribe(
         (response: any) => {
-          console.log('Projects saved successfully:', response);
-          event.confirm.resolve(); // Resolve the edit event
+          console.log('Project updated successfully:', response);
+          event.confirm.resolve();
         },
         (error: any) => {
-          console.error('Error saving projects:', error);
-          event.confirm.reject(); // Reject the edit event
+          console.error('Error updating project:', error);
+          event.confirm.reject();
         }
       );
     } else {
-      event.confirm.reject(); // Reject the edit event
+      event.confirm.reject();
     }
   }
 
-  onDeleteConfirm(event): void {
 
+  onDeleteConfirm(event): void {
     if (this.projectsData.length === 1) {
       window.alert('You cannot delete the last item.');
       event.confirm.reject();

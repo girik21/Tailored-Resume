@@ -20,6 +20,7 @@ export class CertificationsComponent implements OnInit {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true,
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
@@ -78,18 +79,24 @@ export class CertificationsComponent implements OnInit {
 
   onSaveConfirm(event): void {
     if (window.confirm('Are you sure you want to save the changes?')) {
-      const userId = '66073ef404d3bb099d1bc4d3'; // Replace 'userId' with the actual user ID
+      const certificationId = event.data.id; // Get the certification ID from the event data
       const data = event.newData;
-      this.userService.saveCertifications(data, userId).subscribe(
-        (response: any) => {
-          console.log('Certifications saved successfully:', response);
-          event.confirm.resolve(); // Resolve the edit event
-        },
-        (error: any) => {
-          console.error('Error saving certifications:', error);
-          event.confirm.reject(); // Reject the edit event
-        }
-      );
+      // Check if any field is empty before updating
+      if (Object.values(data).every(value => !!value)) {
+        this.userService.updateCertification(certificationId, data).subscribe(
+          (response: any) => {
+            console.log('Certification updated successfully:', response);
+            event.confirm.resolve(); // Resolve the edit event
+          },
+          (error: any) => {
+            console.error('Error updating certification:', error);
+            event.confirm.reject(); // Reject the edit event
+          }
+        );
+      } else {
+        window.alert('Please fill in all fields before saving.');
+        event.confirm.reject(); // Reject the edit event
+      }
     } else {
       event.confirm.reject(); // Reject the edit event
     }
