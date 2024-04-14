@@ -12,26 +12,85 @@
   nb-chat {
     margin: 3rem auto 0;
     width: 500px;
-
   }
 
   .chat-container {
-    margin-bottom: 2rem;
-
-    li {
-      padding-top: 1rem;
-    }
+    position: fixed;
+    bottom: 30%;
+    right: 20%;
+    transform: translateX(50%);
+    width: 300px;
+    height: 400px;
+    border-radius: 5px;
+    display: none;
   }
 
-  .chart-description {
-    text-align: center;
-    margin: 0 auto;
-    width: 52%;
+  .chat-container.open {
+    display: block;
   }
 
-  .chart-features {
-    margin-top: 2.75rem;
+  .minimize-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
   }
+
+  .minimize-button img {
+    width: 20px;
+    height: auto;
+  }
+
+  .chat-icon {
+    border: none;
+    background-color: transparent;
+  }
+
+
+  .icons {
+    width: 30px;
+    height: 30px;
+  }
+
+
+  .image-class {
+    width: 90px;
+    height: 90px;
+    border: none;
+    border-radius: 50%;
+  }
+
+  .attach-document-button {
+    position: absolute;
+    bottom: 20px;
+    left: -65px;
+    width: 70px;
+    height: 70px;
+    border-radius: 40px;
+    z-index: 999;
+    background-color: #3366ff;
+    color: white;
+  }
+
+
+  .file-input {
+    position: absolute;
+    bottom: -35px;
+    left: -92px;
+    z-index: 1;
+    background-color: #3366ff;
+    color: white;
+    width: 75%;
+    border-radius: 30px;
+    padding: 1px;
+  }
+
+
+
+
 
   @include media-breakpoint-down(xxl) {
     nb-chat {

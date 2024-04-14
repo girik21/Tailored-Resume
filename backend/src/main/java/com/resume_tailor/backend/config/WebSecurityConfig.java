@@ -17,6 +17,7 @@ public class WebSecurityConfig {
         http.csrf().disable()
             .authorizeRequests()
                 .requestMatchers("/register").permitAll()
+                .requestMatchers("/home").permitAll()
                 .anyRequest().authenticated()
             .and()
                 .addFilterBefore(new FirebaseAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

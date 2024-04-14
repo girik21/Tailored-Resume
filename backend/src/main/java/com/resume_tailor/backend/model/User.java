@@ -24,6 +24,9 @@ public class User {
     @Indexed(unique = true)
     @Email(message = "Enter valid email!")
     private String email;
+
+    @Email(message = "Enter valid email!")
+    private String professionalEmail;
     @NotBlank(message = "Phone number cannot be null!")
     private String phone;
     @NotNull(message = "Address 1 cannot be null!")
@@ -82,6 +85,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getProfessionalEmail() {
+        return professionalEmail;
+    }
+
+    public void setProfessionalEmail(String professionalEmail) {
+        this.professionalEmail = professionalEmail;
     }
 
     public String getPhone() {

@@ -5,6 +5,7 @@ import { NbAuthService } from '@nebular/auth';
 import { NbLoginComponent } from '@nebular/auth';
 import { ActivatedRoute } from '@angular/router';
 import { UserAPI } from '../../service/api/user-api.service';
+import { User } from '../../service/model/user.model';
 
 @Component({
   selector: 'ngx-login',
@@ -48,18 +49,25 @@ export class NgxLoginComponent extends NbLoginComponent {
         const expiresIn = new Date().getTime() + 3600 * 1000; // Token expiration time (1 hour)
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('accessTokenExpiresIn', expiresIn.toString()); // Store token expiration time
+        localStorage.setItem('loggedInEmail', user.email);
         
         // Check if the user exists in the backend API
-        this.userApi.getAllUsersByEmail(user.email, accessToken).subscribe((users: any[]) => {
-          if (users.length > 0) {
-            // User found, redirect to dashboard
-            this.router.navigate(['dashboard']);
-            this.scheduleTokenRefresh(); // Schedule token refresh
-          } else {
-            // User not found, redirect to profile page
-            this.router.navigate(['pages/layout/profile']);
+        this.userApi.getAllUsersByEmail(user.email, accessToken).subscribe(
+          (loggedInUser: User[]) => {
+            if (loggedInUser && loggedInUser.length > 0) {
+              this.router.navigate([`dashboard`]);
+              this.scheduleTokenRefresh(); // Schedule token refresh
+            } else {
+              // User not found, redirect to profile page
+              this.router.navigate(['pages/layout/profile']);
+            }
+          },
+          (error) => {
+            console.error('Error checking user:', error);
+            // Handle error if necessary
           }
-        });
+        );
+
       }
     } catch (error) {
       // Handle login errors here

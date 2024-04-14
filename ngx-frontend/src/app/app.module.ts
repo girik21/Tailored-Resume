@@ -1,26 +1,34 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   NbChatModule,
+  NbCheckboxModule,
   NbDatepickerModule,
   NbDialogModule,
   NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
-  NbWindowModule,
-  NbCheckboxModule
+  NbWindowModule
 } from '@nebular/theme';
 import { environment } from '../environments/environment';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 
 import { AuthGuard } from './service/auth-guard.service';
+// import { RouterState } from './shared/router.state';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsModule } from '@ngxs/store';
+import { AppState } from './shared/app.state';
+import { RouterState } from './shared/router.state';
+import { UserState } from './shared/user.state';
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,7 +50,14 @@ import { AuthGuard } from './service/auth-guard.service';
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
-    NbCheckboxModule
+    NbCheckboxModule,
+    NgxsModule.forRoot([
+      RouterState,
+      AppState,
+      UserState
+    ]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot()
   ],
   providers: [
     AuthGuard
