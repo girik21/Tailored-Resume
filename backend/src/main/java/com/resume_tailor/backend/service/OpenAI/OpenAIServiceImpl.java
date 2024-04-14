@@ -126,6 +126,20 @@ public class OpenAIServiceImpl implements OpenAIService{
     }
 
     @Override
+    public String createOpenAIProjectPrompt(String projectTitle, String company){
+
+        // Structure the Prompt
+        StringBuilder promptBuilder = new StringBuilder();
+        promptBuilder.append("Generate a brief summary of the project description for \"")
+                .append(projectTitle)
+                .append("\" at ")
+                .append(company)
+                .append(" in one sentence.");
+
+        return promptBuilder.toString();
+    }
+
+    @Override
     public String validateAndFixJson(String jsonString) {
         try {
             // Create an ObjectMapper instance
@@ -260,32 +274,10 @@ public class OpenAIServiceImpl implements OpenAIService{
             // Create an ObjectMapper instance
             ObjectMapper objectMapper = new ObjectMapper();
 
-            JsonNode jsonNode =  parseToJson(jsonString); //objectMapper.readTree(jsonString);
-
-//            ArrayList<Responsibility> responsibilities = new ArrayList<>();
-//            // If the root element is an object
-//            if (jsonNode.isObject()) {
-//                System.out.println("Iterating through object:");
-//                jsonNode.fields().forEachRemaining(entry -> {
-//                    Responsibility responsibility = new Responsibility();
-//                    responsibility.setDescription(entry.getValue().toString());
-//                    responsibilities.add(responsibility);//System.out.println(entry.getKey() + ": " + entry.getValue());
-//                });
-//            }
-//
-//            // If the root element is an array
-//            if (jsonNode.isArray()) {
-//                System.out.println("Iterating through array:");
-//                jsonNode.elements().forEachRemaining(element -> {
-//                    Responsibility responsibility = new Responsibility();
-//                    responsibility.setDescription(extractString(element));
-//                    responsibilities.add(responsibility);
-//                });
-//            }
+            JsonNode jsonNode =  parseToJson(jsonString);
 
             //Return the json object
-            return jsonNode;// parseToJson(jsonString);
-
+            return jsonNode;
 
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception for debugging
@@ -294,17 +286,33 @@ public class OpenAIServiceImpl implements OpenAIService{
 
     }
 
-    public  String extractString(JsonNode node) {
-        // Extract the value associated with the "responsibility" key
-        JsonNode responsibilityNode = node.get("responsibility");
+    @Override
+    public JsonNode generateProjectActivities( String projectTitle, String company) {
+        try {
 
-        // Return the extracted value as a string
-        if (responsibilityNode != null) {
-            return responsibilityNode.asText();
+            String prompt = createOpenAIProjectPrompt(projectTitle, company);
+
+            ChatRequest request = new ChatRequest(model, prompt);
+
+            ChatResponse response = restTemplate.postForObject(
+                    apiUrl,
+                    request,
+                    ChatResponse.class);
+
+            if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
+                return null;
+            }
+            String jsonString = response.getChoices().get(0).getMessage().getContent();
+
+            JsonNode jsonNode =  parseToJson(jsonString);
+
+            //Return the json object
+            return jsonNode;
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception for debugging
+            return null;
         }
 
-        // Return null if extraction fails
-        return null;
     }
-
 }

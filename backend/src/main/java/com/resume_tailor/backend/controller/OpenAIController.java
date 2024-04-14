@@ -95,22 +95,30 @@ public class OpenAIController {
 
             JsonNode responsibilities  = openAIService.generateExperienceResponsibilities(jobDesc, company);
 
-
-
-             //Return the JsonNode
+            //Return the JsonNode
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Responsibilities generated successfully", responsibilities));
-
-//            List<Responsibility> responsibilities = generateResponsibilities();
-//            return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Enhanced resume generated successfully.", responsibilities));
-
-
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception for debugging
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
         }
-
     }
 
+    @PostMapping("/chat/projects/{userId}")
+    public ResponseEntity<?> projectGenerator(@PathVariable String userId, @RequestBody Map<String, String> requestBody) {
+        try {
+
+            String jobDesc = requestBody.get("projectTitle");
+            String company = requestBody.get("company");
+
+            JsonNode responsibilities  = openAIService.generateExperienceResponsibilities(jobDesc, company);
+
+            //Return the JsonNode
+            return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Project activities generated successfully", responsibilities));
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception for debugging
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
+        }
+    }
 
 }
 

@@ -13,6 +13,7 @@ public interface OpenAIService {
     String createOpenAIPrompt(String jobDesc, String sampleResume);
 
     String createOpenAIExperiencePrompt(String jobPosition, String company);
+    String createOpenAIProjectPrompt(String jobPosition, String company);
 
     String validateAndFixJson(String jsonString);
 
@@ -20,5 +21,7 @@ public interface OpenAIService {
 
     JsonNode generateExperienceResponsibilities(String jobDescription, String company);
 
-    String extractString(JsonNode input);
+    JsonNode generateProjectActivities(String projectTitle, String company);
+
+
 }
