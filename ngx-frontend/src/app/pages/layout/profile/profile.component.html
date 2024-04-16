@@ -565,6 +565,7 @@
                             id="projectTitle_{{ i }}"
                             formControlName="name"
                             placeholder="Project title"
+                            (input)="projectTitle = $event.target.value"
                           />
                         </div>
                       </div>
@@ -583,6 +584,7 @@
                             id="organization_{{ i }}"
                             formControlName="employer"
                             placeholder="Organization name"
+                            (input)="projectCompany = $event.target.value"
                           />
                         </div>
                       </div>
@@ -631,7 +633,58 @@
                           />
                         </div>
                       </div>
-                      <div class="col-md-12">
+<!-- ====================================================================== -->
+<div class="col-md-12">
+  <div class="form-group text-left">
+    <nb-card
+      size="tiny"
+      [nbSpinner]="loading"
+      nbSpinnerStatus="primary"
+      nbSpinnerSize="large"
+      nbSpinnerMessage=""
+      id="card.exp.resp_{{ i }}"
+    >
+      <nb-card-body height="300">
+        <label
+          for="projectDescription_{{ i }}"
+          class="text-muted font-weight-bold small"
+          >Describe the project</label
+        >
+        <button
+          nbButton
+          [status]="status"
+          outline
+          [size]="size"
+          (click)="onGenerateProjectsClick(i)"
+        >
+          AI Generate
+        </button>
+        <textarea
+          class="form-control bg-light"
+          id="projectDescription_{{ i }}"
+          rows="5"
+          formControlName="description"
+          placeholder="Describe your project"
+        ></textarea>
+
+        <nb-error
+          class="caption status-danger"
+          *ngIf="
+            projectGroup.get('description').invalid &&
+            projectGroup.get('description').touched
+          "
+        >
+          Description is required.
+        </nb-error>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+
+<!-- ============================================================================ -->
+
+                      <!-- <div class="col-md-12">
                         <div class="form-group text-left">
                           <div>
                             <label
@@ -656,7 +709,7 @@
                             placeholder="Describe your project"
                           ></textarea>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </nb-card-body>
@@ -1135,7 +1188,59 @@
             <nb-card-body>
               <div class="container">
                 <div class="row">
-                  <div class="col-md-12">
+
+<!-- ====================================================================== -->
+<div class="col-md-12">
+  <div class="form-group text-left">
+    <nb-card
+      size="tiny"
+      [nbSpinner]="loading"
+      nbSpinnerStatus="primary"
+      nbSpinnerSize="large"
+      nbSpinnerMessage=""
+      id="card.professionalSummary"
+    >
+      <nb-card-body height="300">
+        <label
+          for="professionalSummary"
+          class="text-muted font-weight-bold small"
+          >Write a professional summary</label
+        >
+        <button
+          nbButton
+          [status]="status"
+          outline
+          [size]="size"
+          (click)="onGenerateProfessionalSummaryClick()"
+        >
+          AI Generate
+        </button>
+        <textarea
+                        class="form-control bg-light"
+                        id="professionalSummary"
+                        rows="5"
+                        formControlName="professionalSummary"
+                        placeholder="Write your professional summary"
+                      ></textarea>
+
+        <nb-error
+        class="caption status-danger"
+        *ngIf="
+          professionalSummary.get('professionalSummary')
+            .invalid &&
+          professionalSummary.get('professionalSummary').touched
+        "
+      >
+      Write your professional summary in few words.
+        </nb-error>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+
+<!-- ============================================================================ -->
+                  <!-- <div class="col-md-12">
                     <div class="form-group text-left">
                       <div>
                         <label
@@ -1169,7 +1274,7 @@
                         Write your professional summary in few words.
                       </nb-error>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </nb-card-body>
@@ -1197,7 +1302,7 @@
           <!-- Start of form -->
           <nb-card>
             <nb-card-header>
-              <h3>Preview</h3>
+              
             </nb-card-header>
             <nb-card-body>
               <div class="container">
@@ -1205,9 +1310,8 @@
                   <div class="col-md-12">
                     <div class="form-group text-left">
                       <div class="border-5">
-                        <ngx-app-report-viewer
-                          [formData]="getFormData()"
-                        ></ngx-app-report-viewer>
+                        
+                        <app-report-viewer [formData]="getFormData()"></app-report-viewer>
                       </div>
                     </div>
                   </div>

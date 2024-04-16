@@ -45,6 +45,10 @@ export class ProfileComponent implements OnInit {
   jobPosition: string = null;
   company: string = null;
 
+  projectTitle: string = null
+  projectCompany: string = null
+ 
+
   timer: any;
   seconds: number = 0;
   constructor(
@@ -418,6 +422,7 @@ export class ProfileComponent implements OnInit {
   }
 
   async submitForms() {
+    
     try {
       
       const loggedInEmail = localStorage.getItem("loggedInEmail")
@@ -558,20 +563,42 @@ export class ProfileComponent implements OnInit {
 
   getFormData(): any {
     let experienceData = [];
-    for (const experienceGroup of this.experienceGroups) {
-      experienceData.push(experienceGroup.value);
+    for (const experienceGroup of this.experienceGroups) {      
+      experienceData.push(experienceGroup.value);   
     }
+    
+    
+    let projectData = [];
+    for (const projectGroup of this.projectGroups) {
+      projectData.push(projectGroup.value);   
+    }
+    
+    let educationData = [];
+    for (const educationGroup of this.educationGroups) {
+      educationData.push(educationGroup.value);   
+    }
+
+    let certificationData = [];
+    for (const certificationGroup of this.certificationGroups) {
+      certificationData.push(certificationGroup.value);   
+    }
+
+    let skillData = [];
+    for (const skillGroup of this.skillGroups) {
+      skillData.push(skillGroup.value);   
+    }
+
     this.formData = {
       "Personal Details": this.personalDetails.value,
-      //'Experience': experienceData
-      //,
-      // 'Project':  this.projectForm.value,
-      // 'Education': this.educationForm.value,
-      // 'Certifications': this.certificationForm.value,
-      // 'Skills': this.skillForm.value,
+      'Experience': experienceData,      
+      'Project':  projectData,
+      'Education':educationData,
+      'Certifications': certificationData,
+      'Skills': skillData,
       "Professional Summary": this.professionalSummary.value,
     };
 
+    
     return this.formData;
   }
 
@@ -580,20 +607,72 @@ export class ProfileComponent implements OnInit {
       alert("Please fill out the following details \n - Job Position \n - Company name" ); 
       return; 
     }
+
+    
     this.loading = true;
     const requestBody = { jobPosition:this.jobPosition, company:this.company };
 
-    // alert(`${this.jobPosition}, \n ${this.company}`);
+   
 
     this.startTimer();
 
-    this.userAPI.generateResponsibilities2(requestBody, this.userId).subscribe(
+    
+    this.userAPI.generateResponsibilities2(requestBody).subscribe(
       (response) => {
         this.loading = false;
-        this.stopTimer();
-        //console.log(response)
+        this.stopTimer();        
         this.updateTextArea(index, response.data);
         
+      },
+      (error: any) => {
+        console.error("Error fetching responsibilities:", error);
+        this.loading = false;
+        this.stopTimer();
+      }
+    );
+  }
+
+  onGenerateProjectsClick(index: number) {
+    if (this.projectTitle === null || this.projectCompany === null){
+      alert("Please fill out the following details \n - Project Title \n - Project Company" ); 
+      return; 
+    }    
+    this.loading = true;
+    const requestBody = { projectTitle:this.projectTitle, company:this.projectCompany };   
+
+    this.startTimer();
+    
+    this.userAPI.generateProjectDescription(requestBody).subscribe(
+      (response) => {
+        this.loading = false;
+        this.stopTimer(); 
+              
+        this.updateProjectTextArea(index, response.data);
+        
+      },
+      (error: any) => {
+        console.error("Error fetching responsibilities:", error);
+        this.loading = false;
+        this.stopTimer();
+      }
+    );
+  }
+
+  onGenerateProfessionalSummaryClick() {
+      
+    this.loading = true;
+    const requestBody = { jobPosition: this.jobPosition }; 
+
+   
+
+    this.startTimer();
+    let loggedInEmail = localStorage.getItem('loggedInEmail');
+    this.userAPI.generateProfessionalSummary(requestBody, loggedInEmail).subscribe(
+      (response) => {
+        this.loading = false;
+        this.stopTimer();        
+        
+        this.updateProfessionalSummaryTextArea(response.data);
       },
       (error: any) => {
         console.error("Error fetching responsibilities:", error);
@@ -612,8 +691,27 @@ export class ProfileComponent implements OnInit {
     this.experienceForm.get(controlName).patchValue(formattedResponsibilities);
   }
 
+  updateProjectTextArea(index: number, projDescription ) {
+    
+    const controlName = this.getProjectFormControlName(index);
+    
+    this.projectForm.get(controlName).patchValue(projDescription);
+  }
+
+  updateProfessionalSummaryTextArea(profSummary ) {    
+    const controlName = this.getProfessionalSummaryFormControlName();    
+    this.professionalSummary.get(controlName).patchValue(profSummary);
+  }
   getFormControlName(index: number): string {
     return `experiences.${index}.description`;
+  }
+
+  getProjectFormControlName(index: number): string {
+    return `projects.${index}.description`;
+  }
+
+  getProfessionalSummaryFormControlName(): string {
+    return `professionalSummary`;
   }
 }
 
