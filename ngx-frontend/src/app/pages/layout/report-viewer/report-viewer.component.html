@@ -1,31 +1,137 @@
 <div class="report-viewer">
   <div class="menu-bar">
     <nb-actions size="medium">
-      <nb-action
-        icon="maximize-outline"
-        (click)="increaseFontSize()"
-      ></nb-action>
-      <nb-action
-        icon="minimize-outline"
-        (click)="decreaseFontSize()"
-      ></nb-action>
+      <nb-action icon="maximize-outline" (click)="increaseFontSize()"></nb-action>
+      <nb-action icon="minimize-outline" (click)="decreaseFontSize()"></nb-action>
       <nb-action icon="file-outline" (click)="downloadAsPDF()"></nb-action>
-      <nb-action
-        icon="file-text-outline"
-        (click)="downloadAsWord()"
-      ></nb-action>
+      <nb-action icon="file-text-outline" (click)="downloadAsWord()"></nb-action>
     </nb-actions>
 
-    <nb-select [(selected)]="selectedFont" (selectedChange)="changeFontType(selectedFont)"  fieldSize="small">
-        <nb-option  fieldSize="small" *ngFor="let item of fontOptions" [value]="item.value">{{ item.label }}</nb-option>
-      </nb-select>
+    <nb-select [(selected)]="selectedFont" (selectedChange)="changeFontType(selectedFont)" fieldSize="small">
+      <nb-option fieldSize="small" *ngFor="let item of fontOptions" [value]="item.value">{{ item.label }}</nb-option>
+    </nb-select>
   </div>
 
-  <div class="headers">
-    <h5>Dawit Woldemichael</h5>
-  </div>
-  <div class="resume-preview" #reportContent>
-    <div *ngIf="formData">
+  <div class="report-viewer" #reportContent>
+    <div>
+      <div class="headers1">
+        <h3>{{ formData["Personal Details"].username }}</h3>
+      </div>
+
+      <div class="headers2">
+        Mobile: {{ formData["Personal Details"].phone }} | LinkedIn:
+        {{ formData["Personal Details"].linkedinLink }} | Email:
+        {{ formData["Personal Details"].email }} |
+        {{ formData["Personal Details"].address1 }},
+        {{ formData["Personal Details"].city }},
+        {{formData["Personal Details"].state }}
+        {{ formData["Personal Details"].zip }}
+      </div>
+    </div>
+    
+    <!-- Professional summary  -->
+    <div>
+      <h6>Professional Summary</h6>
+      <div> {{ formData["Professional Summary"].professionalSummary }} </div>
+    </div>
+
+    <div *ngIf="formData && formData.Experience">
+      <h6>Experience</h6>
+      <div class="resume-section">
+        <div *ngFor="let experience of formData.Experience">
+          
+            <div class="row">
+              <div class="col" style="text-align:left"> <strong>{{ experience.employer }}</strong></div>
+              <div class="col" style="text-align:right"><strong>{{ experience.startDate }} - {{ experience.endDate }}</strong></div>
+          </div>
+
+          <div>
+            <p><i>{{ experience.position }}</i></p>
+          </div>
+          <div>
+            <p>{{ experience.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects -->
+
+    <div *ngIf="formData && formData.Project">
+      <h6>Projects</h6>
+      <div class="resume-section">
+        <div *ngFor="let project of formData.Project">
+          <div class="row">
+            <div class="col" style="text-align:left"><strong>{{ project.name }}</strong></div>
+            <div class="col" style="text-align:right"><strong>{{ project.startDate }} - {{ project.endDate }}</strong></div>
+          </div>
+          <div>
+            <p><i>{{ project.employer }}</i></p>
+          </div>
+          <div>
+            <p>{{ project.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education -->
+
+    <div *ngIf="formData && formData.Education">
+      <h6>Education</h6>
+      <div class="resume-section">
+        <div *ngFor="let education of formData.Education">
+          <div class="row">
+            <div class="col" style="text-align:left"><strong>{{ education.degreeName }}</strong></div>
+            <div class="col" style="text-align:right"><strong>{{ education.startDate }} - {{ education.endDate }}</strong></div>
+          </div>
+          <div>
+            <p><i>{{ education.school }}</i></p>
+          </div>
+          <div>
+            <p>{{ education.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- Cerifications -->
+    <div *ngIf="formData && formData.Certifications">
+      <h6>Certifications</h6>
+      <div class="resume-section">
+        <div *ngFor="let certification of formData.Certifications">
+          <div class="row">
+            <div class="col" style="text-align:left"><strong>{{ certification.name }}</strong></div>
+            <div class="col" style="text-align:right"><strong>{{ certification.startDate }} - {{ certification.endDate }}</strong></div>
+          </div>
+          <div>
+            <p><i>{{ certification.issuer }}</i></p>
+          </div>
+          <div>
+            <p>{{ certification.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div *ngIf="formData && formData.Skills">
+      <h6>Skills</h6>
+      <div class="resume-section">
+        <div *ngFor="let skill of formData.Skills">
+          <div class="row">
+            <div class="col" style="text-align:left">{{ skill.name }}</div>
+            
+          </div>
+         
+        
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- <div *ngIf="formData">
       <div *ngFor="let group of formData | keyvalue">
         <h6>{{ group.key }}</h6>
         <div class="resume-section">
@@ -33,12 +139,10 @@
             <p>
               <strong>{{ field.key }}:</strong> {{ field.value }}
             </p>
-            <ng-container
-              *ngIf="field.key === 'username'; then assignName"
-            ></ng-container>
+            <ng-container *ngIf="field.key === 'username'; then assignName"></ng-container>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

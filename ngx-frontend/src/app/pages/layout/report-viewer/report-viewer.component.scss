@@ -1,116 +1,93 @@
 .report-viewer {
-  margin: 20px;
-  font-family: 'Palatino Linotype', serif;
+    margin: 40px;
+    font-family: 'Palatino Linotype'; 
 
-  .menu-bar button {
-    margin-right: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-  }
-
-
-  .resume-preview {
-    font-family: 'Palatino Linotype', serif;
-
-    h6 {
-      color: #007bff;
-      margin-top: 5px;
+    .menu-bar button {
+        margin-right: 10px;
+        padding: 5px 10px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
     }
 
 
-  }
+    .resume-preview {
+        font-family: 'Palatino Linotype'; 
 
-  .resume-section {
-    font-family: 'Palatino Linotype', serif;
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-    margin-top: 10px;
+        h6 {
+            color: #007bff;
+            margin-top: 5px;
+        }
 
-    p {
-      margin-bottom: 5px;
 
-      strong {
-        font-weight: bold;
-        margin-right: 5px;
-      }
     }
-  }
 
-  .headers {
-    font-family: 'Caramond', serif; // Change font family to 'Caramond'
-    text-align: center;
-    padding-top: 10px;
-    margin-top: 10px;
-  }
+    .resume-section {
+        font-family: 'Palatino Linotype'; 
+        border-top: 1px solid #ccc;
+       
+
+        p {
+            margin-bottom: 5px;
+
+            strong {
+                font-weight: bold;
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .headers1 {
+        font-family: 'Palatino Linotype'; // Change font family to 'Caramond'
+        text-align: center;
+        padding-top: 10px;
+        margin-top: 10px;
+    }
+    .headers2 {
+        font-family: 'Palatino Linotype'; // Change font family to 'Caramond'
+        text-align: center;
+        font-size: 1em;
+        
+    }
+    
+
 }
-
-.report-content {
-  font-size: 12px;
-  /* Default font size */
-}
-
-/* report-viewer.component.css */
-.font-dropdown {
-  font-size: 10px;
-  /* Adjust font size to match other buttons */
-}
-
-.mat-select-trigger {
-  height: 16px;
-  /* Adjust height of the select trigger */
-  line-height: 16px;
-  /* Adjust line height to vertically center the text */
-}
-
-.mat-form-field {
-  margin-right: 6px;
-  /* Add some right margin to separate from other buttons */
-}
-
-::ng-deep .mat-select-trigger {
-  min-width: 80vw;
-}
-
-::ng-deep .mat-select-panel {
-  max-height: 80vh !important;
-}
-
-//   h6 {
-//     display: flex;
-//     align-items: center;
-
-//     &::after {
-//       content: '';
-//       flex: 1;
-//       margin-left: 1rem;
-//       height: 1px;
-//       background-color: #746e6e;
-//     }
-//   }
-
 
 .menu-bar {
-  display: flex;
-
-  background-color: #fcfdfd;
-  border: 1px solid #020813;
+    display: flex;
+    font-size: 0.75em;
+    background-color: #fcfdfd;
+    border: 1px solid #020813;
 }
 
 
 .toolbar {
-  font-size: 2rem;
+    font-size: 0.75em;
 
-  a {
-    padding: 0.4rem;
-    color: nb-theme(text-hint-color);
-    transition: color ease-out 0.1s;
+    a {
+        padding: 0.4rem;
+        color: nb-theme(text-hint-color);
+        transition: color ease-out 0.1s;
 
-    &:hover {
-      color: nb-theme(text-basic-color);
+        &:hover {
+            color: nb-theme(text-basic-color);
+        }
     }
+}
+
+h5 {  
+    font-family: 'Palatino Linotype';   
+}
+
+
+.container {
+    display: flex; /* Use flexbox layout */
+    justify-content: space-between;
   }
+  h6 {
+    color: #2E74B5;
+    margin-top: 5px;
+    margin-top: 0px;
 }

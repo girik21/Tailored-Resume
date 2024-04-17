@@ -65,8 +65,14 @@ import { SpinnerColorComponent } from './spinner-color/spinner-color.component';
     ReportViewerComponent,
     SpinnerColorComponent
   ],
+  exports: [
+    ReportViewerComponent // Exporting the component
+  ],
   providers: [
     NewsService,
   ],
 })
-export class LayoutModule { }
+export class LayoutModule { 
+
+}
+

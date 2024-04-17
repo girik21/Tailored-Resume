@@ -158,10 +158,24 @@ export class UserAPI {
     );
   }
 
-  // save user skills
-  generateResponsibilities2(requestBody: any, userId: string): Observable<any> {
+  
+  generateResponsibilities2(requestBody: any): Observable<any> {     
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.post(`${this.baseUrl}/openai/chat/experiences/${userId}`, requestBody, { headers });
+    return this.http.post(`${this.baseUrl}/openai/chat/experiences`, requestBody, { headers });
+  }
+  generateProjectDescription(requestBody: any): Observable<any> {     
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.post(`${this.baseUrl}/openai/chat/projects`, requestBody, { headers });
+  }
+
+  generateProfessionalSummary(requestBody: any, email: string): Observable<any> {    
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.post(`${this.baseUrl}/openai/chat/professionalSummary`, requestBody, { headers });
+  }
+
+  generateResume(requestBody: any, email: string): Observable<any> {    
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.post(`${this.baseUrl}/openai/chat/${email}`, requestBody, { headers });
   }
 }
 

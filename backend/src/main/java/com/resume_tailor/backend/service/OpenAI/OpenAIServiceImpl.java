@@ -68,38 +68,116 @@ public class OpenAIServiceImpl implements OpenAIService{
 
     @Override
     public String createOpenAIPrompt(String jobDesc, String sampleResume){
-        return  String.format("{%n" +
-                        "  \"jobDescription\": \"%s\",%n" +
-                        "  \"sampleResume\": \"%s\",%n" +
-                        "  \"resumeTemplate\": {%n" +
-                        "    \"name\": \"<<Name extracted from resume>>\",%n" +
-                        "    \"contact\": {%n" +
-                        "      \"LinkedIn\": \"<<LinkedIn extracted from resume>>\",%n" +
-                        "      \"phone\": \"<<Phone extracted from resume>>\",%n" +
-                        "      \"location\": \"<<Location extracted from resume>>\",%n" +
-                        "      \"portfolio\": \"<<Portfolio extracted from resume>>\",%n" +
-                        "      \"email\": \"<<Email extracted from resume>>\",%n" +
-                        "      \"github\": \"<<GitHub extracted from resume>>\"%n" +
-                        "    },%n" +
-                        "    \"skills\": {%n" +
-                        "      \"programmingLanguages\": [<<Programming Languages extracted from resume>>],%n" +
-                        "      \"databases\": [<<Databases extracted from resume>>],%n" +
-                        "      \"frameworks\": [<<Frameworks extracted from resume>>],%n" +
-                        "      \"otherTechnologies\": [<<Other Technologies extracted from resume>>],%n" +
-                        "      \"cloudPlatforms\": [<<Cloud Platforms extracted from resume>>],%n" +
-                        "      \"developmentPractices\": [<<Development Practices extracted from resume>>],%n" +
-                        "      \"proficiency\": [<<Proficiency extracted from resume>>]%n" +
-                        "    },%n" +
-                        "    \"workHistory\": [<<Work History extracted from resume>>],%n" +
-                        "    \"education\": [<<Education extracted from resume>>],%n" +
-                        "    \"projects\": [<<Projects extracted from resume>>],%n" +
-                        "    \"mentorship\": {%n" +
-                        "      \"role\": \"<<Role extracted from resume>>\",%n" +
-                        "      \"responsibilities\": \"<<Responsibilities extracted from resume>>\"%n" +
-                        "    }%n" +
-                        "  }%n" +
-                        "}",
-                jobDesc, sampleResume);
+//        return  String.format("{%n" +
+//                        "  \"jobDescription\": \"%s\",%n" +
+//                        "  \"sampleResume\": \"%s\",%n" +
+//                        "  \"resumeTemplate\": {%n" +
+//                        "    \"name\": \"<<Name extracted from resume>>\",%n" +
+//                        "    \"contact\": {%n" +
+//                        "      \"LinkedIn\": \"<<LinkedIn extracted from resume>>\",%n" +
+//                        "      \"phone\": \"<<Phone extracted from resume>>\",%n" +
+//                        "      \"location\": \"<<Location extracted from resume>>\",%n" +
+//                        "      \"portfolio\": \"<<Portfolio extracted from resume>>\",%n" +
+//                        "      \"email\": \"<<Email extracted from resume>>\",%n" +
+//                        "      \"github\": \"<<GitHub extracted from resume>>\"%n" +
+//                        "    },%n" +
+//                        "    \"skills\": {%n" +
+//                        "      \"programmingLanguages\": [<<Programming Languages extracted from resume>>],%n" +
+//                        "      \"databases\": [<<Databases extracted from resume>>],%n" +
+//                        "      \"frameworks\": [<<Frameworks extracted from resume>>],%n" +
+//                        "      \"otherTechnologies\": [<<Other Technologies extracted from resume>>],%n" +
+//                        "      \"cloudPlatforms\": [<<Cloud Platforms extracted from resume>>],%n" +
+//                        "      \"developmentPractices\": [<<Development Practices extracted from resume>>],%n" +
+//                        "      \"proficiency\": [<<Proficiency extracted from resume>>]%n" +
+//                        "    },%n" +
+//                        "    \"workHistory\": [<<Work History extracted from resume>>],%n" +
+//                        "    \"education\": [<<Education extracted from resume>>],%n" +
+//                        "    \"projects\": [<<Projects extracted from resume>>],%n" +
+//                        "    \"mentorship\": {%n" +
+//                        "      \"role\": \"<<Role extracted from resume>>\",%n" +
+//                        "      \"responsibilities\": \"<<Responsibilities extracted from resume>>\"%n" +
+//                        "    }%n" +
+//                        "  }%n" +
+//                        "}",
+//                jobDesc, sampleResume);
+        String prompt = "Generate a highly enhanced resume based on the following job description:\n\n"
+                + "Job Description:\n"
+                + jobDesc + "\n\n"
+                + "Existing Resume:\n"
+                + sampleResume + "\n\n"
+                + "Enhance the existing resume with relevant information from the job description. Ensure that the resume includes the actual start and end dates of the companies from the existing resume. Also include additional experiences.\n\n"
+                + "The response should be in JSON format and make sure the it has Personal Details, Professional Summary, Experience, Projects, Education, Certifications, and Skills and follow the structure below:\n\n"
+                + "{\n"
+                + "  \"Personal Details\": {\n"
+                + "    \"username\": \"John Doe\",\n"
+                + "    \"phone\": \"123-456-7890\",\n"
+                + "    \"linkedinLink\": \"linkedin.com/in/johndoe\",\n"
+                + "    \"email\": \"john.doe@example.com\",\n"
+                + "    \"address1\": \"123 Main St\",\n"
+                + "    \"city\": \"Anytown\",\n"
+                + "    \"state\": \"Some State\",\n"
+                + "    \"zip\": \"12345\"\n"
+                + "  },\n"
+                + "  \"Professional Summary\": {\n"
+                + "    \"professionalSummary\": \"Experienced software engineer with expertise in web development and a passion for solving complex problems.\"\n"
+                + "  },\n"
+                + "  \"Experience\": [\n"
+                + "    {\n"
+                + "      \"employer\": \"ABC Inc.\",\n"
+                + "      \"startDate\": \"January 2018\",\n"
+                + "      \"endDate\": \"Present\",\n"
+                + "      \"position\": \"Senior Software Engineer\",\n"
+                + "      \"description\": \"Lead a team of developers to build scalable web applications using Angular and Node.js.\"\n"
+                + "    },\n"
+                + "    {\n"
+                + "      \"employer\": \"XYZ Corp.\",\n"
+                + "      \"startDate\": \"June 2015\",\n"
+                + "      \"endDate\": \"December 2017\",\n"
+                + "      \"position\": \"Software Engineer\",\n"
+                + "      \"description\": \"Developed RESTful APIs and implemented frontend interfaces for enterprise applications.\"\n"
+                + "    }\n"
+                + "  ],\n"
+                + "  \"Project\": [\n"
+                + "    {\n"
+                + "      \"name\": \"Project A\",\n"
+                + "      \"startDate\": \"March 2019\",\n"
+                + "      \"endDate\": \"May 2020\",\n"
+                + "      \"employer\": \"ABC Inc.\",\n"
+                + "      \"description\": \"Implemented a microservices architecture for a high-traffic e-commerce platform.\"\n"
+                + "    },\n"
+                + "    {\n"
+                + "      \"name\": \"Project B\",\n"
+                + "      \"startDate\": \"September 2016\",\n"
+                + "      \"endDate\": \"May 2017\",\n"
+                + "      \"employer\": \"XYZ Corp.\",\n"
+                + "      \"description\": \"Designed and developed a real-time chat application using WebSocket technology.\"\n"
+                + "    }\n"
+                + "  ],\n"
+                + "  \"Education\": [\n"
+                + "    {\n"
+                + "      \"degreeName\": \"Bachelor of Science in Computer Science\",\n"
+                + "      \"startDate\": \"September 2011\",\n"
+                + "      \"endDate\": \"May 2015\",\n"
+                + "      \"school\": \"University of Example\",\n"
+                + "      \"description\": \"Focused on software engineering principles and algorithms.\"\n"
+                + "    }\n"
+                + "  ],\n"
+                + "  \"Certifications\": [\n"
+                + "    {\n"
+                + "      \"name\": \"AWS Certified Solutions Architect\",\n"
+                + "      \"startDate\": \"July 2018\",\n"
+                + "      \"endDate\": \"July 2021\",\n"
+                + "      \"issuer\": \"Amazon Web Services\",\n"
+                + "      \"description\": \"Demonstrated expertise in designing distributed systems on AWS.\"\n"
+                + "    }\n"
+                + "  ],\n"
+                + "  \"Skills\": [\n"
+                + "    {\n"
+                + "      \"name\": \"Java, C++, PHP, C Sharp, Javascript\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+        return prompt;
     }
 
     @Override
@@ -125,6 +203,31 @@ public class OpenAIServiceImpl implements OpenAIService{
         return promptBuilder.toString();
     }
 
+    @Override
+    public String createOpenAIProjectPrompt(String projectTitle, String company){
+
+        // Structure the Prompt
+        StringBuilder promptBuilder = new StringBuilder();
+        promptBuilder.append("Generate a brief summary of the project description for \"")
+                .append(projectTitle)
+                .append("\" at ")
+                .append(company)
+                .append(" in one sentence.");
+
+        return promptBuilder.toString();
+    }
+    @Override
+    public String createOpenAIProfessionalSummaryPrompt(String jobPosition){
+
+        // Structure the Prompt
+        StringBuilder promptBuilder = new StringBuilder();
+
+        promptBuilder.append("My position is  \"")
+                .append(jobPosition)
+                .append(" in my current company. Generate a professional summary for my resume based on my current position");
+
+        return promptBuilder.toString();
+    }
     @Override
     public String validateAndFixJson(String jsonString) {
         try {
@@ -196,9 +299,13 @@ public class OpenAIServiceImpl implements OpenAIService{
                         .append(", ")
                         .append(education.getLocation())
                         .append("\n")
-                        .append(dateFormat.format(education.getStartDate()))
+                        .append(
+                                education.getStartDate()
+                        )
                         .append(" - ")
-                        .append(dateFormat.format(education.getEndDate()))
+                        .append(
+                                education.getEndDate()
+                        )
                         .append("\n\n");
             }
         }
@@ -211,9 +318,11 @@ public class OpenAIServiceImpl implements OpenAIService{
                 resume.append("Name: ")
                         .append(experience.getEmployer())
                         .append("\nFrom - To: ")
-                        .append(dateFormat.format(experience.getStartDate()))
+                        .append(
+                                experience.getStartDate()
+                        )
                         .append(" - ")
-                        .append(dateFormat.format(experience.getEndDate()))
+                        .append(experience.getEndDate() )
                         .append("\nPosition: ")
                         .append(experience.getPosition())
                         .append("\nResponsibilities: ")
@@ -260,32 +369,10 @@ public class OpenAIServiceImpl implements OpenAIService{
             // Create an ObjectMapper instance
             ObjectMapper objectMapper = new ObjectMapper();
 
-            JsonNode jsonNode =  parseToJson(jsonString); //objectMapper.readTree(jsonString);
-
-//            ArrayList<Responsibility> responsibilities = new ArrayList<>();
-//            // If the root element is an object
-//            if (jsonNode.isObject()) {
-//                System.out.println("Iterating through object:");
-//                jsonNode.fields().forEachRemaining(entry -> {
-//                    Responsibility responsibility = new Responsibility();
-//                    responsibility.setDescription(entry.getValue().toString());
-//                    responsibilities.add(responsibility);//System.out.println(entry.getKey() + ": " + entry.getValue());
-//                });
-//            }
-//
-//            // If the root element is an array
-//            if (jsonNode.isArray()) {
-//                System.out.println("Iterating through array:");
-//                jsonNode.elements().forEachRemaining(element -> {
-//                    Responsibility responsibility = new Responsibility();
-//                    responsibility.setDescription(extractString(element));
-//                    responsibilities.add(responsibility);
-//                });
-//            }
+            JsonNode jsonNode =  parseToJson(jsonString);
 
             //Return the json object
-            return jsonNode;// parseToJson(jsonString);
-
+            return jsonNode;
 
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception for debugging
@@ -294,17 +381,63 @@ public class OpenAIServiceImpl implements OpenAIService{
 
     }
 
-    public  String extractString(JsonNode node) {
-        // Extract the value associated with the "responsibility" key
-        JsonNode responsibilityNode = node.get("responsibility");
+    @Override
+    public String generateProjectActivities( String projectTitle, String company) {
+        try {
 
-        // Return the extracted value as a string
-        if (responsibilityNode != null) {
-            return responsibilityNode.asText();
+            String prompt = createOpenAIProjectPrompt(projectTitle, company);
+
+            ChatRequest request = new ChatRequest(model, prompt);
+
+            ChatResponse response = restTemplate.postForObject(
+                    apiUrl,
+                    request,
+                    ChatResponse.class);
+
+            if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
+                return null;
+            }
+            String jsonString = response.getChoices().get(0).getMessage().getContent();
+
+            //JsonNode jsonNode =  parseToJson(jsonString);
+
+            //Return the json object
+            return jsonString;
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception for debugging
+            return null;
         }
 
-        // Return null if extraction fails
-        return null;
     }
 
+    @Override
+    public String generateProfessionalSummary( String jobPosition) {
+        try {
+
+            String prompt = createOpenAIProfessionalSummaryPrompt(jobPosition);
+
+            ChatRequest request = new ChatRequest(model, prompt);
+
+            ChatResponse response = restTemplate.postForObject(
+                    apiUrl,
+                    request,
+                    ChatResponse.class);
+
+            if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
+                return null;
+            }
+            String jsonString = response.getChoices().get(0).getMessage().getContent();
+
+            //JsonNode jsonNode =  parseToJson(jsonString);
+
+            //Return the json object
+            return jsonString;
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception for debugging
+            return null;
+        }
+
+    }
 }

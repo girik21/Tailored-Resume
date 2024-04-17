@@ -20,10 +20,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: "Resume",
         link: "/pages/layout/profile",
       },
-      {
-        title: "Cover Letter",
-        link: "",
-      },
+
     ],
   },
   {

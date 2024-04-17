@@ -21,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/openai")
@@ -48,10 +49,10 @@ public class OpenAIController {
      * @param requestBody containing the jobDescription and sample resume to send to the API
      * @return first message from the API response
      */
-    @PostMapping("/chat/{userId}")
-    public ResponseEntity<?> chat(@PathVariable String userId, @RequestBody Map<String, String> requestBody) {
+    @PostMapping("/chat/{email}")
+    public ResponseEntity<?> chat(@PathVariable String email, @RequestBody Map<String, String> requestBody) {
         try {
-            var user = userService.getUserById(userId);
+            var user = userService.getUserByEmail(email);
             //openAIService.validateRequestParameters(requestParams);
             String jobDesc = requestBody.get("jobDesc");
             String sampleResume = openAIService.generateEscapedResume(user); //requestParams.get("sampleResume");
@@ -86,8 +87,8 @@ public class OpenAIController {
 
     }
 
-    @PostMapping("/chat/experiences/{userId}")
-    public ResponseEntity<?> experienceGenerator(@PathVariable String userId, @RequestBody Map<String, String> requestBody) {
+    @PostMapping("/chat/experiences")
+    public ResponseEntity<?> experienceGenerator(@RequestBody Map<String, String> requestBody) {
         try {
 
             String jobDesc = requestBody.get("jobPosition");
@@ -95,23 +96,47 @@ public class OpenAIController {
 
             JsonNode responsibilities  = openAIService.generateExperienceResponsibilities(jobDesc, company);
 
-
-
-             //Return the JsonNode
+            //Return the JsonNode
             return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Responsibilities generated successfully", responsibilities));
-
-//            List<Responsibility> responsibilities = generateResponsibilities();
-//            return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Enhanced resume generated successfully.", responsibilities));
-
-
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception for debugging
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
         }
-
     }
 
+    @PostMapping("/chat/projects")
+    public ResponseEntity<?> projectGenerator(@RequestBody Map<String, String> requestBody) {
+        try {
 
+            String projTitle = requestBody.get("projectTitle");
+            String company = requestBody.get("company");
+
+            String responsibilities  = openAIService.generateProjectActivities(projTitle, company);
+
+            //Return the JsonNode
+            return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Project activities generated successfully", responsibilities));
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception for debugging
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
+        }
+    }
+
+    @PostMapping("/chat/professionalSummary")
+    public ResponseEntity<?> professionalSummaryGenerator(@RequestBody Map<String, String> requestBody) {
+        try {
+
+            String jobPosition = requestBody.get("jobPosition");
+
+
+            String responsibilities  = openAIService.generateProfessionalSummary(jobPosition);
+
+            //Return the JsonNode
+            return ResponseEntity.ok().body(new ResponseWrapper<>(true, "Professional Summary generated successfully", responsibilities));
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception for debugging
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseWrapper<>(false, e.getMessage(), null));
+        }
+    }
 }
 
 

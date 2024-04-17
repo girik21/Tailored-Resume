@@ -1,20 +1,9 @@
-@import '../../../@theme/styles/themes';
-
-@include nb-install-component() {
-  .buttons-row {
-    margin: -0.5rem;
-  }
-
-  button[nbButton] {
-    margin: 0.5rem;
-  }
-
-  .action-icon {
-    @include nb-ltr(margin-right, 0.5rem);
-    @include nb-rtl(margin-left, 0.5rem);
-  }
-
-  .actions-card {
-    height: 8rem;
-  }
+.custom-div {
+  height: 500px; /* Set the height of the div */
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Vertically center the content */
+  justify-content: center; /* Horizontally center the content */
+}
+.button-container {
+  margin-top: 20px;
 }
