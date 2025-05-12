@@ -1,2 +1,4 @@
 # Tailored-Resume
-Capstone Project
+
+An AI powered website to tailor resume on the fly
+
