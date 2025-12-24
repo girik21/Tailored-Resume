@@ -181,6 +181,45 @@ public class OpenAIServiceImpl implements OpenAIService{
     }
 
     @Override
+    public String createOpenAICoverLetterPrompt(String jobDesc, String userProfile){
+        String prompt = "Generate a cover letter based on the following job description:\n\n"
+                + "Job Description:\n"
+                + jobDesc + "\n\n"
+                + "User Profile:\n"
+                + userProfile + "\n\n"
+                + "The response should be in JSON format and make sure it has Personal Details, Cover Letter like in the following format.\n\n"
+                + "{\n"
+                + "  \"Personal Details\": {\n"
+                + "    \"username\": \"Dawit Woldemichael\",\n"
+                + "    \"phone\": \"+1 (439) 812-1458\",\n"
+                + "    \"linkedinLink\": \"linkedin.com/in/dawitwoldemichael\",\n"
+                + "    \"email\": \"daki@gmail.com\",\n"
+                + "    \"address1\": \"185 Hague Drive, Sit deleniti blandit\",\n"
+                + "    \"city\": \"Mountain View\",\n"
+                + "    \"state\": \"CA\",\n"
+                + "    \"zip\": \"92684\"\n"
+                + "  },\n"
+                + "  \"CoverLetter\": [\n"
+                + "    {\n"
+                + "      \"paragraphOne\": \"Details of paragraph one...\"\n"
+                + "    },\n"
+                + "    {\n"
+                + "      \"paragraphTwo\": \"Details of paragraph two...\"\n"
+                + "    },\n"
+                + "    {\n"
+                + "      \"paragraphThree\": \"Details of paragraph three...\"\n"
+                + "    },\n"
+                + "    {\n"
+                + "      \"paragraphFour\": \"Details of paragraph four...\"\n"
+                + "    },\n"
+                + "    {\n"
+                + "      \"paragraphFive\": \"Details of paragraph five...\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+        return prompt;
+    }
+    @Override
     public String createOpenAIExperiencePrompt(String jobPosition, String company){
         // Structure the Prompt
         // Structure the Prompt
@@ -343,6 +382,28 @@ public class OpenAIServiceImpl implements OpenAIService{
             }
         }
 
+        return resume.toString();
+    }
+
+    @Override
+    public String generateEscapedCoverLetter(User user) {
+        StringBuilder resume = new StringBuilder();
+
+        resume.append("\nHere is the User Profile: \n\n")
+                .append(user.getUsername())
+                .append("\n")
+                .append(user.getAddress1())
+                .append(user.getAddress2() != null ? ", " + user.getAddress2() : "")
+                .append("\n")
+                .append(user.getCity())
+                .append(", ")
+                .append(user.getState())
+                .append(", ")
+                .append(user.getZip())
+                .append("\n")
+                .append(user.getEmail())
+                .append("\n")
+                .append(user.getPhone());
         return resume.toString();
     }
 
